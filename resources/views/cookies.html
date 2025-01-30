@@ -1,0 +1,135 @@
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">{{ longName }} Cookies policy </h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">
+																						{% if auth.check %}
+																						User Workspace
+																						{% else %}
+																						Home
+																						{% endif %}
+																						</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Cookies policy</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="portlet light bordered">
+                                                  <div class="portlet-title">
+                                                      <div class="caption font-yellow-crusta">
+                                                          <i class="fa fa-cog font-yellow-crusta"></i>
+                                                          <span class="caption-subject bold uppercase"> Cookies policy</span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="portlet-body ">
+                                                    
+                                                     <h2>What are cookies?</h2>
+
+																										<p>A cookie is a small piece of information, with a text file format, sent from a website and stored in the user’s browser, in such a way that the website can consult previous activity of the user (<a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank">Wikipedia</a>).</p>
+
+																										<p>More about cookies:</p>
+																										<p><a href="http://tools.ietf.org/html/rfc6265" target="_blank">Technical document explaining cookies</a>.<br>
+																										<a href="http://www.aboutcookies.org/" target="_blank">http://www.aboutcookies.org</a></p>
+
+																										<h2>Blocking and deleting cookies</h2>
+
+																										<p>In general, <a href="https://en.wikipedia.org/wiki/Web_browser" target="_blank">browsers</a> offer several configuration options regarding cookies. These options allow the user to adjust various levels of privacy, so that, for example, the cookies sent from a site like this one are rejected or cookies that may have been saved are deleted. To change these parameters, you can consult the help tool on your browser or request information from its developers.</p>
+
+																										<p>However, from here you can get the instructions for the most popular desktop and cell phone browsers.</p>
+
+																										<p><a href="https://support.google.com/chrome/answer/95647?hl=en" target="_blank">Google Chrome</a>, 
+																										<a href="https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences" target="_blank">Mozilla Firefox</a>, 
+																										<a href="https://support.microsoft.com/en-gb/help/17442/windows-internet-explorer-delete-manage-cookies" target="_blank">Internet Explorer</a> and 
+																										<a href="https://support.apple.com/en-gb/guide/safari/manage-cookies-and-website-data-sfri11471/mac" target="_blank">Safari</a>.</p>
+
+																										<p><a href="http://support.apple.com/kb/HT1677" target="_blank">IOS</a>, 
+																										<a href="http://www.wikihow.com/Disable-Cookies#Android_Devices" target="_blank">Android</a> and 
+																										<a href="http://www.windowsphone.com/en-us/how-to/wp7/web/changing-privacy-and-other-browser-settings" target="_blank">Windows Phone</a>.</p>
+
+																										<p>If the user restricts or blocks some or all of the cookies of the present website, some of the tools or services provided by the page may not be available.</p>
+
+																										<h2>Cookies we use in the website</h2>
+
+																										<p>The cookies used by our website are associated exclusively with an anonymous user and his/her pc. Under no circumstance do they provide or gather information that allows access to the personal data of the user.</p>
+
+																										<p><strong>Google Analytics cookies (__utma, __utmb, __utmc, __utmz).</strong> These four cookies are used by <a href="http://www.google.com/analytics/" target="_blank">Google Analytics</a> to collect different information about user navigation at our site. For example, visitor location, visit details (time, page views, etc). Apart from blocking <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank">these cookies</a> in the browser, users can also use this Google <a href="https://tools.google.com/dlpage/gaoptout?hl=en-GB" target="_blank">add-on</a> to disable Google Analytics whilst browsing.</p>
+
+																										<h2>Recommendations</h2>
+
+																										<p>We recommend that you consult the following <a href="http://www.google.com/intl/en/safetycenter/" target="_blank">guide drawn up by Google and designed to provide instructions on how to safeguard yourself on the Internet</a>.</p>
+																									 
+                                                      
+                                                  </div>
+                                              </div>
+                                              <!-- END PORTLET-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

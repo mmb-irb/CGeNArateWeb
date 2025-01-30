@@ -1,0 +1,354 @@
+{% set flexname = page.flexname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                	
+									<!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">Contacts Analysis
+																				{% if sample %}
+																				{% for s in sampleOutputs %}
+																				{% if s[0] == id %}
+																				for sample {{ s[1] }}
+																				{% endif %}
+																				{% endfor %}
+																				{% endif %}
+																				</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">Home</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            {% if sample %}
+																						<span>Sample Output</span>
+																						{% else %}
+                                            <span>Output</span>
+																						{% endif %}
+                                        		<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Flexibility Analysis</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Contacts</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+
+																		<input type="hidden" id="base-url" value="{{ baseURL }}" >
+																		<input type="hidden" id="projectID" value="{{ id }}" >
+																		<input type="hidden" id="strType" value="{{ strType }}" >
+																		<input type="hidden" id="resolution" value="{{ projectData.resolution }}" >
+
+                                    <div class="page-content-inner">
+
+																			{% include 'templates/partials/menu-output.html' %}
+
+                                      <div class="portlet light bordered">
+																				<p>In the ‘Analysis’ section, you can download all the analysis results in a compressed tar.gz file.</p>
+																				<p>
+																					<a href="javascript:downloadFile('{{ id }}', 'an');" class="btn btn-lg yellow-crusta responsive-btn">
+                                          	<i class="fa fa-download"></i> Download all analysis in a compressed file 
+																					</a>
+																				</p>
+
+																			</div>
+
+																			{% include 'templates/partials/menu-flex.html' %}
+
+																			{# if strType == "eq" #}
+
+																			<!--<div class="row ">
+																				<div class="col-md-12">
+																					<div class="portlet light bordered">
+																						<div class="portlet-title tabbable-line">
+																							<div class="caption">
+																								<i class="fa fa fa-compress"></i>  
+																								<span class="caption-subject font-grey-mint sbold uppercase">Contacts</span>
+																							</div>
+																							
+																						</div>
+
+																						<div class="portlet-body " style="">
+																						
+                                              	<div class="tab-pane active" id="mean">
+
+																									<div id="loading-mean" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																									<div id="meanPlotDiv" style="height: 700px;"></div>
+
+																								</div>
+
+																						</div>	
+
+																					</div>
+																				</div>	
+																			</div>-->
+
+																			{# else #}
+
+																			<div class="row ">
+																				<div class="col-md-12">
+																					<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+
+																							<div class="portlet-title">
+																									<div class="caption">
+																											<i class="fa fa-compress"></i>  
+																											<span class="caption-subject font-grey-mint sbold uppercase">Contacts</span>
+																									</div>
+																									{% if projectData.tool == 3 %}
+																									<div class="actions menu-contacts" data-step="3">
+																										<a href="javascript:loadTypeOfContact('NUC-NUC');" class="btn yellow-crusta btn-sm menu-contacts btn-outline" id="bt-NUC-NUC">
+																											<i class="fa fa-nothing"></i> NUC - NUC 
+																										</a>
+																										<a href="javascript:loadTypeOfContact('PROT-NUC');" class="btn yellow-crusta btn-sm menu-contacts btn-outline" id="bt-PROT-NUC" data-step="4">
+																											<i class="fa fa-nothing"></i> PROT - NUC 
+																										</a>
+																										{% if proteinsList|length > 1 %}
+																										<a href="javascript:loadTypeOfContact('PROT-PROT');" class="btn yellow-crusta btn-sm menu-contacts btn-outline" id="bt-PROT-PROT" data-step="9">
+																											<i class="fa fa-nothing"></i> PROT - PROT 
+																										</a>
+																										{% endif %}
+																										<!--<div class="btn-group">
+																											<a class="btn yellow-crusta btn-sm" href="javascript:;" data-toggle="dropdown" style="font-size:16px;">
+																												<i class="fa fa-check-circle-o" style="font-size:16px;"></i>
+																												Select Type of Contact
+																													<i class="fa fa-angle-down"></i>
+																											</a>
+																											<ul class="dropdown-menu pull-right">
+																													<li>
+																														<a href="javascript:loadTypeOfContact('NUC-NUC');"><span class="minitext"> ACTG to ACTG </span> Nucleotide - Nucleotide </a>
+																													</li>
+																													<li>
+																															<a href="javascript:loadTypeOfContact('PROT-NUC');"><span class="minitext"> Cα to ACTG </span> Protein - Nucleotide </a>
+																													</li>
+																													<li>
+																															<a href="javascript:;"><span class="minitext"> Cα to Cα </span> Protein - Protein </a>
+																													</li>
+																											</ul>
+																										</div>-->
+																									</div>
+																									{% endif %}
+																							</div>
+																							<div class="portlet-body">
+
+																								{% if sample and projectData.tool == 3 %}
+																								<p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="contactsProt">Click here to start the guided tour</a></p>
+																								{% endif %}
+
+																								{% if sample and (projectData.tool == 1 or projectData.tool == 2) %}
+																								<p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="contactsMCDNA">Click here to start the guided tour</a></p>
+																								{% endif %}
+																						
+																								{% if projectData.tool == 3 %}	
+																								<!-- BEGIN Portlet NGL -->
+																								<div class="portlet light display-hide" id="3d-view">
+																										<div class="portlet-title tabbable-line">
+																											<div class="caption">
+																												<i class="fa fa-codepen"></i>  
+																												<span class="caption-subject font-grey-mint sbold uppercase">3D View</span>
+																											</div>
+																										</div>
+																										<div class="portlet-body">
+																											<div class="row">
+																												<div class="col-md-9" data-step="5">
+																													<div id="loading-viewport" style="position:absolute;left:46%; top:200px;z-index:50;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading2.gif" /></div>
+																													<div id="viewport" style="width: 100%;height: 500px;background: #c7ced1;" data-step="10"></div>
+																												</div>
+																												<div class="col-md-3">
+																												
+																													<form action="javascript:;" method="post" id="form-PROT-NUC" role="form" class="form-contacts display-hide" data-step="6">
+
+																														<div class="form-body">
+                                                          		<div class="form-group">
+                                                            		<label>Please select the protein with which you want to visualize contacts with the nucleotide:</label>
+                                                            		<div class="mt-radio-list">
+																																	
+																																	{% for protein in proteinsList %}
+																																		<label class="mt-radio"> {{ protein|slice(0,4) }}
+																																			<input type="radio" value="{{ protein }}" name="proteinIDradio" />
+																																			<span></span>
+																																		</label>
+																																	{% endfor %}
+
+																																</div>
+																																<button type="reset" id="reset-view-prot-nuc" class="btn btn-xs default">Reset view</button>
+																															</div>
+																															<div class="form-group" data-step="7">
+																																<button type="submit" id="submit-prot-nuc" class="btn yellow-crusta" disabled><i class="fa fa-check"></i> Load contacts</button>
+																															</div>
+																														</div>
+
+																													</form>
+
+																													<form action="javascript:;" method="post" id="form-PROT-PROT" role="form" class="form-contacts display-hide" data-step="11">
+
+																														<div class="form-body">
+                                                          		<div class="form-group">
+                                                            		<label>Please select the <strong>two</strong> proteins with which you want to visualize contacts:</label>
+                                                            		<div class="mt-checkbox-list">
+																																	
+																																	{% for protein in proteinsList %}
+																																		<label class="mt-checkbox mt-checkbox-outline"> {{ protein|slice(0,4) }}
+																																			<input type="checkbox" value="{{ protein }}" name="proteinIDcheckbox" />
+																																			<span></span>
+																																		</label>
+																																	{% endfor %}
+
+																																</div>
+																																<button type="reset" id="reset-view-prot-prot" class="btn btn-xs default">Reset view</button>
+																															</div>
+																															<div class="form-group" data-step="12">
+																																<button type="submit" id="submit-prot-prot" class="btn yellow-crusta" disabled><i class="fa fa-check"></i> Load contacts</button>
+																															</div>
+																														</div>
+
+																													</form>
+	
+																												</div>
+																											</div>
+																										</div>
+																								</div>
+																								<!-- END Portlet NGL -->
+																								{% endif %}
+	
+																								<!-- BEGIN Portlet HEATMAP -->
+																								<div class="portlet light" id="heatmap">
+																										<div class="portlet-title tabbable-line">
+																											<div class="caption">
+																												<i class="fa fa-qrcode"></i>  
+																												<span class="caption-subject font-grey-mint sbold uppercase">Heatmap 
+																													{% if projectData.tool == 3 %}
+																													<span id="heatmap-type">Nucleotide - Nucleotide</span>
+																													{% endif %}
+																												</span>
+																											</div>
+																											{% if strType == "traj" %}
+																											<ul class="nav nav-tabs" data-step="1">
+																												<li class="active">
+																														<a href="#mean" data-toggle="tab"> MEAN </a>
+																												</li>
+																												<li>
+																														<a href="#min" data-toggle="tab"> MIN </a>
+																												</li>
+																												<li>
+																														<a href="#max" data-toggle="tab"> MAX </a>
+																												</li>
+																												<li>
+																														<a href="#stdev" data-toggle="tab"> STDEV </a>
+																												</li>
+																											</ul>
+																											{% endif %}
+																										</div>
+																										<div class="portlet-body">
+
+																											<div class="tab-content">
+
+																												<div class="tab-pane active" id="mean" style="position:relative;" data-step="2">
+
+																													<div id="loading-mean" style="position:absolute;left:46%; top:320px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																													<span data-step="8" style="display:block;"><div id="meanPlotDiv" style="height: 700px;" data-step="13"></div></span>
+
+																												</div>
+
+																												<div class="tab-pane" id="min" style="position:relative;">
+
+																													<div id="loading-min" style="position:absolute;left:46%; top:320px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																													<div id="minPlotDiv" style="height: 700px;"></div>
+
+																												</div>
+
+																												<div class="tab-pane" id="max" style="position:relative;">
+
+																													<div id="loading-max" style="position:absolute;left:46%; top:320px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																													<div id="maxPlotDiv" style="height: 700px;"></div>
+
+																												</div>
+
+																												<div class="tab-pane" id="stdev" style="position:relative;">
+
+																													<div id="loading-stdev" style="position:absolute;left:46%; top:320px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																													<div id="stdevPlotDiv" style="height: 700px;"></div>
+
+																												</div>
+
+																											</div>
+
+																										</div>
+																								</div>
+																								<!-- END Portlet HEATMAP-->	
+	
+																							</div>
+
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>	
+																			</div>	
+
+																			{# endif #}
+
+                                    	</div>
+
+                                    <!-- END PAGE CONTENT INNER -->
+																</div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+
+
+                    </div>
+                    <!-- END CONTAINER -->
+
+								</div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

@@ -1,0 +1,206 @@
+<!-- BEGIN HEADER MENU -->
+                        <div class="page-header-menu">
+                            <div class="container">
+                                <!-- BEGIN MEGA MENU -->
+                                <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
+                                <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
+																{% set intro = '' %}
+																{% if basename == 'home' %}
+																{% set intro = 'data-step="1"' %}
+																{% endif %}
+                                <div class="hor-menu  hor-menu-light" {{ intro|raw }}>
+                                    <ul class="nav navbar-nav">	
+																				{% if auth.check == false %}
+
+																				{% set active='' %}
+                                        {% if basename == 'home' %}
+                                        {% set active = 'active' %}
+                                        {% endif %}
+                                        <li class="menu-dropdown classic-menu-dropdown {{ active }}">
+                                            <a href="{{ baseURL }}"> Home
+                                                <span class="arrow"></span>
+                                            </a>
+                                        </li>
+
+																				{% else %}
+
+																				{% set active='' %}
+                                        {% if basename == 'workspace' or basename starts with 'summary' %}
+                                        {% set active = 'active' %}
+                                        {% endif %}
+																				<li class="menu-dropdown classic-menu-dropdown {{ active }}">
+                                            <a href="{{ baseURL }}workspace"> Workspace
+                                                <span class="arrow"></span>
+                                            </a>
+                                        </li>
+
+																				{% endif %}
+
+																				{% set active='' %}
+                                        {% if basename == 'input' and not sampleinput %}
+                                        {% set active = 'active' %}
+                                        {% endif %}
+                                        <li class="menu-dropdown classic-menu-dropdown {{ active }}">
+                                            <a href="{{ baseURL }}input"> Input data
+                                                <span class="arrow"></span>
+                                            </a>
+                                        </li>
+																		
+																				{% set active='' %}
+																				{% if sampleinput == true %}
+                                        {% set active = 'active' %}
+                                        {% endif %}
+																				<li class="menu-dropdown classic-menu-dropdown {{ active }}">
+                                            <a href="javascript:;"> Sample Inputs
+                                                <span class="arrow"><i class="first-level-arrow fa fa-angle-down" aria-hidden="true"></i></span>
+                                            </a>
+                                            <ul class="dropdown-menu pull-left">
+																								{% set c = 1 %}
+																								{% for s in sampleOutputs %}
+																								{% set active='' %}
+																								{% if c == sampleType %}
+                                        				{% set active = 'active' %}
+                                        				{% endif %}
+                                                <li class="{{ active }}">
+																									<a href="{{ baseURL }}input/sample/{{ c }}" class="nav-link "> {{ s[1] }} </a>
+                                                </li>
+																								{% set c = c + 1 %}
+																								{% endfor %}
+                                            </ul>
+																				</li>
+
+																				{% set active='' %}
+                                        {% if sample == true %}
+                                        {% set active = 'active' %}
+                                        {% endif %}
+																				<li class="menu-dropdown classic-menu-dropdown {{ active }}">
+                                            <a href="javascript:;"> Sample Outputs
+                                                <span class="arrow"><i class="first-level-arrow fa fa-angle-down" aria-hidden="true"></i></span>
+                                            </a>
+                                            <ul class="dropdown-menu pull-left">
+																								{% for s in sampleOutputs %}
+																								{% set active='' %}
+                                        				{% if sample and s[0] ==  id  %}
+                                        				{% set active = 'active' %}
+                                        				{% endif %}
+                                                <li class="{{ active }}">
+                                                  <a href="{{ baseURL }}output/summary/{{ s[0] }}/sample" class="nav-link "> {{ s[1] }} </a>
+                                                </li>
+																								{% endfor %}
+                                            </ul>
+																				</li>
+
+																				{% set active='' %}
+                                        {% if basename == 'help' %}
+                                        {% set active = 'active' %}
+                                        {% endif %}
+                                        <li class="menu-dropdown classic-menu-dropdown {{ active }}">
+                                            <a href="javascript:;"> Help
+                                                <span class="arrow"><i class="first-level-arrow fa fa-angle-down" aria-hidden="true"></i></span>
+                                            </a>
+                                            <ul class="dropdown-menu pull-left">
+																								{% set active='' %}
+                                        				{% if basename == 'help' and helpname == 'method' %}
+                                        				{% set active = 'active' %}
+                                        				{% endif %}
+                                                <li class="{{ active }}">
+                                                    <a href="{{ baseURL }}help/method" class="nav-link "> Method </a>
+																								</li>
+																								{% set active='' %}
+                                        				{% if basename == 'help' and helpname == 'inputs' %}
+                                        				{% set active = 'active' %}
+                                        				{% endif %}
+                                                <li class="{{ active }}">
+                                                    <a href="{{ baseURL }}help/inputs" class="nav-link "> Inputs </a>
+                                                </li>
+																								{% set active='' %}
+                                        				{% if basename == 'help' and helpname == 'outputs' %}
+                                        				{% set active = 'active' %}
+                                        				{% endif %}
+                                                <li class="{{ active }}">
+                                                    <a href="{{ baseURL }}help/outputs" class="nav-link "> Outputs </a>
+                                                </li>
+																								<!--{% set active='' %}
+                                        				{% if basename == 'help' and helpname == 'analysis' %}
+                                        				{% set active = 'active' %}
+                                        				{% endif %}
+                                                <li class="{{ active }} dropdown-submenu ">
+                                                    <a href="javascript:;" class="nav-link nav-toggle"> 
+																											Analysis 
+																										</a>
+																										<ul class="dropdown-menu">
+																												{% set active='' %}
+																												{% if basename == 'help' and helpname == 'analysis' and analname == 'curves' %}
+																												{% set active = 'active' %}
+																												{% endif %}
+                                                        <li aria-haspopup="true" class="{{ active }} ">
+                                                            <a href="{{ baseURL }}help/analysis/curves" class="nav-link "> Curves </a>
+                                                        </li>
+																												{% set active='' %}
+																												{% if basename == 'help' and helpname == 'analysis' and analname == 'stiffness' %}
+																												{% set active = 'active' %}
+																												{% endif %}
+                                                        <li aria-haspopup="true" class="{{ active }} ">
+                                                            <a href="{{ baseURL }}help/analysis/stiffness" class="nav-link "> Stiffness </a>
+                                                        </li>
+																												{% set active='' %}
+																												{% if basename == 'help' and helpname == 'analysis' and analname == 'pcazip' %}
+																												{% set active = 'active' %}
+																												{% endif %}
+                                                        <li aria-haspopup="true" class="{{ active }} ">
+                                                            <a href="{{ baseURL }}help/analysis/pcazip" class="nav-link "> PCAZip </a>
+                                                        </li>
+																												{% set active='' %}
+																												{% if basename == 'help' and helpname == 'analysis' and analname == 'contacts' %}
+																												{% set active = 'active' %}
+																												{% endif %}
+																												<li aria-haspopup="true" class="{{ active }} ">
+                                                            <a href="{{ baseURL }}help/analysis/contacts" class="nav-link "> Contacts </a>
+                                                        </li>
+																												{% set active='' %}
+																												{% if basename == 'help' and helpname == 'analysis' and analname == 'bending' %}
+																												{% set active = 'active' %}
+																												{% endif %}
+																												<li aria-haspopup="true" class="{{ active }} ">
+                                                            <a href="{{ baseURL }}help/analysis/bending" class="nav-link "> Bending </a>
+                                                        </li>
+																												{% set active='' %}
+																												{% if basename == 'help' and helpname == 'analysis' and analname == 'circular' %}
+																												{% set active = 'active' %}
+																												{% endif %}
+																												<li aria-haspopup="true" class="{{ active }} ">
+                                                            <a href="{{ baseURL }}help/analysis/circular" class="nav-link "> Circular </a>
+                                                        </li>
+																												{% set active='' %}
+																												{% if basename == 'help' and helpname == 'analysis' and analname == 'energy' %}
+																												{% set active = 'active' %}
+																												{% endif %}
+																												<li aria-haspopup="true" class="{{ active }} ">
+                                                            <a href="{{ baseURL }}help/analysis/energy" class="nav-link "> Energy </a>
+																												</li>
+																												{% set active='' %}
+																												{% if basename == 'help' and helpname == 'analysis' and analname == 'endtoend' %}
+																												{% set active = 'active' %}
+																												{% endif %}
+																												<li aria-haspopup="true" class="{{ active }} ">
+                                                            <a href="{{ baseURL }}help/analysis/end-to-end" class="nav-link "> End-to-end </a>
+																												</li>
+																												{% set active='' %}
+																												{% if basename == 'help' and helpname == 'analysis' and analname == 'sasa' %}
+																												{% set active = 'active' %}
+																												{% endif %}
+																												<li aria-haspopup="true" class="{{ active }} ">
+                                                            <a href="{{ baseURL }}help/analysis/sasa" class="nav-link "> Sasa </a>
+																												</li>
+																										</ul>
+                                                </li>-->
+                                            </ul>
+																				</li>
+																				
+                                    </ul>
+                                </div>
+
+                                <!-- END MEGA MENU -->
+                            </div>
+                        </div>
+                        <!-- END HEADER MENU -->

@@ -1,0 +1,137 @@
+{% set helpname = page.helpname  %}
+{% set analname = page.analname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">MC DNA Help - Analysis PCAZip </h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">
+																						{% if auth.check %}
+																						User Workspace
+																						{% else %}
+																						Home
+																						{% endif %}
+																						</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Help</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Analysis</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>PCAZip</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="portlet light bordered">
+                                                  <div class="portlet-title">
+                                                      <div class="caption font-yellow-crusta">
+                                                          <i class="fa fa-signal font-yellow-crusta"></i>
+                                                          <span class="caption-subject bold uppercase"> PCAZip</span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="portlet-body ">
+	                                                   
+																										<h2>Principal Components</h2>
+
+																										<h3>Method</h3>
+
+																										<p>Following <strong>Essential Dynamics algorithm (ED)</strong>, the orthogonal movements describing the variance of a system trajectory is obtained by diagonalization of the covariance matrix.</p>
+
+																										<p>The result of the analysis is the generation of a set of <strong>eigenvectors</strong> (the modes or the principal components), which describe the nature of the deformation movements of the protein and a set of <strong>eigenvalues</strong>, which indicate the stiffness associated to every mode.</p>
+
+																										<p>The <strong>eigenvectors</strong> appear ranked after a <strong>principal component analysis</strong>, the first one is that explaining the largest part of the variance (as indicated by the associated <strong>eigenvalue</strong>). Since the <strong>eigenvectors</strong> represent a full-basis set the original Cartesian trajectory can be always projected into the <strong>eigenvectors space</strong>, without lost of information.</p>
+
+																										<p>Each of the <strong>eigenvector</strong> obtained from <strong>Principal Component Analysis</strong> of a trajectory is called a <strong>Principal Component</strong>. The associated eigenvalue indicates the amount of variance explained by the component. The Collectivity Index gives a measure of how many atoms of the protein are affected by a Principal Component.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/pcazip.gif" style="max-width:100%;"></p>
+
+																										<p><strong>MC DNA</strong> uses <a href="http://mmb.pcb.ub.es/software/pcasuite/" target="_blank">PCAsuite package</a> to compute <strong>Principal Components Flexibility Analysis</strong>. <strong>PCA</strong> is computed using all the atoms of the structure and the compression is reduced to a <strong>90%</strong> of the <strong>explained variance</strong>. Only the first 10 <strong>principal components</strong> are shown in the graphical interface, as the first modes are usually the ones explaining the largest part of the variance.</p>
+
+																										<h3>Results</h3>
+
+																										<p>The <strong>Principal Component Analysis</strong> graphical interface offers the possibility of studying the real movements of the structure through the <strong>projections</strong> of the trajectory onto the different <strong>essential modes</strong>. An interactive <strong>NGL Viewer</strong> shows these movements, allowing user to <strong>translate</strong>, <strong>rotate</strong> and in general manipulate the visualization. The <strong>first 10 animation modes</strong> are offered for <strong>visualization</strong> and <strong>download</strong>. Associated values as <strong>eigenvalues</strong>, <strong>collectivity indexes</strong> and <strong>eigenvector stiffness constants</strong> are also shown.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-pca1.png" style="max-width:100%;"></p>
+
+																										<p>For each of the <strong>first 10 eigenvectors</strong>, a plot containing the <strong>displacement</strong> (in Angstroms) of the <strong>projections</strong> of all the trajectory snapshots into the associated <strong>eigenvector</strong> from the first snapshot is also computed and shown. Plots generated contain the corresponding <strong>histogram</strong> attached, and an associated table with calculated <strong>mean</strong> and <strong>standard deviation</strong> values. Raw data and plot are also easily downloadable.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-pca2.png" style="max-width:100%;"></p>
+
+																										
+
+                                                  </div>
+                                              </div>
+                                              <!-- END PORTLET-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+																			<h1 class="font-yellow-mint">User Workspace</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            User Workspace
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+																		{% include 'templates/partials/flash.html' %}
+                                    <div class="page-content-inner">
+
+																			<input type="hidden" id="user-id" value="{{ uid }}" />
+																			<input type="hidden" id="base-url" value="{{ baseURL }}" />	
+
+                                      
+																			<div class="row ">
+																				
+																					<div class="col-md-12">
+																						Hi, welcome to your workspace!
+																					</div>
+
+																			</div>
+																		</div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+
+

@@ -1,0 +1,513 @@
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                	
+									<!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">Project Output
+																				{% if sample %}
+																				{% for s in sampleOutputs %}
+																				{% if s[0] == id %}
+																				for sample {{ s[1] }}
+																				{% endif %}
+																				{% endfor %}
+																				{% endif %}
+																				</h1>
+
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">Home</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+																						{% if sample %}
+																						<span>Sample Output</span>
+																						{% else %}
+                                            <span>Output</span>
+																						{% endif %}
+                                        		<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Summary</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+
+																		{#########################################################}
+																		<input type="hidden" id="status" value="{{ status }}" >
+																		{#########################################################}
+																		<!--<input type="hidden" id="status" value="4" >-->
+																		{#########################################################}
+																		<input type="hidden" id="base-url" value="{{ baseURL }}" >
+																		<input type="hidden" id="projectID" value="{{ id }}" >
+																		<input type="hidden" id="trajectory" value="{{ traj }}" >
+																		<input type="hidden" id="resolution" value="{{ projectData.resolution }}" >
+																		<input type="hidden" id="tool" value="{{ projectData.tool }}" >
+
+																		{#########################################################}
+																		{# {% set status = 4 %}
+																		{#########################################################}
+
+																		{% if status == 4 %}
+
+																		<div class="page-content-inner">
+
+																			<div class="portlet light bordered">
+
+																				<p>The calculation time can take from a few minutes to several hours depending on the operation you have chosen, the number of structures if you selected trajectory,
+																				the resolution, the analysis and so on. Therefore, if you didn't provide your email address, we recommend you to bookmark the address of this page or copy the URL and 
+																				save it. If you have provided your email address, you will be notified once the job has finished.</p>
+
+																				<div class="form-group mt-clipboard-container">
+																					<div class="input-group">
+																						<input id="mt-target-1" type="text" class="form-control" value="{{ absoluteURL }}output/summary/{{ id }}" readonly style="background:#fff;" >
+																						<span class="input-group-btn">
+																							<button class="btn yellow-crusta mt-clipboard" data-clipboard-action="copy" data-clipboard-target="#mt-target-1" type="button"><i class="fa fa-copy"></i> Copy to clipboard</button>
+    																				</span>
+                                          </div>
+																				</div>
+
+																				<div  style="text-align:center;">
+																					<ul class="progress-tracker progress-tracker--vertical" id="progress-job" >
+
+																					{#
+																					{% for wfs in wfSteps %}
+
+																						<li class="progress-step step-title">
+																							<span class="progress-marker"></span>
+																							<span class="progress-text">
+																								<h3 class="progress-title">{{ wfs.tit }}</h3>
+																							</span>
+																						</li>
+
+																						{% set cs = 1 %}
+																						{% for wf in wfs.steps %}
+
+																							<li class="progress-step">
+																								<span class="progress-marker"></span>
+																								<span class="progress-text">
+																									<h4 class="progress-title">Step {{ cs }}</h4>
+																									{{ wf }}
+																								</span>
+																							</li>
+
+																							{% set cs = cs + 1 %}
+																						{% endfor %}
+
+																					{% endfor %}
+																					#}
+
+																					</ul>	
+																				</div>
+
+																				{#
+																				<div  style="text-align:center;">
+																					<ul class="progress-tracker progress-tracker--vertical">
+																						<li class="progress-step step-title is-complete">
+																							<span class="progress-marker"><i class="fa fa-check-circle-o" aria-hidden="true"></i></span>
+																							<span class="progress-text">
+																								<h3 class="progress-title">Step Title</h3>
+																							</span>
+																						</li>
+																						<li class="progress-step is-complete">
+																							<span class="progress-marker"><i class="fa fa-check" aria-hidden="true"></i></span>
+																							<span class="progress-text">
+																								<h4 class="progress-title">Step 1</h4>
+																								Summary text explaining this step to the user
+																							</span>
+																						</li>
+																						<li class="progress-step is-complete">
+																							<span class="progress-marker"><i class="fa fa-check" aria-hidden="true"></i></span>
+																							<span class="progress-text">
+																								<h4 class="progress-title">Step 2</h4>
+																								Summary text explaining this step to the user
+																							</span>
+																						</li>
+																						<li class="progress-step is-active">
+																							<span class="progress-marker"><i class="fa fa-spinner fa-spin fa-fw"></i></span>
+																							<span class="progress-text">
+																								<h4 class="progress-title">Step 3</h4>
+																								Summary text explaining this step to the user
+																							</span>
+																						</li>
+																						<li class="progress-step step-title">
+																							<span class="progress-marker"></span>
+																							<span class="progress-text">
+																								<h3 class="progress-title">Step Title</h3>
+																							</span>
+																						</li>
+																						<li class="progress-step">
+																							<span class="progress-marker"></span>
+																							<span class="progress-text">
+																								<h4 class="progress-title">Step 1</h4>
+																								Summary text explaining this step to the user
+																							</span>
+																						</li>
+																						<li class="progress-step">
+																							<span class="progress-marker"></span>
+																							<span class="progress-text">
+																								<h4 class="progress-title">Step 2</h4>
+																								Summary text explaining this step to the user
+																							</span>
+																						</li>
+																					</ul>	
+																				</div>
+																				#}
+
+																			</div>
+	
+																		</div>
+																			
+																		{% elseif(status == 3) %}
+
+																		<div class="page-content-inner">
+
+																			<div class="portlet light bordered">
+																				<p>Something happened with the project execution and an error has been generated. Please, try to execute your job again.</p>
+																				<p style="text-align:center;">
+																					<img src="{{ baseURL }}assets/global/img/error.png" style="width:100px;">
+																				</p>
+
+																			</div>
+	
+																		</div>
+																		
+																		{% else %}
+
+                                    <div class="page-content-inner">
+
+																			{% include 'templates/partials/menu-output.html' %}
+
+																			
+
+                                      <div class="portlet light bordered">
+																				<p>In the ‘Summary’ section, you can download all the analysis results and the structure / trajectory in a compressed tar.gz file.
+																				Also, you can view the structure with DNA in relaxed state and / or the trajectory. Both of them are visualized in NGL viewer.</p>
+																				<p>
+																				<a href="javascript:downloadFile('{{ id }}', 'sum');" class="btn btn-lg yellow-crusta responsive-btn">
+                                          	<i class="fa fa-download"></i> Download all summary in a compressed file 
+																					</a>
+																				</p>
+
+																			</div>
+
+																			<div class="row ">
+																				<div class="col-md-12">
+																					<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+																						<div class="portlet-title">
+																							<div class="caption">
+																								<i class="fa fa-file-text-o font-grey-mint"></i>
+																								<span class="caption-subject font-grey-mint sbold uppercase">Inputs Summary</span>
+																							</div>
+																						</div>
+
+																						<div class="portlet-body " style="" data-step="2">
+																						
+																							<table class="table table-striped table-bordered" id="tableFluct">
+																								<tbody>
+																									<tr>
+																										<td class="col-md-3"><strong>Selected Tool</strong></td>
+																										<td class="col-md-9">{{ tool }}</td>
+																									</tr>
+																									<tr>
+																										<td class="col-md-3"><strong>Resolution</strong></td>
+																										<td class="col-md-9">{{ resolutions[projectData.resolution] }}</td>
+																									</tr>
+																									{% if projectData.proteins is defined %}
+																									<tr>
+																										{% set l = projectData.proteins|length %}
+																										{% if l > 1 %}
+																										<td><strong>Proteins</strong></td>
+																										{% else %}
+																										<td><strong>Protein</strong></td>
+																										{% endif %}
+																										<td>
+																											<table>
+																											{% for p in projectData.proteins %}
+																											<tr>
+																												<td style="height:45px; width:280px;"><strong>Code:</strong> {{ p.code|upper }} | <strong>Lentgh:</strong> {{ p.length }} | <strong>Position:</strong> {{ p.position }}</td>
+																											<td><a href="javascript:previewNGL('{{ p.code }}');" class="btn btn-icon-only yellow-crusta tooltips view-pdb" 
+																											style="width:25px;height:25px;padding-top:1px;"
+																											data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Click here to preview the protein.</p>">
+																												<i class="fa fa-cube"></i>
+																											</a></td>
+																											</tr>
+																											{% endfor %}
+																											</table>
+																										</td>
+																									</tr>
+																									{% endif %}
+																									<!--<tr>
+																										<td class="col-md-3"><strong>Type</strong></td>
+																										<td class="col-md-9">{{ type }}</td>
+																									</tr>-->
+																									<tr>
+																										{% set l = projectData.operations|length %}
+																										{% if l > 1 %}
+																										<td><strong>Operations</strong></td>
+																										{% else %}
+																										<td><strong>Operation</strong></td>
+																										{% endif %}
+																										<td>
+																											{% set c = 1 %}
+																											{% for v in projectData.operations %}
+																												{{ operations[v] }}{% if c < l %},{% endif %}  
+																												{% set c = c +1 %}
+																											{% endfor %}
+																										</td>
+																									</tr>
+																									{% if projectData.deltaLN is defined %}
+																									<tr>
+																										<td><strong>Delta linking number</strong></td>
+																										<td>{{ projectData.deltaLN }}</td>
+																									</tr>
+																									{% endif %}
+																									{% if projectData.iterStruct is defined %}
+																									<tr>
+																										<td><strong>Iterations per structure</strong></td>
+																										<td>{{ projectData.iterStruct }}</td>
+																									</tr>
+																									{% endif %}
+																									{% if projectData.numStructures is defined %}
+																									<tr>
+																										<td><strong>Number of Structures</strong></td>
+																										<td>{{ projectData.numStructures }}</td>
+																									</tr>
+																									{% endif %}
+																									<tr>
+																										<td><strong>Input sequence</strong></td>
+																										<td style="word-break: break-all;">{{ inputSequence }}</td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																						</div>	
+
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>	
+																			</div>	
+
+																			{% if (traj == 0) or (traj == 2) %}
+
+																			<div class="row">
+																				<div class="col-md-12">
+																				<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+																						<div class="portlet-title">
+																							<div class="caption">
+																								<i class="fa fa-share-alt font-grey-mint"></i>
+																								<span class="caption-subject font-grey-mint sbold uppercase">STRUCTURE</span>
+																							</div>
+																						</div>
+																						<div class="portlet-body">
+
+																								<div class="row">
+																									<div class="col-md-12">
+																									<!-- BEGIN PORTLET-->
+																										<div class="portlet light ">
+																											<div class="portlet-title">
+																												<div class="caption">
+																													<i class="fa fa-codepen font-grey-mint"></i>
+																													<span class="caption-subject font-grey-mint sbold uppercase">3D VIEW</span>
+																												</div>
+																											</div>
+																											<div class="portlet-body" data-step="3">
+																												<div id="loading-viewport1" style="position:absolute;left:46%; top:300px;z-index:50;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading2.gif" /></div>
+																												<div id="viewport1" style="width: 100%;height: 500px;background: #c7ced1;"></div>
+																												<div style="margin-top:20px;"><a href="javascript:;" id="view-fullscreen1" class="btn yellow-crusta"><i class="fa fa-expand"></i> Click here to view in full screen</a></div>
+																											</div>	
+																										</div>
+																										<!-- END PORTLET-->
+																									</div>
+																								</div>
+																						</div>
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>
+																			</div>
+
+																			{% endif %}
+
+																			{% if (traj == 1) or (traj == 2) %}
+
+																			<div class="row">
+																				<div class="col-md-12">
+																				<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+																						<div class="portlet-title">
+																							<div class="caption">
+																								<i class="fa fa-retweet font-grey-mint"></i>
+																								<span class="caption-subject font-grey-mint sbold uppercase">TRAJECTORIES</span>
+																							</div>
+																						</div>
+																						<div class="portlet-body">
+
+																								<div class="row">
+																									<div class="col-md-12">
+																									<!-- BEGIN PORTLET-->
+																										<div class="portlet light ">
+																											<div class="portlet-title">
+																												<div class="caption">
+																													<i class="fa fa-codepen font-grey-mint"></i>
+																													<span class="caption-subject font-grey-mint sbold uppercase">3D VIEW</span>
+																												</div>
+																											</div>
+																											<div class="portlet-body" data-step="4">
+																												<div id="loading-viewport2" style="position:absolute;left:46%; top:300px;z-index:50;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading2.gif" /></div>
+																												<div id="loading-trajectories" class="font-grey-mint" style="position:absolute; width:100%; top:520px;display:none; text-align:center;z-index:50;">
+																													Loading trajectories <i class="fa-li fa fa-spinner fa-pulse fa-spin" style="position: relative;margin-left: 25px;top: 0;"></i>
+																												</div>
+																												<div id="viewport2" style="width: 100%;height: 500px;background: #c7ced1;"></div>
+
+																												<div class="cbp-left" id="label-pdb">
+																													<a href="javascript:frameStep(-1);" class="btn btn-icon-only yellow-crusta frames-btn disabled">
+																														<i class="fa fa-step-backward"></i>
+																													</a>
+																													<a href="javascript:frameToggle();" class="btn btn-icon-only yellow-crusta frames-btn disabled">
+																														<i class="fa fa-pause" id="pause-btn"></i>
+																														<i class="fa fa-play" id="play-btn" style="display:none;"></i>
+																													</a>
+																													<a href="javascript:frameStep(1);" class="btn btn-icon-only yellow-crusta frames-btn disabled">
+																														<i class="fa fa-step-forward"></i>
+																													</a>
+																												</div>
+																												<div class="cbp-right" id="label-frame" style="background:#ffe990;border-radius:4px; padding:7px 25px;color: #888;">1</div>
+																												<input id="sliderframe" type="range" disabled min="0" max="{{ projectData.numStructures - 1 }}" step="1" value="0" />
+
+																												<div style="margin-top:20px;"><a href="javascript:;" id="view-fullscreen2" class="btn yellow-crusta"><i class="fa fa-expand"></i> Click here to view in full screen</a></div>
+																											</div>
+																										</div>
+																										<!-- END PORTLET-->
+																									</div>
+																								</div>
+																							
+																								<!--<div class="row">
+																									<div class="col-md-6">
+																									BEGIN PORTLET
+																										<div class="portlet light ">
+																											<div class="portlet-title">
+																												<div class="caption">
+																													<i class="fa fa-area-chart font-grey-mint"></i>
+																													<span class="caption-subject font-grey-mint sbold uppercase">Bending distribution of DNA fiber</span>
+																												</div>
+																											</div>
+																											<div class="portlet-body">
+
+																												<div id="loading-traj01" style="position:absolute;left:46%; top:270px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																												<div id="traj01PlotDiv" style="height: 500px;"></div>
+
+																											</div>
+																										</div>
+																										END PORTLET
+																									</div>
+
+																									<div class="col-md-6">
+																									BEGIN PORTLET
+																										<div class="portlet light ">
+																											<div class="portlet-title">
+																												<div class="caption">
+																													<i class="fa fa-area-chart font-grey-mint"></i>
+																													<span class="caption-subject font-grey-mint sbold uppercase">Bending along DNA fiber</span>
+																												</div>
+																											</div>
+																											<div class="portlet-body">
+
+																												<div id="loading-traj02" style="position:absolute;left:46%; top:270px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																												<div id="traj02PlotDiv" style="height: 500px;"></div>
+
+																											</div>
+																										</div>
+																										END PORTLET
+																									</div>
+																								</div>-->
+
+																						</div>
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>
+																			</div>
+
+																			{% endif %}
+
+                                    	</div>
+
+																			{% endif %}
+                                    <!-- END PAGE CONTENT INNER -->
+																</div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+
+												<div class="modal fade bs-modal" id="modalNGL" tabindex="-1" role="basic" aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+																<h4 class="modal-title"></h4>
+															</div>
+															<div class="modal-body">
+																<div id="loading-viewport" style="position:absolute;left:42%; top:220px;z-index:50;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading2.gif" /></div>
+																<div id="viewport" style="width:100%; height:500px;background:#c7ced1;"></div>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+                    </div>
+                    <!-- END CONTAINER -->
+
+								</div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

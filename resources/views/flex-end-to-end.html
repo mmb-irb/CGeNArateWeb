@@ -1,0 +1,207 @@
+{% set flexname = page.flexname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                	
+									<!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">End-to-end Distances
+																				{% if sample %}
+																				{% for s in sampleOutputs %}
+																				{% if s[0] == id %}
+																				for sample {{ s[1] }}
+																				{% endif %}
+																				{% endfor %}
+																				{% endif %}
+																				</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">Home</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            {% if sample %}
+																						<span>Sample Output</span>
+																						{% else %}
+                                            <span>Output</span>
+																						{% endif %}
+                                        		<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Flexibility Analysis</span>
+                                        		<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>End-to-end Distances</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+
+																		<!--<input type="hidden" id="status" value="{{ status }}" >-->
+																		<input type="hidden" id="base-url" value="{{ baseURL }}" >
+																		<input type="hidden" id="projectID" value="{{ id }}" >
+																		<input type="hidden" id="strType" value="{{ strType }}" >
+																		<input type="hidden" id="resolution" value="{{ projectData.resolution }}" >
+																		<input type="hidden" id="tool" value="{{ projectData.tool }}" >
+																		<!--<input type="hidden" id="trajectory" value="{{ traj }}" >
+																		<input type="hidden" id="tool" value="{{ projectData.tool }}" >-->
+
+
+                                    <div class="page-content-inner">
+
+																			{% include 'templates/partials/menu-output.html' %}
+
+                                      <div class="portlet light bordered">
+																				<p>In the ‘Analysis’ section, you can download all the analysis results in a compressed tar.gz file.</p>
+																				<p>
+																					<a href="javascript:downloadFile('{{ id }}', 'an');" class="btn btn-lg yellow-crusta responsive-btn">
+                                          	<i class="fa fa-download"></i> Download all analysis in a compressed file 
+																					</a>
+																				</p>
+
+																			</div>
+
+																			{% include 'templates/partials/menu-flex.html' %}
+
+																			{% if sample %}
+																			<!-- BEGIN Portlet PORTLET-->
+																			<div class="portlet light">
+																				<div class="portlet-body">
+																					<p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="endtoendTour">Click here to start the guided tour</a></p>
+																				</div>
+																			</div>
+																			<!-- END Portlet PORTLET-->	
+																			{% endif %}
+
+																			<div class="row">
+																				<div class="col-md-12">
+																					<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+																						<div class="portlet-title">
+																							<div class="caption">
+																								<i class="fa fa-arrows-h font-grey-mint"></i>
+																								<span class="caption-subject font-grey-mint sbold uppercase">Distances selector</span>	
+																							</div>
+																						</div>
+
+																						<div class="portlet-body" style="min-height:50px;" data-step="1">	
+																					
+																							<div id="loading-range" style="position:absolute;left:48%; top:72px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading3.gif" /></div>
+																							<input id="range" class="display-hide" />
+
+																						</div>	
+
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>
+																			</div>
+
+																			<div class="row row-eq-height">
+																				<div class="col-md-6">
+																					<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+																						<div class="portlet-title">
+																							<div class="caption">
+																								<i class="fa fa-area-chart font-grey-mint"></i>
+																								<span class="caption-subject font-grey-mint sbold uppercase">END-to-End distances plot</span>	
+																							</div>
+																						</div>
+
+																						<div class="portlet-body" data-step="2">	
+																					
+																							<div id="loading-plot" style="position:absolute;left:44%; top:295px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																							<div id="endToEndPlotDiv" style="height: 500px;"></div>	
+
+																						</div>	
+
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>
+																				<div class="col-md-6">
+																					<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+																						<div class="portlet-title">
+																							<div class="caption">
+																								<i class="fa fa-codepen font-grey-mint"></i>
+																								<span class="caption-subject font-grey-mint sbold uppercase">3D View</span>	
+																							</div>
+																						</div>
+
+																						<div class="portlet-body" data-step="3">	
+																						
+																							<div id="loading-viewport" style="position:absolute;left:44%; top:295px;z-index:50;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading2.gif" /></div>
+																							<div id="viewport" style="width: 100%;height: 500px;background: #c7ced1;"></div>	
+
+																							<div style="margin-top:20px;"><a href="javascript:;" id="view-fullscreen" class="btn yellow-crusta"><i class="fa fa-expand"></i> Click here to view in full screen</a></div>
+																						</div>	
+
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>	
+																			</div>	
+
+																			
+
+                                    	</div>
+
+                                    <!-- END PAGE CONTENT INNER -->
+																</div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+
+
+                    </div>
+                    <!-- END CONTAINER -->
+
+								</div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

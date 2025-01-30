@@ -1,0 +1,43 @@
+{% if projectData.analysis == 1 %}
+{% set intro = '' %}
+{% if basename == 'summary' %}
+{% set intro = 'data-step="1"' %}
+{% endif %}
+<div class="portlet" {{ intro|raw }}>
+	{% if sample %}
+  {% set sampPath = '/sample' %}
+	{% else %}
+	{% set sampPath = '' %}
+  {% endif %}
+	<div class="btn-group btn-group-justified">
+		<a href="{{ baseURL }}output/summary/{{id}}{{sampPath}}" 
+			class="btn btn-lg {% if basename == 'summary' %}yellow-crusta not-active{% else %}default{% endif %} menu-output"
+			{% if basename == 'summary' %}disabled{% endif %}>
+			<span class="fa-stack fa-lg" style="margin-top:30px;">
+				<i class="fa fa-circle-thin fa-stack-2x"></i>
+				<i class="fa fa-file-text fa-stack-1x"></i>
+			</span> Summary 
+		</a>
+		{% if 1 in flextypes %}
+			<a href="{{ baseURL }}output/flex/eq/{{ defaultFlexEQ }}/{{id}}{{sampPath}}" 
+			class="btn btn-lg {% if basename == 'flexeq' %}yellow-crusta not-active{% else %}default{% endif %} menu-output"
+			{% if basename == 'flexeq' %}disabled{% endif %}>
+			<span class="fa-stack fa-lg" style="margin-top:30px;">
+				<i class="fa fa-square-o fa-stack-2x"></i>
+				<i class="fa fa-random fa-rotate-270 fa-stack-1x"></i>
+			</span>	Structure Flexibility Analysis 
+		</a>
+		{% endif %}
+		{% if 2 in flextypes %}
+		<a href="{{ baseURL }}output/flex/traj/{{ defaultFlexTRAJ }}/{{id}}{{sampPath}}" 
+			class="btn btn-lg {% if basename == 'flextraj' %}yellow-crusta not-active{% else %}default{% endif %} menu-output"
+			{% if basename == 'flextraj' %}disabled{% endif %}>
+			<span class="fa-stack fa-lg" style="margin-top:30px;">
+				<i class="fa fa-circle-thin fa-stack-2x"></i>
+				<i class="fa fa-random fa-rotate-270 fa-stack-1x"></i>
+			</span> Trajectory Flexibility Analysis 
+		</a>
+		{% endif %}
+	</div>	
+</div>
+{% endif %}

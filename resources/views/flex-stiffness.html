@@ -1,0 +1,257 @@
+{% set flexname = page.flexname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                	
+									<!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">Stiffness Analysis
+																				{% if sample %}
+																				{% for s in sampleOutputs %}
+																				{% if s[0] == id %}
+																				for sample {{ s[1] }}
+																				{% endif %}
+																				{% endfor %}
+																				{% endif %}
+																				</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">Home</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Output</span>
+                                        		<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Flexibility Analysis</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Stiffness</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+
+																		<input type="hidden" id="base-url" value="{{ baseURL }}" >
+																		<input type="hidden" id="projectID" value="{{ id }}" >
+																		<input type="hidden" id="strType" value="{{ strType }}" >
+
+                                    <div class="page-content-inner">
+
+																			{% include 'templates/partials/menu-output.html' %}
+
+                                      <div class="portlet light bordered">
+																				<p>In the ‘Analysis’ section, you can download all the analysis results in a compressed tar.gz file.</p>
+																				<p>
+																					<a href="javascript:downloadFile('{{ id }}', 'an');" class="btn btn-lg yellow-crusta responsive-btn">
+                                          	<i class="fa fa-download"></i> Download all analysis in a compressed file 
+																					</a>
+																				</p>
+
+																			</div>
+
+																			{% include 'templates/partials/menu-flex.html' %}
+
+																			<div class="row ">
+																				<div class="col-md-12">
+																					<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+																						<div class="portlet-title tabbable-line">
+																							<div class="caption">
+																								<i class="fa fa fa-stack-overflow"></i>  
+																								<span class="caption-subject font-grey-mint sbold uppercase">Stiffness</span>
+																							</div>
+																							<ul class="nav nav-tabs">
+																								<li class="active">
+																										<a href="#helical" data-toggle="tab"> Stiffness by Helical Parameters </a>
+																								</li>
+																							</ul>
+																						</div>
+
+																						<div class="portlet-body " style="">
+																					
+																							{% if sample %}
+																							<p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="stiffnessTour">Click here to start the guided tour</a></p>
+																							{% endif %}
+	
+																							<div class="tab-content">
+
+                                              	<div class="tab-pane active" id="helical">	
+
+																									<p>Images courtesy of <a href="http://x3dna.org/" target="_blank">x3dna.org</a></p>
+
+																									<div class="mt-element-card mt-element-overlay" data-step="1">
+																										<div class="row">
+
+																											<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/shift.png" />
+																														<div class="mt-overlay helical" id="shift_avg">
+																															<a href="javascript:loadScatterPlot('helical', 'shift_avg', ['Sequence Base Pair', 'Shift (Kcal/mol*Ångströms²)'], ['Shift User-MCDNA Stiffness Average'], 'Base Pair Step Helical Parameters Stiffness Constants: Shift', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Shift</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/slide.png" />
+																														<div class="mt-overlay helical" id="slide_avg">
+																															<a href="javascript:loadScatterPlot('helical', 'slide_avg', ['Sequence Base Pair', 'Slide (Kcal/mol*Ångströms²)'], ['Slide User-MCDNA Stiffness Average'], 'Base Pair Step Helical Parameters Stiffness Constants: Shift', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Slide</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/rise.png" />
+																														<div class="mt-overlay helical" id="rise_avg">
+																															<a href="javascript:loadScatterPlot('helical', 'rise_avg', ['Sequence Base Pair', 'Rise (Kcal/mol*Ångströms²)'], ['Rise User-MCDNA Stiffness Average'], 'Base Pair Step Helical Parameters Stiffness Constants: Rise', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Rise</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/tilt.png" />
+																														<div class="mt-overlay helical" id="tilt_avg">
+																															<a href="javascript:loadScatterPlot('helical', 'tilt_avg', ['Sequence Base Pair', 'Tilt (Kcal/mol*Degree²)'], ['Tilt User-MCDNA Stiffness Average'], 'Base Pair Step Helical Parameters Stiffness Constants: Tilt', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Tilt</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/roll.png" />
+																														<div class="mt-overlay helical" id="roll_avg">
+																															<a href="javascript:loadScatterPlot('helical', 'roll_avg', ['Sequence Base Pair', 'Roll (Kcal/mol*Degree²)'], ['Roll User-MCDNA Stiffness Average'], 'Base Pair Step Helical Parameters Stiffness Constants: Roll', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Roll</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/twist.png" />
+																														<div class="mt-overlay helical" id="twist_avg">
+																															<a href="javascript:loadScatterPlot('helical', 'twist_avg', ['Sequence Base Pair', 'Twist (Kcal/mol*Degree²)'], ['Twist User-MCDNA Stiffness Average'], 'Base Pair Step Helical Parameters Stiffness Constants: Twist', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Twist</h3>
+																													</div>
+																												</div>
+																											</div>
+																									
+																										</div>	
+
+																									</div>
+
+																									<div class="row">
+
+																										<div class="col-sm-12" data-step="2">
+																											<div id="loading-helical" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																											<div id="helicalPlotDiv" style="height: 700px;"></div>
+																										</div>
+
+																									</div>
+
+																								</div>
+
+																							</div>
+
+																						</div>	
+
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>	
+																			</div>	
+
+                                    	</div>
+
+                                    <!-- END PAGE CONTENT INNER -->
+																</div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+
+
+                    </div>
+                    <!-- END CONTAINER -->
+
+								</div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

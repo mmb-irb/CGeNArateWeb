@@ -1,0 +1,116 @@
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title ">
+                                        <h1 class="font-yellow-crusta">CGeNArate Help</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">
+																						{% if auth.check %}
+																						User Workspace
+																						{% else %}
+																						Home
+																						{% endif %}
+																						</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Help</span>
+																						
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                              <!-- BEGIN PORTLET-->
+                                              <div class="portlet light bordered">
+                                                    <div class="portlet-title">
+                                                        <div class="caption font-yellow-crusta">
+                                                            <i class="fa fa-question-circle font-yellow-crusta"></i>
+                                                            <span class="caption-subject bold uppercase"> Help</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body ">
+                                                         
+                                                        <h2>Method Help</h2>
+
+                                                        <p>Method</p>
+
+                                                        <h2>{{ longName }}</h2>
+
+                                                        <p>{{ longName }}</p>
+
+                                                        <h2>Circular CGeNArate</h2>
+
+                                                        <p>Circular CGeNArate</p>
+
+                                                        <h2>CGeNArate + Proteins</h2>
+
+                                                        <p>CGeNArate + Proteins</p>
+  
+                                                    </div>
+                                                </div>
+                                                <!-- END PORTLET-->
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

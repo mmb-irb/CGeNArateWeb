@@ -1,0 +1,307 @@
+{% set flexname = page.flexname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                	
+									<!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">Elastic Energy Analysis
+																				{% if sample %}
+																				{% for s in sampleOutputs %}
+																				{% if s[0] == id %}
+																				for sample {{ s[1] }}
+																				{% endif %}
+																				{% endfor %}
+																				{% endif %}		
+																				</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">Home</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            {% if sample %}
+																						<span>Sample Output</span>
+																						{% else %}
+                                            <span>Output</span>
+																						{% endif %}
+                                        		<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Elastic Energy</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+
+																		<input type="hidden" id="base-url" value="{{ baseURL }}" >
+																		<input type="hidden" id="projectID" value="{{ id }}" >
+																		<input type="hidden" id="strType" value="{{ strType }}" >
+																		<input type="hidden" id="tool" value="{{ projectData.tool }}" >
+
+                                    <div class="page-content-inner">
+
+																			{% include 'templates/partials/menu-output.html' %}
+
+                                      <div class="portlet light bordered">
+																				<p>In the ‘Analysis’ section, you can download all the analysis results in a compressed tar.gz file.</p>
+																				<p>
+																					<a href="javascript:downloadFile('{{ id }}', 'an');" class="btn btn-lg yellow-crusta responsive-btn">
+                                          	<i class="fa fa-download"></i> Download all analysis in a compressed file 
+																					</a>
+																				</p>
+
+																			</div>
+
+																			{% include 'templates/partials/menu-flex.html' %}
+
+																			<div class="row ">
+																				<div class="col-md-12">
+																					<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+																						<div class="portlet-title tabbable-line">
+																							<div class="caption">
+																								<i class="fa fa-bolt"></i>  
+																								<span class="caption-subject font-grey-mint sbold uppercase">Elastic Energy</span>
+																							</div>
+																							
+																						</div>
+
+																						<div class="portlet-body " style="">
+
+																							{% if sample %}
+																							<p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="energyTour">Click here to start the guided tour</a></p>
+																							{% endif %}	
+
+																							<h4>Elastic energy of DNA</h4>
+
+																							<table class="table table-bordered table-striped" data-step="1">
+																								{% set row = 0 %}
+																								{% for k1,v1 in enTable %}
+																									{% if row == 0 %}
+																										<thead>
+																										<tr>
+																										{% for k2,v2 in v1 %}
+																										<th>{{ v2 }}</th>
+																										{% endfor %}																										
+																										</tr>
+																										</thead>
+																									{% else %}
+																										{% if row == 1 %}
+																										<tbody>
+																										{% endif %}
+																										<tr>
+																										{% set col = 0 %}
+																										{% for k2,v2 in v1 %}
+																										{% if col == 0 %}
+																											<td class="col-sm-4"><strong>{{ v2 }}</strong></td>
+																										{% else %}
+																											<td class="col-sm-4">{{ v2|round(2) }}</td>
+																										{% endif %}
+																										{% set col = col + 1 %}
+																										{% endfor %}
+																										</tr>
+																									{% endif %}
+																								{% set row = row + 1 %}
+																								{% endfor %}
+																									</tbody>
+																							</table>
+
+
+																							{% if strType == 'traj' %}
+
+																							<div class="row ">
+																								<div class="col-md-12" data-step="2">
+																									<div id="loading-elen" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																									<div id="elenPlotDiv" style="height: 700px;"></div>
+																								</div>
+																							</div>
+
+																							{% endif %}
+
+																							{% if projectData.tool == 3 %}
+
+																							<h4>Elastic Energy of DNA not bound to a protein</h4>
+
+																							<table class="table table-bordered table-striped" data-step="3">
+																								{% set row = 0 %}
+																								{% for k1,v1 in meansdTable %}
+																									{% if row == 0 %}
+																										<thead>
+																										<tr>
+																										{% for k2,v2 in v1 %}
+																										<th>{{ v2 }}</th>
+																										{% endfor %}																										
+																										</tr>
+																										</thead>
+																									{% else %}
+																										{% if row == 1 %}
+																										<tbody>
+																										{% endif %}
+																										<tr>
+																										{% set col = 0 %}
+																										{% for k2,v2 in v1 %}
+																										{% if col == 0 %}
+																											<td class="col-sm-4"><strong>{{ v2 }}</strong></td>
+																										{% else %}
+																											<td class="col-sm-4">{{ v2|round(2) }}</td>
+																										{% endif %}
+																										{% set col = col + 1 %}
+																										{% endfor %}
+																										</tr>
+																									{% endif %}
+																								{% set row = row + 1 %}
+																								{% endfor %}
+																									</tbody>
+																							</table>
+
+																							{% if strType == 'traj' %}
+
+																							<div class="row ">
+																								<div class="col-md-12" data-step="4">
+																									<div id="loading-unbound" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																									<div id="unboundPlotDiv" style="height: 700px;"></div>
+																								</div>
+																							</div>
+
+																							{% endif %}
+
+																							<h4>Elastic Energy of Protein-Bound DNA</h4>
+
+																							<table class="table table-bordered table-striped" data-step="5">
+																								{% set row = 0 %}
+																								{% for k1,v1 in dnaprotTable %}
+																									{% if row == 0 %}
+																										<thead>
+																										<tr>
+																										{% for k2,v2 in v1 %}
+																										<th>{{ v2 }}</th>
+																										{% endfor %}																										
+																										</tr>
+																										</thead>
+																									{% else %}
+																										{% if row == 1 %}
+																										<tbody>
+																										{% endif %}
+																										<tr>
+																										{% set col = 0 %}
+																										{% for k2,v2 in v1 %}
+																										{% if col == 0 %}
+																											<td class="col-sm-4">
+																											<strong style="font-family:'monospace', 'Courier'">{{ v2 }}
+																											<a href="javascript:previewNGL('{{ v2 }}');" class="btn btn-icon-only yellow-crusta tooltips view-pdb" 
+																											style="width:25px;height:25px;padding-top:1px;"
+																											data-container="body" data-html="true" data-placement="right" data-original-title="<p align='left' style='margin:0'>Click here to preview the protein.</p>">
+																												<i class="fa fa-cube"></i>
+																											</a>
+																											</strong>
+																											</strong></td>
+																										{% else %}
+																											<td class="col-sm-4">{{ v2|round(2) }}</td>
+																										{% endif %}
+																										{% set col = col + 1 %}
+																										{% endfor %}
+																										</tr>
+																									{% endif %}
+																								{% set row = row + 1 %}
+																								{% endfor %}
+																									</tbody>
+																							</table>
+
+																							<div class="row ">
+																								<div class="col-md-12" data-step="6">
+																									<div id="loading-dnaprot" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																									<div id="dnaprotPlotDiv" style="height: 700px;"></div>
+																								</div>
+																							</div>
+																							
+																							{% endif %}
+
+																						</div>
+		
+
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>	
+																			</div>	
+
+                                    	</div>
+
+                                    <!-- END PAGE CONTENT INNER -->
+																</div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+
+												<div class="modal fade bs-modal" id="modalNGL" tabindex="-1" role="basic" aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+																<h4 class="modal-title"></h4>
+															</div>
+															<div class="modal-body">
+																<div id="loading-viewport" style="position:absolute;left:42%; top:220px;z-index:50;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading2.gif" /></div>
+																<div id="viewport" style="width:100%; height:500px;background:#c7ced1;"></div>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+
+                    </div>
+                    <!-- END CONTAINER -->
+
+								</div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

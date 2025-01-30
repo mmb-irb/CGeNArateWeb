@@ -1,0 +1,237 @@
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+{% set countries = id %}
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-mint">User Profile</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                      <li>
+                                          <a href="{{ baseURL }}" class="font-yellow-mint">User Workspace</a>
+                                          <i class="fa fa-circle"></i>
+                                      </li>
+                                      <li>
+                                          <span>User</span>
+                                          <i class="fa fa-circle"></i>
+                                      </li>
+                                      <li>
+                                          <span>My Profile</span>
+                                      </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                      <div class="row">
+                                            <div class="col-md-12">
+                                                <!-- BEGIN PROFILE SIDEBAR -->
+                                                <div class="profile-sidebar">
+                                                    <!-- PORTLET MAIN -->
+                                                    <div class="portlet light profile-sidebar-portlet bordered">
+                                                        <!-- SIDEBAR USERPIC -->
+                                                        <div class="profile-userpic">
+                                                            <div class="img-circle" id="avatar-usr-profile">{{ auth.initials }}</div>
+                                                        </div>
+                                                        <!-- END SIDEBAR USERPIC -->
+                                                        <!-- SIDEBAR USER TITLE -->
+                                                        <div class="profile-usertitle">
+                                                            <div class="profile-usertitle-name font-yellow-mint"> {{ auth.user.name }} {{ auth.user.surname }} </div>
+                                                            <div class="profile-usertitle-job font-blue-oleo"> {{ auth.user.institution }}  </div>
+                                                            <div class="profile-usertitle-lastlogin font-blue-oleo"> Last login: <strong>{{ auth.lastLogin.sec|date("d/m/Y H:i") }}</strong> </div>
+                                                        </div>
+                                                        <!-- END SIDEBAR USER TITLE -->
+                                                        <div class="profile-usermenu"></div>
+                                                    </div>
+                                                    <!-- END PORTLET MAIN -->
+                                                </div>
+                                                <!-- END BEGIN PROFILE SIDEBAR -->
+                                                <!-- BEGIN PROFILE CONTENT -->
+                                                <div class="profile-content">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="portlet light bordered">
+                                                                <div class="portlet-title tabbable-line">
+                                                                    <div class="caption caption-md">
+                                                                        <i class="fa fa-user font-green"></i>
+                                                                        <span class="caption-subject font-green bold uppercase">Profile Account</span>
+                                                                    </div>
+                                                                    <ul class="nav nav-tabs">
+                                                                        <li class="active">
+                                                                            <a href="#tab_1_1" data-toggle="tab">Personal Info</a>
+                                                                        </li>
+                                                                        <!--<li>
+                                                                            <a href="#tab_1_2" data-toggle="tab">Change Avatar</a>
+                                                                        </li>-->
+                                                                        <li>
+                                                                            <a href="#tab_1_3" data-toggle="tab">Change Password</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="portlet-body">
+                                                                    <div class="tab-content">
+                                                                        <!-- PERSONAL INFO TAB -->
+                                                                        <div class="tab-pane active" id="tab_1_1">
+                                                                            <form role="form" action="{{ baseURL }}auth/profile/user" method="post" id="form-change-profile">
+                                                                              {% include 'templates/partials/flash.html' %}
+																																							<div class="form-group {{ errors.name ? 'has-error' : '' }}">
+                                                                                <label class="control-label">Name</label>
+                                                                                <input name="name" type="text" value="{{ auth.user.name }}" class="form-control" />
+																																								<span class="help-block {{ errors.name ? 'help-block-error' : '' }}">
+																																								{% if errors.name %}
+																																									{{ errors.name | first }}<br>
+																																								{% endif %}
+																																								</span>
+                                                                              </div>
+                                                                              <div class="form-group {{ errors.surname ? 'has-error' : '' }}">
+                                                                                <label class="control-label">Surname</label>
+                                                                                <input name="surname" type="text" value="{{ auth.user.surname }}" class="form-control" />
+																																								<span class="help-block {{ errors.surname ? 'help-block-error' : '' }}">
+																																								{% if errors.surname %}
+																																									{{ errors.surname | first }}<br>
+																																								{% endif %}
+																																								</span>
+																																							</div>
+                                                                              <div class="form-group {{ errors.institution ? 'has-error' : '' }}">
+                                                                                <label class="control-label">Institution</label>
+                                                                                <input name="institution" type="text" value="{{ auth.user.institution }}" class="form-control" />
+																																								<span class="help-block {{ errors.institution ? 'help-block-error' : '' }}">
+																																								{% if errors.institution %}
+																																									{{ errors.institution | first }}<br>
+																																								{% endif %}
+																																								</span>
+																																							</div>
+                                                                              <div class="form-group">
+                                                                                <label class="control-label">Country</label>
+																																								<select name="country" class="form-control">
+																																									{% for v in countries %}	
+																																										{% set sel = '' %}
+																																										{% if auth.user.country == v._id %}
+																																										{% set sel = 'selected' %}
+																																										{% endif %}
+																																										<option value="{{ v._id }}" {{ sel }}>{{ v.country }}</option>
+																																									{% endfor %}
+																																								</select>
+                                                                              </div>
+                                                                              <div class="margiv-top-10">
+                                                      													<button type="submit" id="submit-changes" class="btn yellow-mint"><i class="fa fa-check"></i> Save Changes</button>
+                                                      													<button type="reset" class="btn default">Cancel</button>
+                                                                              </div>
+																																
+																																							{{ csrf.field | raw }}
+
+                                                                            </form>
+                                                                        </div>
+                                                                        <!-- END PERSONAL INFO TAB -->
+                                                                        <!-- CHANGE AVATAR TAB -->
+                                                                        <div class="tab-pane" id="tab_1_2">
+                                                                            <p> Change avatar (soon) </p>
+                                                                        </div>
+                                                                        <!-- END CHANGE AVATAR TAB -->
+                                                                        <!-- CHANGE PASSWORD TAB -->
+                                                                        <div class="tab-pane" id="tab_1_3">
+                                                                            <form role="form" action="{{ baseURL }}auth/profile/password" method="post"  id="form-change-pwd">
+																																								{% include 'templates/partials/flash.html' %}
+                                                                                <div class="form-group {{ errors.oldpassword ? 'has-error' : '' }}">
+                                                                                    <label class="control-label">Current Password</label>
+                                                                                    <input type="password" name="oldpassword" class="form-control" />
+																																										<span class="help-block {{ errors.oldpassword ? 'help-block-error' : '' }}">
+																																										{% if errors.oldpassword %}
+																																											{{ errors.oldpassword | first }}<br>
+																																										{% endif %}
+																																										</span>
+																																								</div>
+                                                                                <div class="form-group {{ errors.password1 ? 'has-error' : '' }}">
+                                                                                    <label class="control-label">New Password</label>
+                                                                                    <input type="password" name="password1" class="form-control" id="password1" />
+																																										<span class="help-block {{ errors.password1 ? 'help-block-error' : '' }}">
+																																										{% if errors.password1 %}
+																																											{{ errors.password1 | first }}<br>
+																																										{% endif %}
+																																										</span>
+																																								</div>
+                                                                                <div class="form-group {{ errors.password2 ? 'has-error' : '' }}">
+                                                                                    <label class="control-label">Re-type New Password</label>
+                                                                                    <input type="password" name="password2" class="form-control" />
+																																										<span class="help-block {{ errors.password2 ? 'help-block-error' : '' }}">
+																																										{% if errors.password2 %}
+																																											{{ errors.password2 | first }}<br>
+																																										{% endif %}
+																																										</span>
+																																								</div>
+                                                                                <div class="margin-top-10">
+                                                                                  <button type="submit" id="submit-pwd" class="btn yellow-mint"><i class="fa fa-check"></i> Change Password</button>
+                                                                                  <button type="reset" class="btn default">Cancel</button>
+                                                                                </div>
+
+																																							{{ csrf.field | raw }}	
+	
+                                                                            </form>
+                                                                        </div>
+                                                                        <!-- END CHANGE PASSWORD TAB -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- END PROFILE CONTENT -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

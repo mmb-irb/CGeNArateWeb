@@ -1,0 +1,262 @@
+{% set helpname = page.helpname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">{{ longName }} Help - Inputs </h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">
+																						{% if auth.check %}
+																						User Workspace
+																						{% else %}
+																						Home
+																						{% endif %}
+																						</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Help</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Inputs</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="portlet light bordered">
+                                                  <div class="portlet-title">
+                                                      <div class="caption font-yellow-crusta">
+                                                          <i class="fa fa-sign-in font-yellow-crusta"></i>
+                                                          <span class="caption-subject bold uppercase"> Inputs</span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="portlet-body ">
+	                                                   
+																										<h2>Inputs Help</h2>
+
+																										<p>There are three groups of fields in the inputs page: generic fields, additional fields for Circular CGeNArate and additional field for CGeNArate + Proteins.
+																										All the fields have a <span class="icon-question"></span> icon. Rolling the mouse over this icon, a short help related to the field will be shown.
+																										Additionally, users can preload sample input data for launching jobs.</p>
+
+																										<ul>
+
+																											<li><a href="#sample">Sample Input Data</a></li>
+
+																											<li><a href="#generic">Generic fields</a>
+																												<ul>
+																													<li><a href="#dna-seq">Write or paste DNA sequence</a></li>
+																													<li><a href="#tool">Tool</a></li>
+																													<li><a href="#resolution">Resolution</a></li>
+																													<li><a href="#operations">Operations</a></li>
+																													<li><a href="#email">E-mail address</a></li>
+																													<li><a href="#analysis">Perform Analysis</a></li>
+																												</ul>
+																											</li>
+
+																											<li><a href="#circular">Additional fields only Circular CGeNArate</a>
+																												<ul>
+																													<li><a href="#delta">ΔLk</a></li>
+																													<li><a href="#iterations">Iterations per structure</a></li>
+																												</ul>
+																											</li>
+
+																											<li><a href="#proteins">Additional field only for CGeNArate + Proteins</a>
+																												<ul>
+																													<li><a href="#prot-list">Proteins</a></li>
+																												</ul>
+																											</li>
+
+																										</ul>
+
+																										<h3 id="sample">Sample Input Data</h3>
+
+																										<p>To load the sample input data, users should click one of the buttons of the Inputs page:</p> 
+																										
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs00.png" style="max-width:100%;"></p>
+														
+																										<p>Also it's possible to access the sample input data via the main menu:</p>
+	
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs000.png" style="max-width:100%;"></p>
+
+																										<h3 id="generic">Generic fields</h3>
+
+																										<h4 id="dna-seq">Write or paste DNA sequence</h4>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs01.png" style="max-width:100%;"></p>
+
+																										<p>Put the full DNA sequence in this field. The sequence only may contain upper case letters A,C,G and T. The length of the sequence has to be between 15 and 500 nucleotides. No spaces or other signs are allowed in this field. Additionally, you can load a sample sequence clicking the left button "Add sample sequence".</p>
+																										
+																										<h4 id="tool">Tool</h4>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs02.png" style="max-width:100%;"></p>
+
+																										<p>Select the tool you want to execute. You can choose between “CGeNArate” which simulates naked B-DNA, “Circular CGeNArate” which simulates circular naked B-DNA and “CGeNArate + proteins” which simulates the dynamics of B-DNA with proteins attached. See more details about the tools in “Methods”.</p>
+																										
+																										<h4 id="resolution">Resolution</h4>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs03.png" style="max-width:100%;"></p>
+
+																										<p>Choose the resolution of the selected tool. “Coarse Grain” resolution outputs a DNA structure with all atoms of the base pairs and the phosphate of the backbone while “Atomistic” has on top of the coarse grain structure all the backbone atoms included in the structure. All atoms of the DNA fiber are included. See more info in “Methods” under CGeNArate.</p>
+
+																										<h4 id="operations">Operations</h4>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs04.png" style="max-width:100%;"></p>
+
+																										<p>Two operations can be chosen. “Create Structure” creates a single structure with the ground state base pair step parameters of each base pair. “Create Trajectory” creates a certain number of DNA structures (specify the number of structures in the corresponding field “Number of structures”). Each of the structures is a final configuration after exhaustive Monte Carlo sampling on the bp-step parameters of the DNA. The option “Create Trajectory” is recommended if properties of the dynamics of the DNA want to be obtained. </p>
+																										<p>Note: The range of analysis tools varies depending on the chosen type of operation (see “Analysis” for details)</p>
+																										
+																										<h4 id="email">E-mail address</h4>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs05.png" style="max-width:100%;"></p>
+																										
+																										<p>Enter your E-mail address if you want to receive the link to the results once the simulation and analysis are done. This field is not mandatory.</p>
+
+																										<h4 id="analysis">Perform Analysis</h4>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs06.png" style="max-width:100%;"></p>
+	
+																										<p>Enable or disable flexibility analysis. Disabling this button the tool will only calculate the equilibrium structure and/or the trajectory and it will take less time.</p>
+
+																										<h3 id="circular">Additional fields only Circular CGeNArate</h3>
+	
+																										<h4 id="delta">ΔLk</h4>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs07.png" style="max-width:100%;"></p>
+
+																										<p>Choose a number of the change of the linking number ΔLk. Only integer numbers are valid. ΔLk = 0 means there will be no additional tension induced. Putting another number than 0 will induce over/undertwisting of the planar circular starting structure.</p>
+																										
+																										<h4 id="iterations">Iterations per structure</h4>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs08.png" style="max-width:100%;"></p>
+
+																										<p>Choose the number of Monte Carlo iterations per structure. The higher the number the longer the simulation takes. In the following you can see a table formulas which should serve as a guideline for choosing the number of Monte Carlo iterations per structure for different ΔLk. The number of Monte Carlo iterations y depend on the size of the circle x (in bp). The formulas were fit to observations after how many Monte Carlo iterations the expected transition for a certain ΔLk is visible (for example the transition of a planar circle to a 8-shape for ΔLk=-1).</p>
+																										
+																										<div class="row">
+																											<div class="col-md-6">
+																												<table class="table table-bordered table-striped">
+																													<thead>
+																														<tr>
+																															<th>ΔLk</th>
+																															<th>Formula</th>
+																														</tr>
+																													</thead>
+																													<tbody>
+																														<tr>
+																															<td>0</td>
+																															<td>No transition; y can be small (~ 1e6)</td>
+																														</tr>
+																														<tr>
+																															<td>-1</td>
+																															<td>y = 67600 x + 2e07</td>
+																														</tr>
+																														<tr>
+																															<td>2</td>
+																															<td>y = 303644 x – 3e-07</td>
+																														</tr>
+																													</tbody>
+																												</table>
+																											</div>
+																										</div>
+			
+			<p>Circles of 94bp (Lankas et al., Structure 2006), 260bp (Noy et al., BJ 2017) and 336bp (Sutthibutpong et al, JCTC 2015) were used to fit these formulas. The value for required Monte Carlo iterations for ΔLk = -2 becomes negative for x ~ 100bp. This is because this formula was fitted to large minicircles with x > 260bp. Also take into account that the transitions may not occur because of the stiffness of the underlying sequence.</p>
+																										<h3 id="proteins">Additional field only for CGeNArate + Proteins</h3>
+
+																										<h4 id="prot-list">Proteins</h4>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs09.png" style="max-width:80%;"></p>
+
+																										<p>The user can select up to 10 proteins to bind to DNA. The ID is the PDB code and length is the number of base pairs bound to the protein. The user can define which base pair should be the first base pair bound to the protein in the field “Initial position”. Possible positions range from 1 to number of base pairs – number of base pairs bound to protein. For example the protein-DNA complex 1a0a is bound to 16 base pairs of DNA. If you choose initial position 2, the base pair steps 2 to 17 (which is base pair 3 to 18) are kept according to the base pair step parameters of the 1a0a complex. The sequence the user inputs for the bound DNA does not matter then.</p>
+																										<p>IMPORTANT: Make sure the bound DNA of one protein does not overlap with the bound DNA of another protein.</p>
+
+																										<p>The user can also place the protein in an interactive way by clicking on the yellow graph button on the right.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/prot_selection_plot.png" style="max-width:80%;"></p>
+
+																										<p>A graphical interface is shown where the DNA affinity for the proteins along the DNA sequence according to the propensity of the DNA to deform into the protein-bound DNA conformation derived from the pdb structure is plotted. The DNA occupied by proteins is colored. The dashed line shows the current position of the selected protein, the horizontal blue line shows the highest affinity/lowest elastic energy for the protein according to the deformability of the DNA. Within the affinity plot the user can select a new position for the protein by clicking on a data point in the graph. This position will be directly updated in the Input form.</p>
+																										
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/prot_affinity.png" style="max-width:80%;"></p>
+
+																										<p><strong>Special cases:</strong></p> 
+																										
+																										<p>1) In case the protein is positioned at the end of the sequence so that there are not enough nucleotides left to bind the protein an error message occurs once the “Submit” button is pressed:</p> 
+																										
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/prot_too_long.png" style="max-width:80%;"></p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/prot_endseq.png" style="max-width:80%;"></p>
+
+																										<p>2) In a way that it overlaps with other DNA-bound proteins an error message occurs once the “Submit” button is pressed:</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/prot_olap_input.png" style="max-width:80%;"></p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/prot_olap.png" style="max-width:80%;"></p>
+
+                                                  </div>
+                                              </div>
+                                              <!-- END PORTLET-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}

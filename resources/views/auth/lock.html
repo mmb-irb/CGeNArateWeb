@@ -1,0 +1,38 @@
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="body-lock-screen">
+        <div class="page-lock">
+            <div class="page-logo">
+                <a class="brand" href="{{ baseURL }}">
+									<img src="{{ baseURL }}assets/layouts/layout3/img/logo-lock.png" alt="logo" /> </a>
+            </div>
+            <div class="page-body">
+                <div class="lock-head font-white"> Locked </div>
+                <div class="lock-body">
+                    <div class="pull-left lock-avatar-block">
+                        <div class="lock-avatar" id="avatar-no-picture-lockscreen">{{ auth.initials }}</div>
+                    </div>
+                    <form class="lock-form pull-left" action="{{ baseURL }}auth/signin" method="post">
+												<input type="hidden" name="email" value="{{ auth.user.email }}" />
+                        <h4>{{ auth.user.name }} {{ auth.user.surname }}</h4>
+                        <div class="form-group">
+                            <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" /> </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn white uppercase">Login</button>
+                        </div>
+												{{ csrf.field | raw }}
+
+                    </form>
+                </div>
+                <div class="lock-bottom">
+                    <a href="{{ baseURL }}auth/signin" class=" font-white">Not {{ auth.user.name }} {{ auth.user.surname }}?</a>
+                </div>
+            </div>
+            <div class="page-footer-custom font-grey-silver"> {{ "now"|date("Y") }} &copy; <a target="_blank" href="http://mmb.irbbarcelona.org" class=" font-white">Molecular Modeling and Bioinformatics Group</a> </div>
+        </div>
+	
+{% endblock %}
+
+

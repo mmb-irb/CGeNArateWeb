@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+
+    <head>
+	
+				{% include 'templates/partials/analytics.html' %}
+
+        <meta charset="utf-8" />
+        <title>{{ page.title }}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta content="{{ page.description }}" name="description" />
+        <meta content="Molecular Modeling and Bioinformatics Modesto Orozco Group" name="author" />
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+        <link href="{{ baseURL }}assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+				<link href="{{ baseURL }}assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{ baseURL }}assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+				<link href="{{ baseURL }}assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+				{% if basename == 'workspace' %}	
+				<link href="{{ baseURL }}assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{ baseURL }}assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{ baseURL }}assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+				<link href="{{ baseURL }}assets/global/plugins/kekule/default/kekule.css" rel="stylesheet" type="text/css" />
+				{% elseif basename == 'input' %}
+				<link href="{{ baseURL }}assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+				<link href="{{ baseURL }}assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+				<link href="{{ baseURL }}assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+				<link href="{{ baseURL }}assets/global/plugins/bootstrap-select/bootstrap-select.css" rel="stylesheet" type="text/css" />
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+				{% elseif basename == 'dashboard' %}
+				<link href="{{ baseURL }}assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{ baseURL }}assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+				{% elseif basename == 'home' %}
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'pcazip') %}
+				<link href="{{ baseURL }}assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{ baseURL }}assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'end-to-end') %}
+				<link href="{{ baseURL }}assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css" />
+        <link href="{{ baseURL }}assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinNice.css" rel="stylesheet" type="text/css" />
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'contacts') %}
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'bending') %}
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'curves') %}
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'stiffness') %}
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'circular') %}
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'energy') %}
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'sasa') %}
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+				{% elseif (basename == 'summary') %}
+				<link href="{{ baseURL }}assets/global/plugins/progress-tracker/progress-tracker.css" rel="stylesheet" type="text/css" />
+				<link href="{{ baseURL }}assets/global/plugins/introjs/introjs.css" rel="stylesheet" type="text/css" />
+        {% endif %}
+				<!-- END PAGE LEVEL PLUGINS -->
+        <!-- BEGIN THEME GLOBAL STYLES -->
+        <link href="{{ baseURL }}assets/global/css/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
+				{% if basename != 'error' and basename != 'errordb' %}
+        <link href="{{ baseURL }}assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+				{% endif %}
+        <!-- END THEME GLOBAL STYLES -->
+        <!-- BEGIN PAGE LEVEL STYLES -->
+				{% if basename == 'error' %}
+				<link href="{{ baseURL }}assets/pages/css/error.min.css" rel="stylesheet" type="text/css" />
+				{% elseif basename == 'errordb' %}
+				<link href="{{ baseURL }}assets/pages/css/errordb.css" rel="stylesheet" type="text/css" />
+				{% elseif basename == 'change' %}
+				<link href="{{ baseURL }}assets/pages/css/profile.min.css" rel="stylesheet" type="text/css" />
+				{% elseif basename == 'lock' %}
+				<link href="{{ baseURL }}assets/pages/css/lock.min.css" rel="stylesheet" type="text/css" />	
+				{% endif %}
+        <!-- END PAGE LEVEL STYLES -->
+        <!-- BEGIN THEME LAYOUT STYLES -->
+				{% if basename != 'error' %}
+        <link href="{{ baseURL }}assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{ baseURL }}assets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="{{ baseURL }}assets/layouts/layout3/css/custom.css?v={{ random() }}" rel="stylesheet" type="text/css" />
+				{% endif %}
+        <!-- END THEME LAYOUT STYLES -->
+        <link rel="shortcut icon" href="{{ baseURL }}assets/layouts/layout3/img/ico.png" /> </head>
+    <!-- END HEAD -->

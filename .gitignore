@@ -1,0 +1,9 @@
+/logs
+/app/config.php
+/public/data
+/test
+info.php
+*.swp
+*.bk
+.DS_Store
+help.txt

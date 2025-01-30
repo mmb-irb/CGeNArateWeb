@@ -1,0 +1,89 @@
+<!-- BEGIN HEADER TOP -->
+<div class="page-header-top">
+    <div class="container">
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+            <a href="{{ baseURL }}">
+                <img src="{{ baseURL }}assets/layouts/layout3/img/logo.png" alt="logo" class="logo-default">
+            </a>
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler"></a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        {% if auth.check %}
+        <!-- BEGIN TOP NAVIGATION MENU -->
+        <div class="top-menu">
+            <ul class="nav navbar-nav pull-right">
+                {% if projectsFinished|length > 0 %}
+                <!-- BEGIN NOTIFICATION DROPDOWN -->
+                <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                        data-close-others="true">
+                        <i class="icon-bell"></i>
+                        <span class="badge badge-warning">{{ projectsFinished|length }}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="external">
+                            <h3>Finished jobs</h3>
+                        </li>
+                        <li>
+                            <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                {% for job in projectsFinished %}
+                                <li>
+                                    <a href="{{ baseURL }}{{ defaultOutput }}{{ job.id }}">
+                                        <span class="details">
+                                            <span class="label label-sm label-icon label-success">
+                                                <i class="fa fa-thumbs-up"></i>
+                                            </span> {{ job.name }}
+                                        </span>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END NOTIFICATION DROPDOWN -->
+                <li class="droddown dropdown-separator">
+                    <span class="separator"></span>
+                </li>
+                {% endif %}
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+                <li class="dropdown dropdown-user dropdown-light">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                        data-close-others="true">
+                        <div class="img-circle" id="avatar-no-picture">{{ auth.initials }}</div>
+                        <span class="username username-hide-mobile font-green">{{ auth.user.name }} {{ auth.user.surname
+                            }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-default">
+                        <li>
+                            <a href="{{ baseURL }}auth/profile">
+                                <i class="glyphicon glyphicon-user"></i> My Profile </a>
+                        </li>
+                        {% if auth.isAdmin %}
+                        <li>
+                            <a href="{{ baseURL }}admin/dashboard">
+                                <i class="glyphicon glyphicon-dashboard"></i> Dashboard </a>
+                        </li>
+                        {% endif %}
+                        <li class="divider"> </li>
+                        <li>
+                            <a href="{{ baseURL }}auth/lock">
+                                <i class="fa fa-lock"></i> Lock Screen </a>
+                        </li>
+                        <li>
+                            <a href="{{ baseURL }}auth/signout">
+                                <i class="fa fa-power-off"></i> Log Out </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END USER LOGIN DROPDOWN -->
+            </ul>
+        </div>
+        <!-- END TOP NAVIGATION MENU -->
+        {% endif %}
+    </div>
+</div>
+<!-- END HEADER TOP -->

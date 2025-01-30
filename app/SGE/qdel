@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#source /usr/local/sge/environment/settings.sh
+source /opt/sge/MMB-Services/common/settings.sh
+
+qdel $*

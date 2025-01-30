@@ -1,0 +1,369 @@
+{% set helpname = page.helpname  %}
+{% set analname = page.analname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">MC DNA Help - Analysis Curves </h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">
+																						{% if auth.check %}
+																						User Workspace
+																						{% else %}
+																						Home
+																						{% endif %}
+																						</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Help</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Analysis</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Curves</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="portlet light bordered">
+                                                  <div class="portlet-title">
+                                                      <div class="caption font-yellow-crusta">
+                                                          <i class="fa fa-mail-forward font-yellow-crusta"></i>
+                                                          <span class="caption-subject bold uppercase"> Curves</span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="portlet-body ">
+	                                                   
+ 																										<p>Using <a href="http://bisi.ibcp.fr/tools/curves_plus/" target="_blank">Curves+</a>, <strong>MC DNA</strong> offers a complete study of Nucleic Acids Helical Parameters:</p>
+
+																										<ul>
+																										<!--<li><a href="#backbone">Backbone Torsions</a> :: <a href="#backbone-m">Method</a> - <a href="#backbone-r">Results</a></li>-->
+																										<li><a href="#axis">Axis Base Pairs</a> :: <a href="#axis-m">Method</a> - <a href="#axis-r">Results</a></li>
+																										<!--<li><a href="#intra">Intra-Base Pairs</a> :: <a href="#intra-m">Method</a> - <a href="#intra-r">Results</a></li>-->
+																										<li><a href="#inter">Inter-Base Pairs</a> :: <a href="#inter-m">Method</a> - <a href="#inter-r">Results</a></li>
+																										<li><a href="#grooves">Grooves</a> :: <a href="#grooves-m">Method</a> - <a href="#grooves-r">Results</a></li>
+																										</ul>
+
+																										<!--<h2 id="backbone">Backbone Torsions</h2>
+
+																										<h3 id="backbone-m">Method</h3>
+
+																										<p>The <strong>backbone of DNA</strong> is based on a repeated pattern of a <strong>sugar group and a phosphate group</strong>.</p>
+																										<p>The three major <strong>elements of flexibility</strong> in the <strong>backbone</strong> are:</p>
+
+																										<h4>Sugar Puckering</h4>
+
+																										<p><strong>Sugar Puckering</strong> annotation is done by dividing the pseudo-rotational circle in four equivalent sections:</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/sugar-puck.png" style="max-width:100%;"></p>
+
+																										<div class="well">North: 315:45º<br>
+																										East: 45:135º<br>
+																										South: 135:225º<br>
+																										West: 225:315º</div>
+
+																										<p>These four conformations are those dominating sugar conformational space, in agreement with all available experimental data.</p>
+
+																										<h4>Canonical Alpha-Gamma</h4>
+
+																										<p>Rotations around <strong>α/γ torsions</strong> generate non-canonical local conformations leading to a reduced twist and they have been reported as being important in the formation of several <strong>protein-DNA complexes</strong>.</p>
+                                                     
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/canonical.png" style="max-width:100%;"></p>
+
+																										<h4>BI-BII Population</h4>
+
+																										<p>The concerted rotation around <strong>ζ/ε torsions</strong> generates two major conformers: <strong>BI and BII</strong>, which are experimentally known to co-exist in a ratio around <strong>80%:20% (BI:BII) in B-DNA</strong>.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/bI-bII.png" style="max-width:100%;"></p>
+
+																										<h3 id="backbone-r">Results</h3>
+
+																										<p><strong>Backbone torsions</strong> analyses are shown in a set of percentage bar plots. Percentages of <strong>BI and BII</strong>, <strong>α/γ torsions</strong> and <strong>North/East/South/West puckering conformations</strong> are represented in coloured bars (y-axis) for each of the nucleotides from the input sequence (x-axis).</p>
+																										<h4>Sugar Puckering</h4>
+
+																										<p>Percentage of <strong>puckering conformations</strong>: West (green), South (red), East (yellow) and North (black), are shown for each of the nucleotides in the sequence through a bar plot. Y-axis: percentage of puckering conformation, X-axis: nucleotide sequence.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-sugar-puck.png" style="max-width:100%;"></p>
+
+																										<h4>Canonical Alpha-Gamma</h4>
+
+																										<p>Percentage of <strong>canonical α/γ torsions</strong>: Alpha (black), Gamma (yellow), are shown for each of the nucleotides in the sequence through a bar plot. Y-axis: percentage of α/γ torsions, X-axis: nucleotide sequence.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-canonical.png" style="max-width:100%;"></p>
+
+																										<h4>BI-BII Population</h4>
+
+																										<p>Percentage of <strong>BI/BII populations</strong>: BI (black), BII (yellow), are shown for each of the nucleotides in the sequence through a bar plot. Y-axis: percentage of BI/BII populations, X-axis: nucleotide sequence.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-bI-bII.png" style="max-width:100%;"></p>-->
+
+																										<h2 id="axis">Axis Base Pair</h2>
+
+																										<h3 id="axis-m">Method</h3>
+																										<p>Nucleotide Base pairs, the DNA building blocks, are made of two nucleobases bound to each other by hydrogen bonds.</p> 
+																										<p>The major <strong>elements of flexibility</strong> in the <strong>DNA base pairs</strong> when we consider them as a blocks (movements of the whole base pair) are divided in two types: <strong>Translational</strong> (<strong><em>x/y-displacement</em></strong>) and <strong>rotational</strong> (<strong><em>inclination, tip</em></strong>) parameters.</p>
+
+																										<ul>
+																										<li><strong>X-displacement:</strong> Translation around the X-axis.</li>
+																										<li><strong>Y-displacement:</strong> Translation around the Y-axis.</li>
+																										<li><strong>Inclination:</strong> Rotation around the X-axis.</li>
+																										<li><strong>Tip:</strong> Rotation around the Y-axis.</li>
+																										</ul>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/axis.png" style="max-width:100%;"></p>
+
+																										<h3 id="axis-r">Results</h3>
+
+																										<p><strong>Axis Base Pair</strong> analyses are shown in a set of line plots. The <strong>parameter value</strong> (or average value + standard deviation in case of structure ensemble) is represented with a yellow point-line (y-axis) for each of the nucleotides along the input sequence (x-axis). For the sake of comparison, a black point-line is also represented (whenever is available), showing the average values of the same parameter for the same base pair in the <a href="https://academic.oup.com/nar/article/38/1/299/3112428" target="_blank">ABC MD study</a>.</p>
+																										<h4>Inclination</h4>
+
+																										<p><strong>Inclination value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the nucleotides in the sequence in a yellow point-line. Y-axis: <strong>Inclination</strong> value in <strong>degrees</strong>, X-axis: Sequence base pairs. Black point-line represents the ABC average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-inclination.png" style="max-width:100%;"></p>
+
+																										<h4>Tip</h4>
+
+																										<p><strong>Tip value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the nucleotides in the sequence in a yellow point-line. Y-axis: <strong>Tip</strong> value in <strong>degrees</strong>, X-axis: Sequence base pairs. Black point-line represents the ABC average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-tip.png" style="max-width:100%;"></p>
+
+																										<h4>X-displacement</h4>
+
+																										<p><strong>X-displacement value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the nucleotides in the sequence in a yellow point-line. Y-axis: <strong>X-displacement</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pairs.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-xdisp.png" style="max-width:100%;"></p>
+
+																										<h4>Y-displacement</h4>
+
+																										<p><strong>Y-displacement value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the nucleotides in the sequence in a yellow point-line. Y-axis: <strong>Y-displacement</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pairs.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-ydisp.png" style="max-width:100%;"></p>
+
+																										<!--<h2 id="intra">Intra Base Pair</h2>
+
+																										<h3 id="intra-m">Method</h3>
+																										<p>The major <strong>elements of flexibility</strong> in the <strong>DNA base pairs</strong> when we consider them as a two elements interacting to each other (movements of a nucleotide with respect to its interacting partner) can be divided again in two different types: <strong>Translational</strong> (<strong><em>Shear, Stretch, Stagger</em></strong>) and <strong>rotational</strong> (<strong><em>Buckle, Propeller, Opening</em></strong>) parameters.</p>
+
+																										<ul>
+																										<li><strong>Shear:</strong> Translation around the X-axis.</li>
+																										<li><strong>Stretch:</strong> Translation around the Y-axis.</li>
+																										<li><strong>Stagger:</strong> Translation around the Z-axis.</li>
+																										<li><strong>Buckle:</strong> Rotation around the X-axis.</li>
+																										<li><strong>Propeller:</strong> Rotation around the Y-axis.</li>
+																										<li><strong>Opening:</strong> Rotation around the Z-axis.</li>
+																										</ul>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/intra.png" style="max-width:100%;"></p>
+
+																										<h3 id="intra-r">Results</h3>
+
+																										<p><strong>Intra Base Pair</strong> analyses are shown in a set of line plots. The <strong>parameter value</strong> (or average value + standard deviation in case of structure ensemble) is represented with a yellow point-line (y-axis) for each of the base pairs along the input sequence (x-axis). For the sake of comparison, a black point-line is also represented, showing the average values of the same parameter for the same base pair in the <a href="https://academic.oup.com/nar/article/38/1/299/3112428" target="_blank">ABC MD study</a>.</p>
+																										<h4>Shear</h4>
+
+																										<p><strong>Shear value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pairs in the sequence in a yellow point-line. Y-axis: <strong>Shear</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pairs. Black point-line represents the ABC average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-shear.png" style="max-width:100%;"></p>
+
+																										<h4>Stretch</h4>
+
+																										<p><strong>Stretch value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pairs in the sequence in a yellow point-line. Y-axis: <strong>Stretch</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pairs. Black point-line represents the ABC average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-stretch.png" style="max-width:100%;"></p>
+
+																										<h4>Stagger</h4>
+
+																										<p><strong>Stagger value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pairs in the sequence in a yellow point-line. Y-axis: <strong>Stagger</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pairs. Black point-line represents the ABC average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-stagger.png" style="max-width:100%;"></p>
+
+																										<h4>Buckle</h4>
+
+																										<p><strong>Buckle value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pairs in the sequence in a yellow point-line. Y-axis: <strong>Buckle</strong> value in <strong>degrees</strong>, X-axis: Sequence base pairs. Black point-line represents the ABC average values.</p>
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-buckle.png" style="max-width:100%;"></p>
+
+																										<h4>Propeller</h4>
+
+																										<p><strong>Propeller value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pairs in the sequence in a yellow point-line. Y-axis: <strong>Propeller</strong> value in <strong>degrees</strong>, X-axis: Sequence base pairs. Black point-line represents the ABC average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-propeller.png" style="max-width:100%;"></p>
+
+																										<h4>Opening</h4>
+
+																										<p><strong>Opening value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pairs in the sequence in a yellow point-line. Y-axis: <strong>Opening</strong> value in <strong>degrees</strong>, X-axis: Sequence base pairs. Black point-line represents the ABC average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-opening.png"></p>-->
+
+																										<h2 id="inter">Inter Base Pair</h2>
+
+																										<h3 id="inter-m">Method</h3>
+
+																										<p>Nucleotide <strong>Base pair steps</strong>, build by two adjacent base pairs (two base pairs, four nucleotides -two from one strand, two from the other strand-), are the <strong>DNA blocks</strong> that characterize the <strong>helical structure</strong> of the molecule. Changes in the <strong>helical parameters</strong> (described in the following sections) of these base pair steps can be used to describe disruptions in a DNA structure.</p> 
+																										<p>The major <strong>elements of flexibility</strong> in the <strong>DNA base pair steps</strong> when we consider them as a two elements interacting to each other (movements of a base pair with respect to adjacent base pair) can be divided again in two different types: <strong>Translational</strong> (<strong><em>Shift, Slide, Rise</em></strong>) and <strong>rotational</strong> (<strong><em>Tilt, Roll, Twist</em></strong>) parameters.</p>
+
+																										<ul>
+																										<li><strong>Shift:</strong> Translation around the X-axis.</li>
+																										<li><strong>Slide:</strong> Translation around the Y-axis.</li>
+																										<li><strong>Rise:</strong> Translation around the Z-axis.</li>
+																										<li><strong>Tilt:</strong> Rotation around the X-axis.</li>
+																										<li><strong>Roll:</strong> Rotation around the Y-axis.</li>
+																										<li><strong>Twist:</strong> Rotation around the Z-axis.</li>
+																										</ul>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/inter.png" style="max-width:100%;"></p>
+
+																										<h3 id="inter-r">Results</h3>
+
+																										<p><strong>Inter Base Pair</strong> analyses are shown in a set of line plots. The <strong>parameter value</strong> (or average value + standard deviation in case of structure ensemble) is represented with a yellow point-line (y-axis) for each of the base pair steps along the input sequence (x-axis). For the sake of comparison, a black and a red point-line are also represented, showing the average values of the same parameter for the same base pair in the <a href="https://academic.oup.com/nar/article/38/1/299/3112428" target="_blank">ABC MD study</a>, and in a compilation of experimental crystal structures from the PDB, respectively. Both set of values used for comparisons are extracted from the same work ( <a href="https://academic.oup.com/nar/article/38/1/299/3112428" target="_blank">Dans et al., NAR 2012</a>)</p>
+
+																										<h4>Shift</h4>
+
+																										<p><strong>Shift value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Shift</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pair steps. Black point-line represents the ABC average values, whereas red point-line represents the experimental crystal structures average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-shift.png" style="max-width:100%;"></p>
+
+																										<h4>Slide</h4>
+
+																										<p><strong>Slide value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Slide</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pair steps. Black point-line represents the ABC average values, whereas red point-line represents the experimental crystal structures average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-slide.png" style="max-width:100%;"></p>
+
+																										<h4>Rise</h4>
+
+																										<p><strong>Rise value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Rise</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pair steps. Black point-line represents the ABC average values, whereas red point-line represents the experimental crystal structures average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-rise.png" style="max-width:100%;"></p>
+
+																										<h4>Tilt</h4>
+
+																										<p><strong>Tilt value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Tilt</strong> value in <strong>degrees</strong>, X-axis: Sequence base pair steps. Black point-line represents the ABC average values, whereas red point-line represents the experimental crystal structures average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-tilt.png" style="max-width:100%;"></p>
+
+																										<h4>Roll</h4>
+
+																										<p><strong>Roll value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Roll</strong> value in <strong>degrees</strong>, X-axis: Sequence base pair steps. Black point-line represents the ABC average values, whereas red point-line represents the experimental crystal structures average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-roll.png" style="max-width:100%;"></p>
+
+																										<h4>Twist</h4>
+
+																										<p><strong>Twist value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Twist</strong> value in <strong>degrees</strong>, X-axis: Sequence base pair steps. Black point-line represents the ABC average values, whereas red point-line represents the experimental crystal structures average values.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-twist.png" style="max-width:100%;"></p>
+
+																										<h2 id="grooves">Grooves</h2>
+
+																										<h3 id="grooves-m">Method</h3>
+
+																										<p>Nucleic Acid Structure's strand backbones appear closer together on one side of the helix than on the other. This creates a <strong>Major groove</strong> (where backbones are far apart) and a <strong>Minor groove</strong> (where backbones are close together). <strong>Depth and width</strong> of these <strong>grooves</strong> can be mesured giving information about the different conformations that the nucleic acid structure can achieve.</p>
+
+																										<ul>
+																										<li><strong>Major Groove Width.</strong>
+																										<li><strong>Major Groove Depth.</strong>
+																										<li><strong>Minor Groove Width.</strong>
+																										<li><strong>Minor Groove Depth.</strong>
+																										</ul>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/grooves.gif" style="max-width:100%;"></p>
+
+																										<h3 id="grooves-r">Results</h3>
+
+																										<p><strong>Grooves</strong> analyses are shown in a set of line plots. The <strong>parameter value</strong> (or average value + standard deviation in case of structure ensemble) is represented with a yellow point-line (y-axis) for each of the base pair steps along the input sequence (x-axis).</p> 
+
+																										<h4>Major Groove Width</h4>
+
+																										<p><strong>Major Groove Width value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Major Groove Width</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pair steps.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-magw.png" style="max-width:100%;"></p>
+
+																										<h4>Major Groove Depth</h4>
+
+																										<p><strong>Major Groove Depth value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Major Groove Depth</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pair steps.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-magd.png" style="max-width:100%;"></p>
+
+																										<h4>Minor Groove Width</h4>
+
+																										<p><strong>Minor Groove Width value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Minor Groove Width</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pair steps.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-migw.png" style="max-width:100%;"></p>
+
+																										<h4>Minor Groove Depth</h4>
+
+																										<p><strong>Minor Groove Depth value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Minor Groove Depth</strong> value in <strong>Angstroms</strong>, X-axis: Sequence base pair steps.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-migd.png" style="max-width:100%;"></p>
+
+                                                  </div>
+                                              </div>
+                                              <!-- END PORTLET-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}

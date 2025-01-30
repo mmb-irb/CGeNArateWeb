@@ -1,0 +1,129 @@
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+	<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-mint">Sign In</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-mint">Home</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Sign In</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="portlet light bordered">
+                                                  <div class="portlet-title">
+                                                      <div class="caption font-green">
+                                                          <i class="fa fa-sign-in font-green"></i>
+                                                          <span class="caption-subject bold uppercase"> Enter your data</span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="portlet-body form">
+                                                        <form action="{{ baseURL }}auth/signin" method="post" id="form-signin" role="form" autocomplete="off">
+                                                            <div class="form-body">
+																															{% include 'templates/partials/flash.html' %}
+                                                              <div class="row">
+                                                                <div class="col-md-6">
+                                                                  <div class="form-group form-md-line-input form-md-floating-label {{ errors.email ? 'has-error' : '' }}">
+                                                                      <input type="text" class="form-control" id="email" name="email" value="{{ old.email }}">
+                                                                      <label for="email">Enter your Email</label>
+                                                                      <span class="help-block {{ errors.email ? 'help-block-error' : '' }}">
+																																			{% if errors.email %}
+																																				{{ errors.email | first }}<br>
+																																			{% endif %}
+																																			</span>
+                                                                  </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                  <div class="form-group form-md-line-input form-md-floating-label {{ errors.password ? 'has-error' : '' }}">
+                                                                      <input type="password" class="form-control" id="password" name="password">
+                                                                      <label for="password">Enter your password</label>
+                                                                      <span class="help-block {{ errors.password ? 'help-block-error' : '' }}">
+																																			{% if errors.password %}
+																																				{{ errors.password | first }}<br>
+																																			{% endif %}
+																																			</span>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                            <div class="form-actions noborder">
+                                                                <button type="submit" class="btn yellow-mint">SIGN IN</button>
+                                                                <a href="{{ baseURL }}auth/forgot-password" class="font-yellow-mint" style="margin-left:20px;">Forgot password?</a>
+                                                            </div>
+
+																														{{ csrf.field | raw }}
+			
+                                                        </form>
+                                                    </div>
+                                              </div>
+                                              <!-- END PORTLET-->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}

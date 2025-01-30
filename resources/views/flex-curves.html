@@ -1,0 +1,628 @@
+{% set flexname = page.flexname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                	
+									<!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">Curves Analysis
+																				{% if sample %}
+																				{% for s in sampleOutputs %}
+																				{% if s[0] == id %}
+																				for sample {{ s[1] }}
+																				{% endif %}
+																				{% endfor %}
+																				{% endif %}
+																				</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">Home</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            {% if sample %}
+																						<span>Sample Output</span>
+																						{% else %}
+                                            <span>Output</span>
+																						{% endif %}
+                                        		<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Flexibility Analysis</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Curves</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+
+																		<input type="hidden" id="base-url" value="{{ baseURL }}" >
+																		<input type="hidden" id="projectID" value="{{ id }}" >
+																		<input type="hidden" id="strType" value="{{ strType }}" >
+
+                                    <div class="page-content-inner">
+
+																			{% include 'templates/partials/menu-output.html' %}
+
+                                      <div class="portlet light bordered">
+																				<p>In the ‘Analysis’ section, you can download all the analysis results in a compressed tar.gz file.</p>
+																				<p>
+																					<a href="javascript:downloadFile('{{ id }}', 'an');" class="btn btn-lg yellow-crusta responsive-btn">
+                                          	<i class="fa fa-download"></i> Download all analysis in a compressed file 
+																					</a>
+																				</p>
+
+																			</div>
+
+																			{% include 'templates/partials/menu-flex.html' %}
+
+																			<div class="row ">
+																				<div class="col-md-12">
+																					<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+																						<div class="portlet-title tabbable-line" data-step="1">
+																							<div class="caption">
+																								<i class="fa fa-mail-forward"></i>  
+																								<span class="caption-subject font-grey-mint sbold uppercase">Curves</span>
+																							</div>
+																							<ul class="nav nav-tabs">
+																								{% if strType == 'eq' %}
+																								<!--<li class="active">
+																										<a href="#backbone_torsions" data-toggle="tab"> Backbone Torsions </a>
+																								</li>-->
+																								<li class="active">
+																										<a href="#axis_bp" data-toggle="tab"> Axis Base Pair </a>
+																								</li>
+																								{% else %}
+																								<li class="active">
+																										<a href="#axis_bp" data-toggle="tab"> Axis Base Pair </a>
+																								</li>
+																								{% endif %}
+																								{% if strType == 'eq' %}
+																								<!--<li>
+																										<a href="#helical_bp" data-toggle="tab"> Intra-Base Pair </a>
+																								</li>-->
+																								{% endif %}
+																								<li>
+																										<a href="#helical_bpstep" data-toggle="tab"> Inter-Base Pair </a>
+																								</li>
+																								<li>
+																										<a href="#grooves" data-toggle="tab"> Grooves </a>
+																								</li>
+																							</ul>
+																						</div>
+
+																						<div class="portlet-body " style="">
+	
+																							<div class="tab-content">
+
+																								{% if strType == 'eq' %}
+																								<!-- BACKBONE TORSIONS -->
+                                              	<div class="tab-pane" id="backbone_torsions">
+
+																									{% if sample %}
+																									<p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="curvesTour">Click here to start the guided tour</a></p>
+																									{% endif %}
+
+																									<p>Images courtesy of <a href="http://www.sciencedirect.com/science/article/pii/S0022283609012637?via=ihub" target="_blank"><em>Heddi B. et al, JMB 2010, 395:1, 123-133</em></a> (BI /BII Population)  
+																									and <em>Neidle, S. (2007). Principles of nucleic acid structure</em> (Canonical Alpha-Gamma and Puckering). 
+																									</p>
+
+																									<div class="mt-element-card mt-element-overlay" data-step="2">
+																										<div class="row">
+
+																											<div class="col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/population.png" />
+																														<div class="mt-overlay backbone_torsions" id="BI_population">
+																															<a href="javascript:loadBarsPlot('backbone_torsions', 'BI_population', 'BI/BII Population', ['BI', 'BII'], 2);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">BI / BII Population</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/canonical_alpha_gamma.png" />
+																														<div class="mt-overlay backbone_torsions" id="canonical_alpha_gamma">
+																															<a href="javascript:loadBarsPlot('backbone_torsions', 'canonical_alpha_gamma', 'Canonical Alpha-Gamma', ['Alpha', 'Gamma'], 2);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Canonical Alpha-Gamma</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/puckering.png" />
+																														<div class="mt-overlay backbone_torsions" id="puckering">
+																															<a href="javascript:loadBarsPlot('backbone_torsions', 'puckering', 'Puckering', ['north', 'east', 'south', 'west'], 4);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Puckering</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																									
+																										</div>	
+
+																									</div>
+
+																									<div class="row">
+
+																										<div class="col-sm-12" data-step="3">
+																											<div id="loading-backbone_torsions" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																											<div id="backbone_torsionsPlotDiv" style="height: 700px;"></div>
+																										</div>
+
+																									</div>
+
+																								</div>
+																								<!-- END BACKBONE TORSIONS -->
+																								{% endif %}
+
+																								<!-- AXIS BASE PAIR -->
+																								<div class="tab-pane active" id="axis_bp">
+
+																									{% if sample and strType == 'traj' %}
+																									<p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="curvesTour">Click here to start the guided tour</a></p>
+																									{% endif %}
+
+																									<p>Images courtesy of <a href="http://x3dna.org/" target="_blank">x3dna.org</a></p>
+
+																									<div class="mt-element-card mt-element-overlay" data-step="4">
+																										<div class="row">
+
+																											<div class="col-md-3 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/inclination.png" />
+																														<div class="mt-overlay axis_bp" id="inclin_avg">
+																															<a href="javascript:loadScatterPlot('axis_bp', 'inclin_avg', ['Sequence Base Pair', 'Inclin (degrees)'], ['Inclin User-MCDNA Average', 'Inclination ABC Average'], 'Base Pair Helical Parameters: Inclin', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Inclination</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-3 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/tip.png" />
+																														<div class="mt-overlay axis_bp" id="tip_avg">
+																															<a href="javascript:loadScatterPlot('axis_bp', 'tip_avg', ['Sequence Base Pair', 'Tip (degrees)'], ['Tip User-MCDNA Average', 'Tip ABC Average'], 'Base Pair Helical Parameters: Tip', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Tip</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-3 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/xdisp.png" />
+																														<div class="mt-overlay axis_bp" id="xdisp_avg">
+																															<a href="javascript:loadScatterPlot('axis_bp', 'xdisp_avg', ['Sequence Base Pair', 'X-Displacement (Ångströms)'], ['X-Displacement User-MCDNA Average'], 'Base Helical Parameters: X-Displacement', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">X displacement</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-3 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/ydisp.png" />
+																														<div class="mt-overlay axis_bp" id="ydisp_avg">
+																															<a href="javascript:loadScatterPlot('axis_bp', 'ydisp_avg', ['Sequence Base Pair', 'Y-Displacement (Ångströms)'], ['Y-Displacement User-MCDNA Average'], 'Base Helical Parameters: Y-Displacement', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Y displacement</h3>
+																													</div>
+																												</div>
+																											</div>
+																									
+																										</div>	
+
+																									</div>
+
+																									<div class="row">
+
+																										<div class="col-sm-12" data-step="5">
+																											<div id="loading-axis_bp" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																											<div id="axis_bpPlotDiv" style="height: 700px;"></div>
+																										</div>
+
+																									</div>
+
+																								</div>
+																								<!-- END AXIS BASE PAIR -->
+																								
+																								{% if strType == 'eq' %}
+																								<!-- INTRA BASE PAIR -->
+																								<div class="tab-pane" id="helical_bp">	
+
+																									<p>Images courtesy of <a href="http://x3dna.org/" target="_blank">x3dna.org</a></p>
+
+																									<div class="mt-element-card mt-element-overlay">
+																										<div class="row">
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/shear.png" />
+																														<div class="mt-overlay helical_bp" id="shear_avg">
+																															<a href="javascript:loadScatterPlot('helical_bp', 'shear_avg', ['Sequence Base Pair', 'Shear (Ångströms)'], ['Shear User-MCDNA Average', 'Shear ABC Average'], 'Base Pair Helical Parameters: Shear', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Shear</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/stretch.png" />
+																														<div class="mt-overlay helical_bp" id="stretch_avg">
+																															<a href="javascript:loadScatterPlot('helical_bp', 'stretch_avg', ['Sequence Base Pair', 'Stretch (Ångströms)'], ['Stretch User-MCDNA Average', 'Stretch ABC Average'], 'Base Pair Helical Parameters: Stretch', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Stretch</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/stagger.png" />
+																														<div class="mt-overlay helical_bp" id="stagger_avg">
+																															<a href="javascript:loadScatterPlot('helical_bp', 'stagger_avg', ['Sequence Base Pair', 'Stagger (Ångströms)'], ['Stagger User-MCDNA Average', 'Stagger ABC Average'], 'Base Pair Helical Parameters: Stagger', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Stagger</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/buckle.png" />
+																														<div class="mt-overlay helical_bp" id="buckle_avg">
+																															<a href="javascript:loadScatterPlot('helical_bp', 'buckle_avg', ['Sequence Base Pair', 'Buckle (degrees)'], ['Buckle User-MCDNA Average', 'Buckle ABC Average'], 'Base Pair Helical Parameters: Buckle', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Buckle</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/propeller.png" />
+																														<div class="mt-overlay helical_bp" id="propel_avg">
+																															<a href="javascript:loadScatterPlot('helical_bp', 'propel_avg', ['Sequence Base Pair', 'Propeller (degrees)'], ['Propeller User-MCDNA Average', 'Propeller ABC Average'], 'Base Pair Helical Parameters: Propeller', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Propeller</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/opening.png" />
+																														<div class="mt-overlay helical_bp" id="opening_avg">
+																															<a href="javascript:loadScatterPlot('helical_bp', 'opening_avg', ['Sequence Base Pair', 'Opening (degrees)'], ['Opening User-MCDNA Average', 'Opening ABC Average'], 'Base Pair Helical Parameters: Opening', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Opening</h3>
+																													</div>
+																												</div>
+																											</div>
+																									
+																										</div>	
+
+																									</div>
+
+																									<div class="row">
+
+																										<div class="col-sm-12">
+																											<div id="loading-helical_bp" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																											<div id="helical_bpPlotDiv" style="height: 700px;"></div>
+																										</div>
+
+																									</div>
+
+																								</div>
+																								<!-- END INTRA BASE PAIR -->
+																								{% endif %}
+
+																								<!-- INTER BASE PAIR -->
+																								<div class="tab-pane" id="helical_bpstep">	
+
+																									<p>Images courtesy of <a href="http://x3dna.org/" target="_blank">x3dna.org</a></p>
+
+																									<div class="mt-element-card mt-element-overlay">
+																										<div class="row">
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/rise.png" />
+																														<div class="mt-overlay helical_bpstep" id="rise_avg">
+																															<a href="javascript:loadScatterPlot('helical_bpstep', 'rise_avg', ['Sequence Base Pair Step', 'Rise (Ångströms)'], ['Rise User-MCDNA Average', 'Rise ABC Average', 'Rise X-Ray Average'], 'Base Pair Step Helical Parameters: Rise', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Rise</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/roll.png" />
+																														<div class="mt-overlay helical_bpstep" id="roll_avg">
+																															<a href="javascript:loadScatterPlot('helical_bpstep', 'roll_avg', ['Sequence Base Pair Step', 'Roll (degrees)'], ['Roll User-MCDNA Average', 'Roll ABC Average', 'Roll X-Ray Average'], 'Base Pair Step Helical Parameters: Roll', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Roll</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/shift.png" />
+																														<div class="mt-overlay helical_bpstep" id="shift_avg">
+																															<a href="javascript:loadScatterPlot('helical_bpstep', 'shift_avg', ['Sequence Base Pair Step', 'Shift (Ångströms)'], ['Shift User-MCDNA Average', 'Shift ABC Average', 'Shift X-Ray Average'], 'Base Pair Step Helical Parameters: Shift', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Shift</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/slide.png" />
+																														<div class="mt-overlay helical_bpstep" id="slide_avg">
+																															<a href="javascript:loadScatterPlot('helical_bpstep', 'slide_avg', ['Sequence Base Pair Step', 'Slide (Ångströms)'], ['Slide User-MCDNA Average', 'Slide ABC Average', 'Slide X-Ray Average'], 'Base Pair Step Helical Parameters: Slide', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Slide</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/tilt.png" />
+																														<div class="mt-overlay helical_bpstep" id="tilt_avg">
+																															<a href="javascript:loadScatterPlot('helical_bpstep', 'tilt_avg', ['Sequence Base Pair Step', 'Tilt (degrees)'], ['Tilt User-MCDNA Average', 'Tilt ABC Average', 'Tilt X-Ray Average'], 'Base Pair Step Helical Parameters: Tilt', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Tilt</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-2 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/twist.png" />
+																														<div class="mt-overlay helical_bpstep" id="twist_avg">
+																															<a href="javascript:loadScatterPlot('helical_bpstep', 'twist_avg', ['Sequence Base Pair Step', 'Twist (degrees)'], ['Twist User-MCDNA Average', 'Twist ABC Average', 'Twist X-Ray Average'], 'Base Pair Step Helical Parameters: Twist', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Twist</h3>
+																													</div>
+																												</div>
+																											</div>
+																									
+																										</div>	
+
+																									</div>
+
+																									<div class="row">
+
+																										<div class="col-sm-12">
+																											<div id="loading-helical_bpstep" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																											<div id="helical_bpstepPlotDiv" style="height: 700px;"></div>
+																										</div>
+
+																									</div>
+
+																								</div>
+																								<!-- END INTER BASE PAIR -->
+
+																								<!-- GROOVES -->
+                                              	<div class="tab-pane" id="grooves">	
+
+																									<p>Images courtesy of <a href="http://www.math.andyou.com/" target="_blank">math.andyou.com</a></p>
+
+																									<div class="mt-element-card mt-element-overlay">
+																										<div class="row">
+
+																											<div class="col-md-3 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/major.png" />
+																														<div class="mt-overlay grooves" id="majd_avg">
+																															<a href="javascript:loadScatterPlot('grooves', 'majd_avg', ['Sequence Base Pair', 'Major Groove Depth (Ångströms)'], ['Major Groove User-MCDNA Average'], 'Base Pair Helical Parameter: Major Groove', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Major Groove Depth</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-3 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/major.png" />
+																														<div class="mt-overlay grooves" id="majw_avg">
+																															<a href="javascript:loadScatterPlot('grooves', 'majw_avg', ['Sequence Base Pair', 'Major Groove Width (Ångströms)'], ['Major Groove User-MCDNA Average'], 'Base Pair Helical Parameter: Major Groove', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Major Groove Width</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-3 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/minor.png" />
+																														<div class="mt-overlay grooves" id="mind_avg">
+																															<a href="javascript:loadScatterPlot('grooves', 'mind_avg', ['Sequence Base Pair', 'Minor Groove Depth (Ångströms)'], ['Minor Groove User-MCDNA Average'], 'Base Pair Helical Parameter: Minor Groove', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Minor Groove Depth</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-3 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/minor.png" />
+																														<div class="mt-overlay grooves" id="minw_avg">
+																															<a href="javascript:loadScatterPlot('grooves', 'minw_avg', ['Sequence Base Pair', 'Minor Groove Width (Ångströms)'], ['Minor Groove User-MCDNA Average'], 'Base Pair Helical Parameter: Minor Groove', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Minor Groove Width</h3>
+																													</div>
+																												</div>
+																											</div>
+																									
+																										</div>	
+
+																									</div>
+
+																									<div class="row">
+
+																										<div class="col-sm-12">
+																											<div id="loading-grooves" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																											<div id="groovesPlotDiv" style="height: 700px;"></div>
+																										</div>
+
+																									</div>
+
+																								</div>
+																								<!-- END GROOVES -->
+
+																							</div>
+
+																						</div>	
+
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>	
+																			</div>	
+
+                                    	</div>
+
+                                    <!-- END PAGE CONTENT INNER -->
+																</div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+
+
+                    </div>
+                    <!-- END CONTAINER -->
+
+								</div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

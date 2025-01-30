@@ -1,0 +1,140 @@
+{% set helpname = page.helpname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">{{ longName }} Help - Outputs </h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">
+																						{% if auth.check %}
+																						User Workspace
+																						{% else %}
+																						Home
+																						{% endif %}
+																						</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Help</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Outputs</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="portlet light bordered">
+                                                  <div class="portlet-title">
+                                                      <div class="caption font-yellow-crusta">
+                                                          <i class="fa fa-sign-out font-yellow-crusta"></i>
+                                                          <span class="caption-subject bold uppercase"> Outputs</span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="portlet-body ">
+	                                                   
+																										<h2>Outputs Help</h2>
+
+																										<h3>Summary</h3>
+
+																										<p>In the ‘Summary’ section, you can download all the analysis results and the structure / trajectory in a compressed tar.gz file. Also, you can view the structure with DNA in relaxed state and / or the trajectory. Both of them are visualized in NGL viewer.</p>
+																										<p>The “Download all summary in a compressed file” provides the user with the equilibrium structure (as pdb) and the trajectory (in AMBER format mdcrd).</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/outputs01.png" style="max-width:100%;"></p>
+
+																										<h4>Inputs Summary</h4>
+
+																										<p>List of input parameters used to do the simulation.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/outputs02.png" style="max-width:100%;"></p>
+
+																										<h4>Structure</h4>
+
+																										<p>Relaxed structure from “Create Structure” visualized by NGL viewer.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/outputs03.png" style="max-width:100%;"></p>
+
+																										<h4>Trajectory</h4>
+
+																										<p>Trajectory from “Create Trajectory” visualized by NGL viewer.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/outputs04.gif" style="max-width:100%;"></p>
+
+																										<!--<h3>Structure Flexibility Analysis</h3>
+					
+																										<p>See “Analysis” in the Help Menu.</p>
+
+																										<h3>Trajectory Flexibility Analysis</h3>
+					
+																										<p>See “Analysis” in the Help Menu.</p>-->
+
+																										
+                                                  </div>
+                                              </div>
+                                              <!-- END PORTLET-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}

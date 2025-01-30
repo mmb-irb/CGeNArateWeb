@@ -1,0 +1,8 @@
+.center-container { display: flex; justify-content: center; align-items: center; height: 100%; }
+.content { text-align: center; color:#525e64; padding:0 15px; }
+.content h1 { font-size: 130px; line-height: 115px; margin:0; }
+.content h2 { font-size: 30px; }
+.content p { font-size: 16px; }
+
+.img-503 { width:500px; opacity: .7; margin: 0 auto; }
+.img-responsive { max-width:100%; }

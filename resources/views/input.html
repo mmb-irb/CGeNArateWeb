@@ -1,0 +1,478 @@
+{% extends 'templates/layout.html' %}
+
+{% block content %}
+
+<body class="page-container-bg-solid">
+  <div class="page-wrapper">
+    <div class="page-wrapper-row">
+      <div class="page-wrapper-top">
+        <!-- BEGIN HEADER -->
+        <div class="page-header">
+
+          {% include 'templates/partials/top.html' %}
+
+          {% include 'templates/partials/nav.html' %}								
+
+        </div>
+        <!-- END HEADER -->
+      </div>
+    </div>
+    <div class="page-wrapper-row full-height">
+      <div class="page-wrapper-middle">
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+          <!-- BEGIN CONTENT -->
+          <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <!-- BEGIN PAGE HEAD-->
+            <div class="page-head">
+              <div class="container">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                  <h1 class="font-yellow-crusta">
+                    Input Data
+                    {% if sampleinput %}
+                    {% set c = 1 %}
+                    {% for s in sampleOutputs %}
+                    {% if c == sampleType %}
+                    for {{ s[1] }}
+                    {% endif %}
+                    {% set c = c + 1 %}
+                    {% endfor %}
+                    {% endif %}
+                  </h1>
+                </div>
+                <!-- END PAGE TITLE -->
+              </div>
+            </div>
+            <!-- END PAGE HEAD-->
+            <!-- BEGIN PAGE CONTENT BODY -->
+            <div class="page-content">
+              <div class="container">
+                <!-- BEGIN PAGE BREADCRUMBS -->
+                <ul class="page-breadcrumb breadcrumb">
+                  <li>
+                    <a href="{{ baseURL }}">Home</a>
+                    <i class="fa fa-circle"></i>
+                  </li>
+                  <li>
+                   <span>Input {% if sampleinput %} Sample {% endif %}Data</span>
+                 </li>
+               </ul>
+               <!-- END PAGE BREADCRUMBS -->
+               <!-- BEGIN PAGE CONTENT INNER -->
+               <div class="page-content-inner">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <!-- BEGIN PORTLET-->
+                    <div class="portlet light">
+                      <div class="portlet-title tabbable-line">
+                        <div class="caption">
+                          <i class="fa fa-sign-in font-grey-mint"></i>
+                          <span class="caption-subject font-grey-mint sbold uppercase">Insert your input data</span>
+                        </div>
+                        <!--<ul class="nav nav-tabs">
+                          <li class="active">
+                              <a href="#sfile" data-toggle="tab"> Sequence File </a>
+													</li>
+                          <li class="active">
+                              <a href="#stext" data-toggle="tab"> Sequence Text </a>
+                          </li>
+                        </ul>-->
+                      </div>
+                      <div class="portlet-body form">
+                        <div class="tab-content">
+                          
+                            <div class="tab-pane active" id="stext">
+                              <!-- BEGIN FORM-->
+                              <p>All the form fields are mandatory except the <em>e-mail address</em> and <em>perform analysis</em>. If you provide your e-mail address, you will be notified once the job is finished.
+                              Disabling the analysis perform, the tool will calculate just the structure and / or the trajectory.</p>
+
+                              {% if sampleType is empty %}
+                              <p>If you prefer, you can load the form with different sample inputs through the top menu or clicking the buttons below:</p>
+                              <p data-step="1">
+                               <a class="btn yellow-crusta btn-xs" href="{{ baseURL }}input/sample/1">CGeNArate - CG</a>
+                               <a class="btn yellow-crusta btn-xs" href="{{ baseURL }}input/sample/2">CGeNArate - Atomistic</a>
+                               <a class="btn yellow-crusta btn-xs" href="{{ baseURL }}input/sample/3">Circular CGeNArate - CG</a>
+                               <a class="btn yellow-crusta btn-xs" href="{{ baseURL }}input/sample/4">Circular CGeNArate - Atomistic</a>
+                               <a class="btn yellow-crusta btn-xs" href="{{ baseURL }}input/sample/5">CGeNArate + Proteins - CG</a>
+                               <a class="btn yellow-crusta btn-xs" href="{{ baseURL }}input/sample/6">CGeNArate + Proteins - Atomistic</a>
+                             </p>
+                             {% endif %}
+
+                            
+                             {% if sampleinput and (sampleType == 1 or sampleType == 2) %}
+                             <p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="inputsMCDNA">Click here to start the guided tour</a></p>
+                             {% endif %}
+
+                             {% if sampleinput and (sampleType == 3 or sampleType == 4) %}
+                             <p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="inputsCircular">Click here to start the guided tour</a></p>
+                             {% endif %}
+
+                             {% if sampleinput and (sampleType == 5 or sampleType == 6) %}
+                             <p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="inputsProteins">Click here to start the guided tour</a></p>
+                             {% endif %}
+                             
+
+                             <form action="javascript:;" class="form-horizontal form-bordered" id="form_input_text">
+                               <input type="hidden" name="typeupload" value="2" >
+                               <input type="hidden" id="base-url"  value="{{ baseURL }}" >
+                              <input type="hidden" id="sample-seq" value="{{ sampleSequence }}" >
+                              <input type="hidden" id="sample-np" value="{{ sampleNP }}" >
+                              <input type="hidden" id="sample-type" value="{{ sampleType }}">
+
+                               <div class="form-body" data-step="2">
+                                <div class="alert alert-danger alert-form-error alert-form-error2 display-hide">
+                                  <button class="close" data-close="alert"></button> <span>You have some form errors. Please check below.</span>
+                                </div>
+                                <div class="form-group" id="fg-typeahead">
+                                  <label class="control-label col-md-3">Write or paste DNA sequence
+                                    <i class="icon-question tooltips" data-step="20" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Select DNA sequence as input. Length must be between 15 and 500 nucleotides.</p>"></i>
+                                    <span class="help-inline" style="padding-left:30%;{% if sampleType %}display:none;{% endif %}"> <button type="button" class="btn yellow-crusta btn-xs" id="add-sample-seq">Add sample sequence</button> </span>
+                                  </label>
+                                  <div class="col-md-6" data-step="21">
+                                  	<textarea class="form-control" name="seqtxt" id="seqtxt" rows="3" placeholder="GATTACATACATACA..." maxlength="500"></textarea>
+                                   <!--<span class="help-inline" style="padding-left:0;"> <button type="button" class="btn yellow-crusta btn-xs" id="add-sample-seq">Add sample sequence</button> </span>-->
+                                 </div>
+                               </div>
+                               <div class="form-group">
+                                <label class="control-label col-md-3">Tool
+                                  <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Select the tool you want to use for the analysis.</p>"></i>
+                                </label>
+                                <div class="col-md-6" data-step="22">
+                                 <select class="form-control form-field-enabled valid tools2 " name="tool" aria-invalid="false">
+                                  <option value=""></option>
+                                  {% for k,v in tools %}
+                                  <option value="{{ k }}" >{{ v }}</option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group" id="fg-resol">
+                              <label class="control-label col-md-3">Resolution
+                                <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Select the resolution for the selected tool.</p>"></i>
+                              </label>
+                              <div class="col-md-6" data-step="23">
+                               <select class="form-control form-field-enabled valid resolution2 " id="resolution" name="resolution" aria-invalid="false">
+                                <option value=""></option>
+                                {% for k,v in resolution %}
+                                <option value="{{ k }}" >{{ v }}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group display-hide" id="fg-np">
+                              <label class="control-label col-md-3">Write or paste nucleosomes positions
+                                <i class="icon-question tooltips" data-step="20" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Put in position where the nucleosomes are positioned in the linker sequence. Between each number has to be a space: for example '5 15' creates a structure where one nucleosome is put after the 5th bp of the linker sequence and another one after the 15th bp of the linker sequence generating a linker of 10bp between the two nucleosomes. Before the first and after the last nucleosome there have to be at least 5 base pairs. Between two nucleosomes there has to be at least 3 base pairs.</p>"></i>
+                                <span class="help-inline" style="padding-left:15%;{% if sampleType %}display:none;{% endif %}"> <button type="button" class="btn yellow-crusta btn-xs" id="add-sample-np">Add sample nucleosomes positions</button> </span>
+                              </label>
+                              <div class="col-md-6" data-step="">
+                                <textarea class="form-control" name="nuclpos" id="nuclpos" rows="3" placeholder="10 15 23..." maxlength="500" disabled></textarea>
+                             </div>
+                           </div>
+                          <div class="form-group display-hide" id="dln-block">
+                            <label class="control-label col-md-3">ΔLK
+                              <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Delta linking number.</p>"></i>
+                            </label>
+                            <div class="col-md-6" data-step="24">
+                             <input type="number" name="deltaLN" class="form-control deltaLN2" value="-1" step="1" disabled>
+                           </div>
+                         </div>
+                         <div class="form-group display-hide fg_numStruct" id="fg_IterStruct2">
+                          <label class="control-label col-md-3">Iterations per structure
+                            <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Number of iterations per structure.</p>"></i>
+                          </label>
+                          <div class="col-md-6" data-step="25">
+                            <input type="number" name="iterStruct" class="form-control iterStruct2" min="1" max="70000000" value="25000000">
+                          </div>
+                        </div>
+																	<!--<div class="form-group">
+                                      <label class="control-label col-md-3">Type
+                                        <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Select the type you want.</p>"></i>
+                                      </label>
+                                      <div class="col-md-6">
+																				<select class="form-control form-field-enabled valid type2" name="type" aria-invalid="false">
+																					<option value=""></option>
+                            							{% for k,v in types %}
+																					<option value="{{ k }}" >{{ v }}</option>
+																					{% endfor %}
+                        								</select>
+                                      </div>
+                                    </div>-->
+
+                                    <div class="form-group display-hide" id="proteins-list">
+                                      <label class="col-md-3 control-label">Proteins
+                                       <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>You can select up to 10 proteins. Order must be sequential: first protein in first position, second in second and so on.</p>"></i>
+                                       <span class="help-inline" style="padding-left:30%;display:none;"> <button type="button" class="btn yellow-crusta btn-xs" id="add-sample-prot">Add sample proteins</button> </span>
+                                     </label>
+                                     <div class="col-md-9" style="padding-top: 0;">
+                                      {% if not sampleinput %}
+                                      <div class="mt-repeater">
+                                        <div data-repeater-list="protein">
+                                          <div data-repeater-item class="row">
+                                            <div class="col-md-3">
+                                              <label class="control-label">Protein</label>
+                                              <select class="form-control form-field-enabled valid protein-id" name="id" aria-invalid="false" disabled>
+                                               <option value="">Select a protein</option>
+                                               {% for k,v in PDBList %}
+                                               <option value="{{ v }}" >ID: {{ v|slice(0,4) }} - length: {{ v|slice(5,7) }}</option>
+                                               {% endfor %}
+                                             </select>
+                                           </div>
+                                           <div class="col-md-2 display-hide">
+                                            <label class="control-label">PDB Code</label>
+                                            <div class="input-group">
+                                             <input type="text" class="form-control protein-code" readonly name="code" disabled/>
+                                             <span class="input-group-btn">
+                                              <a href="javascript:;" class="btn btn-icon-only yellow-crusta tooltips view-pdb"  data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Click here to preview the protein.</p>">
+                                               <i class="fa fa-cube"></i>
+                                             </a>
+                                           </span>
+                                         </div>
+                                       </div>
+                                       <div class="col-md-2 display-hide">
+                                        <label class="control-label">Length</label>
+                                        <input type="text" class="form-control protein-length" readonly name="length" disabled/> 
+                                      </div>
+                                      <div class="col-md-2 display-hide">
+                                        <label class="control-label">Initial position</label>
+                                        <input type="number" min="1" max="500" name="position" class="form-control protein-position" disabled/> 
+                                      </div>
+                                      <div class="col-md-1 display-hide">
+                                        <label class="control-label">&nbsp;</label>
+                                        <a href="javascript:;" class="btn yellow-crusta tooltips view-affinity" name="affinity" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Click here to calculate the protein affinity along the sequence.</p>">
+                                          <i class="fa fa-area-chart"></i>
+                                        </a>
+                                      </div>
+                                      <div class="col-md-1">
+                                        <label class="control-label">&nbsp;</label>
+                                        <a href="javascript:;" data-repeater-delete class="btn btn-danger">
+                                          <i class="fa fa-close"></i>
+                                        </a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <hr>
+                                  <a href="javascript:;" data-repeater-create class="btn grey-salsa mt-repeater-add">
+                                    <i class="fa fa-plus"></i> Add Protein</a>
+                                    <br>
+                                    <br> 
+																					<!--<div style="width:100%;word-break: break-all;font-family:'courier';cursor:default;text-transform: uppercase;" id="seqprots">
+																					</div>-->
+                                        </div>
+                                        {% endif %}
+
+                                        {% set c = 0 %}	
+                                        {% for sp in sampleProtein %}
+
+                                        <div class="row display-hide fake-prots" data-step="26">
+                                          <div class="col-md-3">
+                                            <label class="control-label">Protein</label>
+                                            <select class="form-control form-field-enabled valid protein-id-sample" name="protein[{{ c }}][id]" aria-invalid="false" readonly disabled>
+                                             <option value="{{ sp.code }} {{ sp.length }}" >ID: {{ sp.code }} - length: {{ sp.length }}</option>
+                                           </select>
+                                         </div>
+                                         <div class="col-md-2">
+                                          <label class="control-label">PDB Code</label>
+                                          <div class="input-group">
+                                           <input type="text" class="form-control protein-code-sample" value="{{ sp.code }}" readonly name="protein[{{ c }}][code]" disabled/>
+                                           <span class="input-group-btn">
+                                            <a href="javascript:previewNGL('{{ sp.code }}');" class="btn btn-icon-only yellow-crusta tooltips view-pdb"  data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Click here to preview the protein.</p>">
+                                             <i class="fa fa-cube"></i>
+                                           </a>
+                                         </span>
+                                       </div>
+                                     </div>
+                                     <div class="col-md-2">
+                                      <label class="control-label">Length</label>
+                                      <input type="text" class="form-control protein-length-sample" value="{{ sp.length }}" readonly name="protein[{{ c }}][length]" disabled/> 
+                                    </div>
+                                    <div class="col-md-2">
+                                      <label class="control-label">Initial position</label>
+                                      <input type="number" min="1" max="500" name="protein[{{ c }}][position]" value="{{ sp.position }}" class="form-control protein-position-sample" readonly disabled/> 
+                                    </div>
+                                    <div class="col-md-1" data-step="27">
+                                      <label class="control-label">&nbsp;</label>
+                                      <a href="javascript:;" class="btn yellow-crusta tooltips view-affinity"  name="protein[{{ c }}][affinity]" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Click here to calculate the protein affinity along the sequence.</p>">
+                                        <i class="fa fa-area-chart"></i>
+                                      </a>
+                                    </div>
+                                    <div class="col-md-1">
+
+                                    </div>
+                                  </div>
+
+                                  {% set c = c + 1 %}
+                                  {% endfor %}
+
+                                </div>
+                              </div>	
+
+
+
+                              <div class="form-group">
+                               <label class="control-label col-md-3">Operations
+                                <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Select the operation you want to execute.</p>"></i>
+                              </label>
+                              <div class="col-md-6" data-step="28">
+                                <select class="form-control form-field-enabled valid operations" id="operations2" id="" name="operations[]" aria-invalid="false" multiple="multiple">
+                                 <option value=""></option>
+                                 {% for k,v in operations %}
+                                 {% set sel='' %}
+                                 {% if k == 'createStructure' %}
+                                 {% set sel='selected' %}
+                                 {% endif %}
+                                 <option value="{{ k }}" {{ sel }}>{{ v }}</option>
+                                 {% endfor %}
+                               </select>
+                               {% if sampleType %}
+                               <!--<span class="help-inline">Note: to completely reproduce the Sample Outputs, the </span>-->
+                               {% endif %}
+                             </div>
+                           </div>
+
+                           <div class="form-group display-hide fg_numStruct" id="fg_numStruct2">
+                            <label class="control-label col-md-3">Number of structures
+                              <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Number of structures for the trajectory.</p>"></i>
+                            </label>
+                            <div class="col-md-6" data-step="29">
+                              <input type="number" name="numStruct" class="form-control numStruct2" min="1" max="500" value="{{ numStr }}" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3">E-mail address
+                              <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Please provide your email adress if you want to receive the results.</p>"></i>
+                            </label>
+                            <div class="col-md-6" data-step="30">
+                              <input type="email" name="email" class="form-control" placeholder="your@email.com" >
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3">Perform analysis
+                              <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Enable or disable Flexibility Analyses. Disabling this button, the tool will only calculate the equilibrated and / or the trajectory and it will took less time.</p>"></i>
+                            </label>
+                            <div class="col-md-6" data-step="31">
+                              <label class="mt-checkbox mt-checkbox-outline" style="margin-top:5px;"> Enable / Disable Analysis
+                               <input type="checkbox" value="1" name="analysis" checked />
+                               <span></span>
+                             </label>
+                           </div>
+                         </div>
+                       </div>
+                       <div class="form-actions">
+                        <div class="row">
+                          <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn yellow-crusta" data-step="3"><i class="fa fa-check"></i> Submit</button>
+                            {% if not sampleinput %}<button type="reset" class="btn grey-salsa btn-outline">Reset</button>{% endif %}
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <!-- END FORM-->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- END PORTLET-->
+          </div>
+        </div>
+      </div>
+      <!-- END PAGE CONTENT INNER -->
+    </div>
+  </div>
+  <!-- END PAGE CONTENT BODY -->
+  <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+                              <div class="modal fade bs-modal" id="modalNGL" tabindex="-1" role="basic" aria-hidden="true">
+                               <div class="modal-dialog">
+                                <div class="modal-content">
+                                 <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                  <h4 class="modal-title"></h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div id="loading-viewport" style="position:absolute;left:42%; top:220px;z-index:50;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading2.gif" /></div>
+                                  <div id="viewport" style="width:100%; height:500px;background:#c7ced1;"></div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="modal fade bs-modal-lg" id="modalErrProts" tabindex="-1" role="basic" aria-hidden="true">
+                           <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                             <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                              <h4 class="modal-title">Proteins Error!</h4>
+                            </div>
+                            <div class="modal-body">
+                             <p id="error-description"></p>
+                             <div id="loading-block" class="display-hide" style="position:absolute;left:45%; top:120px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+                             <div id="blockPlotDiv" class="display-hide" style="height: 300px;"></div>
+                           </div>
+                           <div class="modal-footer">
+                            <p style="position: absolute;left: 20px;bottom: 0px;" id="eos-legend" class="display-hide">
+                             <span style="color:#cc0000">
+                              <svg height="10" width="40">
+                               <line stroke-dasharray="8, 6" x1="5" y1="5" x2="33" y2="5" style="stroke:#cc0000;stroke-width:3" />
+                             </svg>
+                             End of sequence
+                           </span> 
+                         </p>
+                         <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="modal fade bs-modal-lg" id="modalAffinity" tabindex="-1" role="basic" aria-hidden="true">
+                   <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                     <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                      <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                      <div id="loading-affinity" style="position:absolute;left:45%; top:220px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+                      <div id="affinityPlotDiv" style="height: 500px;"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <p style="position: absolute;left: 20px;bottom: 0px;" id="shape-legend" class="display-hide">
+                       <span style="color:#cc6600">
+                        <svg height="10" width="40">
+                         <line stroke-dasharray="8, 6" x1="5" y1="5" x2="33" y2="5" style="stroke:#cc6600;stroke-width:3" />
+                       </svg>
+                       Current protein position
+                     </span> 
+                     <span style="color:#4f79bc">
+                      <svg height="10" width="40">
+                        <line x1="5" y1="5" x2="33" y2="5" style="stroke:#4f79bc;stroke-width:2" />
+                      </svg>
+                      Minimum energy
+                    </span>
+                  </p>
+                  <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- END CONTAINER -->
+      </div>
+    </div>
+    <div class="page-wrapper-row">
+      <div class="page-wrapper-bottom">
+        {% include 'templates/partials/footer.html' %}
+
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

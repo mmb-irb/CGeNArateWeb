@@ -1,0 +1,172 @@
+{% if basename != 'error' and basename != 'errordb' %}
+				<!--[if lt IE 9]>
+				<script src="/assets/global/plugins/respond.min.js"></script>
+				<script src="/assets/global/plugins/excanvas.min.js"></script>
+				<script src="/assets/global/plugins/ie8.fix.min.js"></script>
+				<![endif]-->
+        <!-- BEGIN CORE PLUGINS -->
+        <script src="{{ baseURL }}assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <!-- END CORE PLUGINS -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+				<script src="{{ baseURL }}assets/global/plugins/jquery-cookiebar/jquery.cookieBar.min.js" type="text/javascript"></script>
+				{% if basename == 'signin' 
+				or basename == 'forgot' 
+				or basename == 'signup' 
+				or basename == 'reset' 
+				or basename == 'change' 
+				or basename == 'lock'
+				%}
+				<script src="{{ baseURL }}assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+				{% elseif basename == 'workspace' %}
+				<script src="{{ baseURL }}assets/global/plugins/ngl/ngl.2.0.0-dev.36.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/scripts/datatable.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/jquery-knob/js/jquery.knob.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/kekule/kekule.min.js" type="text/javascript"></script>
+				{% elseif basename == 'input' %}
+				<script src="{{ baseURL }}assets/global/plugins/ngl/ngl.2.0.0-dev.36.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/jquery-repeater/jquery.repeater.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/bootstrap-select/bootstrap-select.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/plotly/plotly-1.31.2.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% elseif basename == 'dashboard' %}	
+				<script src="{{ baseURL }}assets/global/plugins/jquery-knob/js/jquery.knob.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/scripts/datatable.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+				{% elseif basename == 'home' %}
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% elseif basename == 'help' %}
+				<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+				{% elseif basename == 'summary' %}
+				<script src="{{ baseURL }}assets/global/plugins/ngl/ngl.2.0.0-dev.36.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/plotly/plotly-1.31.2.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/clipboard/clipboard.min.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'pcazip') %}
+				<script src="{{ baseURL }}assets/global/plugins/ngl/ngl.2.0.0-dev.36.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/scripts/datatable.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/plotly/plotly-1.31.2.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'contacts') %}
+				<script src="{{ baseURL }}assets/global/plugins/ngl/ngl.2.0.0-dev.36.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/plotly/plotly-1.31.2.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'curves') %}
+        <script src="{{ baseURL }}assets/global/plugins/plotly/plotly-1.31.2.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'stiffness') %}
+        <script src="{{ baseURL }}assets/global/plugins/plotly/plotly-1.31.2.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'circular') %}
+        <script src="{{ baseURL }}assets/global/plugins/plotly/plotly-1.31.2.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'bending') %}
+        <script src="{{ baseURL }}assets/global/plugins/plotly/plotly-1.31.2.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'energy') %}
+				<script src="{{ baseURL }}assets/global/plugins/ngl/ngl.2.0.0-dev.36.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/global/plugins/plotly/plotly-1.31.2.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% elseif ((basename == 'flextraj') and flexname == 'end-to-end') %}
+        <script src="{{ baseURL }}assets/global/plugins/plotly/plotly-1.31.2.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/ngl/ngl.2.0.0-dev.36.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'sasa') %}
+        <script src="{{ baseURL }}assets/global/plugins/plotly/plotly-1.31.2.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/ngl/ngl.2.0.0-dev.36.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/global/plugins/introjs/intro.js" type="text/javascript"></script>
+				{% endif %}
+        <!-- END PAGE LEVEL PLUGINS -->
+        <!-- BEGIN THEME GLOBAL SCRIPTS -->
+        <script src="{{ baseURL }}assets/global/scripts/app.min.js" type="text/javascript"></script>
+        <!-- END THEME GLOBAL SCRIPTS -->
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->
+				<script src="{{ baseURL }}js/globals" type="text/javascript"></script>
+				{% if basename == 'signin' 
+				or basename == 'forgot' 
+				or basename == 'signup' 
+				or basename == 'reset' %}
+				<script src="{{ baseURL }}assets/pages/scripts/form-validation-out.js" type="text/javascript"></script>
+				{% elseif basename == 'workspace' %}
+				<script src="{{ baseURL }}js/globals" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/ws-tree.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/ws-actions.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/pages/scripts/ws-datatables.js" type="text/javascript"></script>
+        <script src="{{ baseURL }}assets/pages/scripts/ngl-modal.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/kekule-modal.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/components-knob-dials.js" type="text/javascript"></script>
+				{% elseif basename == 'home' %}
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% elseif basename == 'input' %}
+				<script src="{{ baseURL }}assets/pages/scripts/ngl-modal.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/input.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% elseif basename == 'dashboard' %}
+				<script src="{{ baseURL }}js/globals" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/dashboard.js" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/ds-tables.js" type="text/javascript"></script>
+				{% elseif basename == 'help' %}
+				<script src='{{ baseURL }}assets/global/scripts/mathjax.js?v={{ random() }}'></script>
+				{% elseif basename == 'summary' %}
+				<script src="{{ baseURL }}assets/pages/scripts/ngl-modal.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/summary.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'pcazip') %}
+				<script src="{{ baseURL }}assets/pages/scripts/flex-pcazip.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'stiffness') %}
+				<script src="{{ baseURL }}assets/pages/scripts/flex-stiffness.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'curves') %}
+				<script src="{{ baseURL }}assets/pages/scripts/flex-curves.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'contacts') %}
+				<script src="{{ baseURL }}assets/pages/scripts/flex-contacts.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'circular') %}
+				<script src="{{ baseURL }}assets/pages/scripts/flex-circular.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'bending') %}
+				<script src="{{ baseURL }}assets/pages/scripts/flex-bending.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% elseif ((basename == 'flextraj') and flexname == 'end-to-end') %}
+				<script src="{{ baseURL }}assets/pages/scripts/flex-end-to-end.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'energy') %}
+				<script src="{{ baseURL }}assets/pages/scripts/ngl-modal.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/flex-energy.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% elseif ((basename == 'flexeq' or basename == 'flextraj') and flexname == 'sasa') %}
+				<script src="{{ baseURL }}assets/pages/scripts/flex-sasa.js?v={{ random() }}" type="text/javascript"></script>
+				<script src="{{ baseURL }}assets/pages/scripts/intro.js?v={{ random() }}" type="text/javascript"></script>
+				{% endif %}
+				<script src="{{ baseURL }}assets/pages/scripts/common.js?v={{ random() }}" type="text/javascript"></script>
+        <!-- END PAGE LEVEL SCRIPTS -->
+        <!-- BEGIN THEME LAYOUT SCRIPTS -->
+        <script src="{{ baseURL }}assets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
+        <!-- END THEME LAYOUT SCRIPTS -->
+{% endif %}
+
+				
+
+    </body>
+
+</html>
+

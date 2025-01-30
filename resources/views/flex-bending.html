@@ -1,0 +1,213 @@
+{% set flexname = page.flexname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                	
+									<!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">Bending Analysis
+																				{% if sample %}
+																				{% for s in sampleOutputs %}
+																				{% if s[0] == id %}
+																				for sample {{ s[1] }}
+																				{% endif %}
+																				{% endfor %}
+																				{% endif %}		
+																				</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">Home</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            {% if sample %}
+																						<span>Sample Output</span>
+																						{% else %}
+                                            <span>Output</span>
+																						{% endif %}
+                                        		<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Bending</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+
+																		<input type="hidden" id="base-url" value="{{ baseURL }}" >
+																		<input type="hidden" id="projectID" value="{{ id }}" >
+																		<input type="hidden" id="strType" value="{{ strType }}" >
+
+                                    <div class="page-content-inner">
+
+																			{% include 'templates/partials/menu-output.html' %}
+
+                                      <div class="portlet light bordered">
+																				<p>In the ‘Analysis’ section, you can download all the analysis results in a compressed tar.gz file.</p>
+																				<p>
+																					<a href="javascript:downloadFile('{{ id }}', 'an');" class="btn btn-lg yellow-crusta responsive-btn">
+                                          	<i class="fa fa-download"></i> Download all analysis in a compressed file 
+																					</a>
+																				</p>
+
+																			</div>
+
+																			{% include 'templates/partials/menu-flex.html' %}
+
+																			<div class="row ">
+																				<div class="col-md-12">
+																					<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+																						<div class="portlet-title tabbable-line">
+																							<div class="caption">
+																								<i class="fa fa-circle-o-notch"></i>  
+																								<span class="caption-subject font-grey-mint sbold uppercase">Bending</span>
+																							</div>
+																							
+																						</div>
+
+																						<div class="portlet-body " style="">
+
+																							{% if sample %}
+																								<p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="bendingTour">Click here to start the guided tour</a></p>
+																							{% endif %}
+
+																							{% if strType == 'eq' %}
+
+																							<table class="table table-bordered table-striped" data-step="1">
+																								<tbody>
+																									{% for k1,v1 in eqTable %}
+																									<tr>
+																										{% set c = 0 %}
+																										{% for k2,v2 in v1 %}
+																										{% if c == 0 %}
+																										<td class="col-sm-6"><strong>{{ v2 }}</strong></td>
+																										{% else %}
+																										<td class="col-sm-6">{{ v2 }}</td>
+																										{% endif %}
+																										{% set c = c + 1 %}
+																										{% endfor %}
+																									</tr>
+																									{% endfor %}	
+																								</tbody>
+																							</table>
+
+																							<div class="row ">
+																								<div class="col-md-12" data-step="2">
+																									<div id="loading-distribution" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																									<div id="distributionPlotDiv" style="height: 700px;"></div>
+																								</div>
+																							</div>
+
+																							<div class="row ">
+																								<div class="col-md-12" data-step="3">
+																									<div id="loading-individual" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																									<div id="individualPlotDiv" style="height: 700px;"></div>
+																								</div>
+																							</div>
+
+																							{% else %}
+
+																							<div class="row ">
+
+																								<div class="row ">
+																									<div class="col-md-12" data-step="4">
+																										<div id="loading-distribution" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																										<div id="distributionPlotDiv" style="height: 700px;"></div>
+																									</div>
+																								</div>
+
+																								<div class="row ">
+																									<div class="col-md-12" data-step="5">
+																										<div id="loading-individual" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																										<div id="individualPlotDiv" style="height: 700px;"></div>
+																									</div>
+																								</div>
+
+																								<div class="row ">
+																									<div class="col-md-12" data-step="6">
+																										<div id="loading-fiber" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																										<div id="fiberPlotDiv" style="height: 700px;"></div>
+																									</div>
+																								</div>
+
+																								<div class="row ">
+																									<div class="col-md-12" data-step="7">
+																										<div id="loading-fiberalong" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																										<div id="fiberalongPlotDiv" style="height: 700px;"></div>
+																									</div>
+																								</div>
+
+																							</div>
+		
+																							{% endif %}
+
+																						</div>	
+
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>	
+																			</div>	
+
+                                    	</div>
+
+                                    <!-- END PAGE CONTENT INNER -->
+																</div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+
+
+                    </div>
+                    <!-- END CONTAINER -->
+
+								</div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

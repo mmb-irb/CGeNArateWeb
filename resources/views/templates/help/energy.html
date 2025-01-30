@@ -1,0 +1,143 @@
+{% set helpname = page.helpname  %}
+{% set analname = page.analname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">MC DNA Help - Analysis Elastic Energy </h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">
+																						{% if auth.check %}
+																						User Workspace
+																						{% else %}
+																						Home
+																						{% endif %}
+																						</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Help</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Analysis</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Elastic Energy</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="portlet light bordered">
+                                                  <div class="portlet-title">
+                                                      <div class="caption font-yellow-crusta">
+                                                          <i class="fa fa-bolt font-yellow-crusta"></i>
+                                                          <span class="caption-subject bold uppercase"> Elastic Energy</span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="portlet-body ">
+	                                                   
+																										<h2>Elastic Energy</h2>
+
+																										<p>The elastic energy $F_{short}(X)$ of the DNA fiber in the current implementation is calculated as follows:</p>
+
+																										<p>$$F_{short}(X) = K_i \Delta X_i^2$$</p>
+
+																										<p>$K_i$ is a 6x6 stiffness matrix obtained by inverting the covariance matrix centered at the global minimum i for all unique base-pair steps in all unique tetrameric environments as derived from ABC microsecond-long MD simulations with the parmbsc1 force-field, $\Delta X_i^2$ is the displacement of the given conformation of base pair step parameters ($X_i$).</p>
+
+																										<p>Elastic energy of DNA: The table shows mean and standard deviation for the elastic energy of the DNA fiber as well as the average elastic energy per base pair</p>
+	
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna.png" style="max-width:100%;"></p>
+
+																										<p>Note that for “Structure Flexibility Analysis” the standard deviation is 0 and the mean represents the elastic energy of the structure.</p>
+
+																										<h3>Elastic energy of DNA along trajectory (available for Trajectory Flexibility Analysis)</h3>
+
+																										<p>The elastic energy and the average elastic energy per base pair (y-axis, in kcal/mol) is shown for each snapshot (x-axis) of the trajectory:</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna_plot.png" style="max-width:100%;"></p>
+
+																										<h3>Elastic energy of DNA not bound to a protein (available when tool “MC DNA + Proteins” is chosen):</h3>
+	
+																										<p>Table with elastic energy and average elastic energy per base pair of the DNA not bound to a protein.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna_unbound.png" style="max-width:100%;"></p>
+
+																										<p>Note that for “Structure Flexibility Analysis” the standard deviation is 0 and the mean represents the elastic energy of the structure.
+
+																										<h3>Elastic Energy of Protein-Bound DNA (available when tool “MC DNA + Proteins” is chosen)</h3>
+
+																										<p>A table with the elastic energy of the protein-bound DNA is shown ordered according to the appearance along the DNA fiber. In the plot underneath the values of the elastic energy in kcal/mol (y-axis) along the bound DNA (x-axis) are shown.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna_bound.png" style="max-width:100%;"></p>
+
+                                                  </div>
+                                              </div>
+                                              <!-- END PORTLET-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}

@@ -1,0 +1,239 @@
+{% set flexname = page.flexname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                	
+									<!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">Circular Analysis
+																				{% if sample %}
+																				{% for s in sampleOutputs %}
+																				{% if s[0] == id %}
+																				for sample {{ s[1] }}
+																				{% endif %}
+																				{% endfor %}
+																				{% endif %}
+																				</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">Home</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            {% if sample %}
+																						<span>Sample Output</span>
+																						{% else %}
+                                            <span>Output</span>
+																						{% endif %}
+                                        		<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Circular</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+
+																		<input type="hidden" id="base-url" value="{{ baseURL }}" >
+																		<input type="hidden" id="projectID" value="{{ id }}" >
+																		<input type="hidden" id="strType" value="{{ strType }}" >
+
+                                    <div class="page-content-inner">
+
+																			{% include 'templates/partials/menu-output.html' %}
+
+                                      <div class="portlet light bordered">
+																				<p>In the ‘Analysis’ section, you can download all the analysis results in a compressed tar.gz file.</p>
+																				<p>
+																					<a href="javascript:downloadFile('{{ id }}', 'an');" class="btn btn-lg yellow-crusta responsive-btn">
+                                          	<i class="fa fa-download"></i> Download all analysis in a compressed file 
+																					</a>
+																				</p>
+
+																			</div>
+
+																			{% include 'templates/partials/menu-flex.html' %}
+
+																			<div class="row ">
+																				<div class="col-md-12">
+																					<!-- BEGIN PORTLET-->
+																					<div class="portlet light bordered">
+																						<div class="portlet-title tabbable-line">
+																							<div class="caption">
+																								<i class="fa fa-circle-thin"></i>  
+																								<span class="caption-subject font-grey-mint sbold uppercase">Circular</span>
+																							</div>
+																						</div>
+
+																						<div class="portlet-body " style="">
+																					
+																							{% if sample %}
+																							<p><a href="javascript:;" class="btn btn-sm yellow-crusta" id="circularTour">Click here to start the guided tour</a></p>
+																							{% endif %}
+	
+																							<div class="tab-content">
+
+																								<!-- CIRCULAR TAB -->
+                                              	<div class="tab-pane active" id="">	
+
+																									{% if strType == 'traj' %}
+
+																									<p>Images courtesy of <a href="http://pubs.rsc.org/en/content/articlelanding/2012/sm/c2sm26036k/unauth#!divAbstract" target="_blank">
+																										<em>Danielle J. Mai, Christopher Brockman  and Charles M. Schroeder</em></a> (Radius of Gyration)  
+																									and <a href="https://www.researchgate.net/publication/40757110_DNA_supercoiling_and_its_role_in_DNA_decatenation_and_unknotting" target="_blank"><em>Guillaume Witz and Andrzej Stasiak</em></a> (Helical and Writhe). 
+																									</p>
+
+																									<div class="mt-element-card mt-element-overlay" data-step="2">
+																										<div class="row">
+
+																											<div class="col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/rg.png" />
+																														<div class="mt-overlay circular" id="rg">
+																															<a href="javascript:loadScatterPlot('circular', 'rg', ['# of snapshot', 'Radius of gyration (in nm)'], ['Radius of gyration'], 'Radius of gyration', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Radius of Giration</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/twistc.png" />
+																														<div class="mt-overlay circular" id="twist">
+																															<a href="javascript:loadScatterPlot('circular', 'twist', ['# of snapshot', 'Helical (turns)'], ['Helical'], 'Helical', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Helical</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																											<div class="col-md-4 col-sm-6 col-xs-12">
+																												<div class="mt-card-item">
+																													<div class="mt-card-avatar mt-overlay-1">
+																														<img src="{{ baseURL }}assets/layouts/layout3/img/writhe.png" />
+																														<div class="mt-overlay circular" id="writhe">
+																															<a href="javascript:loadScatterPlot('circular', 'writhe', ['# of snapshot', 'Writhe (turns)'], ['Writhe'], 'Writhe', 1);"></a>	
+																														</div>
+																													</div>
+																													<div class="mt-card-content">
+																														<h3 class="mt-card-name">Writhe</h3>
+																													</div>
+																												</div>
+																											</div>
+
+																										</div>	
+
+																									</div>
+
+																									<div class="row">
+
+																										<div class="col-sm-12" data-step="3">
+																											<div id="loading-circular" style="position:absolute;left:46%; top:370px;"><img src="{{ baseURL }}assets/layouts/layout3/img/loading.gif" /></div>
+																											<div id="circularPlotDiv" style="height: 700px;"></div>
+																										</div>
+
+																									</div>
+
+																									{% else %}
+
+																									<table class="table table-bordered table-striped" data-step="1">
+																										<tbody>
+																											{% for k1,v1 in eqTable %}
+																											<tr>
+																												{% set c = 0 %}
+																												{% for k2,v2 in v1 %}
+																												{% if c == 0 %}
+																												<td class="col-sm-6"><strong>{{ v2 }}</strong></td>
+																												{% else %}
+																												<td class="col-sm-6">{{ v2 }}</td>
+																												{% endif %}
+																												{% set c = c + 1 %}
+																												{% endfor %}
+																											</tr>
+																											{% endfor %}	
+																										</tbody>
+																									</table>
+
+																									{% endif %}
+
+																								</div>
+																								<!-- END CIRCULAR TAB -->
+
+																							</div>
+
+																						</div>	
+
+																					</div>
+																					<!-- END PORTLET-->
+																				</div>	
+																			</div>	
+
+                                    	</div>
+
+                                    <!-- END PAGE CONTENT INNER -->
+																</div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+
+
+                    </div>
+                    <!-- END CONTAINER -->
+
+								</div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

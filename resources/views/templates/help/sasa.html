@@ -1,0 +1,154 @@
+{% set helpname = page.helpname  %}
+{% set analname = page.analname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">MC DNA Help - Analysis SASA </h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">
+																						{% if auth.check %}
+																						User Workspace
+																						{% else %}
+																						Home
+																						{% endif %}
+																						</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Help</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Analysis</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>SASA</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="portlet light bordered">
+                                                  <div class="portlet-title">
+                                                      <div class="caption font-yellow-crusta">
+                                                          <i class="fa fa-steam font-yellow-crusta"></i>
+                                                          <span class="caption-subject bold uppercase"> SASA</span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="portlet-body ">
+	                                                   
+																										<h2>Solvent Accessible Surface Area</h2>
+
+																										<h3>Method</h3>
+
+																										<p>Solvent Accessible Surface Area (SASA) is computed for the Protein-DNA method of MCDNA. The SASA for the nucleic fiber allows an easy identification of the fragments of DNA affected by the attached proteins, not only in the regions where they are docked, but also in protein-free regions that see their accessibility hindered by these proteins.</p>
+
+																										<p>SASA plots can be seen as a type of virtual, in-silico DNA footprinting. DNA footprinting is an experimental method to identify sequence specificity of DNA-binding proteins. The gel electrophoresis lanes obtained in the study allow them to identify and determine the DNA sequence fragment from the protected area that is called the footprint, the area where the protein binds to the DNA. SASA also decreases abruptly in the DNA fragments where a protein is attached, creating a similar effect in the plots (see results).</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/sasa01.png" style="max-width:30%;"></p>
+
+																										<p style="font-size:12px;font-style:italic;">Adapted from Fig 5.37 – DNAse footprinting.<br>
+																										Molecular Biology, Robert F. Weaver, University of Kansas-Lawrence.<br>
+																										Chapter 5:  Molecular Tools for Studying Genes and Gene Activity.</p>
+													
+																										<p>Solvent Accessible Surface Area is designated as the region of the molecule surface exposed enough to be able to interact with solvent molecules. It is usually defined as a surface built by the delineation drawn by the center of a sphere (rough representation of a solvent molecule, usually of 1.4 Å of radii; i.e. a water molecule) rolling over the molecular surface (see figure below). </p>
+
+																										<p>SASA values are computed in this analysis using the well-known software called NACCESS (S. Hubbard and J. Thornton, "'NACCESS' computer program," Department of Biochemistry and Molecular Biology, University College London, 1993.), developed by Simon Hubbard in Manchester.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/sasa02.png" style="max-width:100%;"></p>
+
+																										<p style="font-size:12px;font-style:italic;">Solvent Accessible Surface Area (SASA). Atoms of the protein are represented as van der Waals spheres, and the solvent accessible surface area is defined by the center of a rolling ball (S) representing the solvent molecule while going over the protein surface.</p>
+
+																										<p>Reference averaged-values for the different DNA bases (A, C, T, G) were computed in a naked fiber, right handed B-DNA (Arnott) modeled using NAFlex web server (<a href="http://mmb.irbbarcelona.org/NAFlex" target="_blank">http://mmb.irbbarcelona.org/NAFlex</a>). These values are plotted together with the user-generated structure/trajectory SASA for the sake of comparison (see results).</p>
+	
+																										<h3>Results</h3>
+
+																										<p>Results for the SASA analysis are divided in two main sections:</p>
+
+																										<ul>
+																										<li>3D view</li>
+																										<li>SASA plot</li>
+																										</ul>
+
+																										<p>The 3D view shows an NGL interactive representation of the structure or trajectory with the DNA fiber together with the attached proteins, properly labeled with their PDB code. In the case of a trajectory, a slider is provided to go through the whole snapshots ensemble. Every time a different snapshot is selected, the corresponding structure is represented in the viewer, and its associated SASA plot is drawn in the SASA section below. </p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/sasa03.png" style="max-width:100%;"></p>
+
+																										<p>Note that the 3D representation and the plot are interconnected: when the mouse is passing over the SASA plot, the corresponding nucleotide base of the DNA in the NGL viewer is highlighted (using a VdW representation), in order to easily identify the structure region being analyzed.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/sasa04.png" style="max-width:100%;"></p>
+
+																										<p>The SASA plot section then represents the solvent accessible surface area computed for the particular selected structure. Three line values are depicted: the user-generated DNA fiber SASA (green), the reference SASA (yellow), and the corrected SASA (DNA fiber SASA – reference SASA, orange). The DNA fragments where proteins are placed are highlighted with grey-shaded regions, accompanied by the corresponding protein PDB code. The footprinting areas should fall into the grey-shaded regions, where the DNA is protected by the proteins. </p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/sasa05.png" style="max-width:100%;"></p>
+
+                                                  </div>
+                                              </div>
+                                              <!-- END PORTLET-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}

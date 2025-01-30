@@ -1,0 +1,163 @@
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+                    {% include 'templates/partials/top.html' %}
+
+                    {% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title ">
+                                        <h1 class="font-yellow-crusta">Welcome to {{ longName }} </h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <span>Home</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                      <div class="row">
+                                          <div class="col-md-12">
+																						
+                                              <div class="portlet box grey-mint">
+                                                <div class="portlet-title">
+                                                    <div class="caption sbold">
+                                                        <i class="fa fa-creative-commons" style="font-size: 20px;"></i>This server is free to use (including commercial users) </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- BEGIN PORTLET-->
+                                              <div class="portlet box yellow-crusta">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="icon-info" style="font-size: 18px;"></i>{{ longName }} </div>
+                                                </div>
+                                                <div class="portlet-body">
+
+                                                    <input type="hidden" id="base-url"  value="{{ baseURL }}" >
+	
+                                                  <div class="row">
+                                                    <div class="col-md-6">
+                                                     <p > <img  src="{{ baseURL}}assets/layouts/layout3/img/home.png" style="width:100%;"></p> 
+                                                    </div>
+																										<div class="col-md-6">
+
+                                                    <p>Thank you for visiting our website!!</p>
+
+                                                    <p class="margin-top-20">We present {{ longName }}, an intuitive environment for simulation of both unconstrained and constrained DNA, such as circular DNA and protein-DNA simulations. The simulations are obtained using CGeNArate, a new model for molecular dynamics simulations for B-DNA in the context of biotechnological or chromatin studies. The developed method uses a coarse-grained Hamiltonian with trajectories that are back-mapped to the atomistic resolution. The method is sequence-dependent and reproduces very well not only local, but also global physical properties of DNA, while its performance exceeds common molecular dynamics simulations by several orders of magnitude.</p>
+
+                                                    <p class="margin-top-20">Apart from the sequence, it is possible to choose the resolution of the simulated DNA ('Coarse Grain' or 'Atomistic') and the type of operation to execute ('Create Structure' and 'Create Trajectory') which makes the webserver a flexible tool that can be tailored to the user's needs. Additionally, in the case of 'circular DNA' the amount of initial over- or undertwisting can be specified. In 'protein-DNA' the user can manually indicate the proteins to be superimposed onto the DNA at a given position in the sequence.</p>
+
+                                                    <p class="margin-top-20">The graphical output of the simulations is complemented with a flexibility analysis done by Curves+ (backbone torsions, BI/BII, alpha/gamma, sugar puckering, grooves, axis base pair and inter base pair parameters), principal component analysis, contact matrix, bending and energy penalty calculations as well as individual analysis depending on the chosen simulation type (see more details in Help).</p>
+                                                                                                            
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <!-- END PORTLET-->
+                                            <!-- BEGIN Portlet PORTLET-->
+                                            <div class="portlet light bordered">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa fa-tripadvisor"></i>
+                                                        <span class="caption-subject bold uppercase"> Guided Tour</span>
+                                                    </div>
+                                                </div>
+                                                <div class="portlet-body">
+                                                    <p>There is a complete Help section accessible through the main menu on the top of the page. But if you want to see a short introduction to this website, you can click the button below:</p>
+                                                    <p><a href="javascript:;" class="btn yellow-crusta" id="startButton">Click here to start the guided tour</a></p>
+                                                </div>
+                                            </div>
+                                            <!-- END Portlet PORTLET-->
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa fa-plug font-grey-mint" style="font-size:20px;"></i>
+                                                        <span class="caption-subject sbold  font-grey-mint"> {{ longName }} IS POWERED BY CGeNArate</span>
+                                                    </div>
+                                                    </div>
+                                                <div class="portlet-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <p> 
+                                                                <a href="https://academic.oup.com/nar/article/52/12/6791/7685160?login=false" target="_blank" style="font-weight:bold;">CGeNArate: a sequence-dependent coarse-grained model of DNA for accurate atomistic MD simulations of kb-long duplexes</a><br>
+                                                                David Farré-Gil, Juan Pablo Arcon, Charles A Laughton, Modesto Orozco <a href="https://www.irbbarcelona.org/en/research/modesto-orozco" target="_blank"><i class="fa fa-envelope"></i></a> . <i>Nucleic Acids Research</i>, Volume 52, Issue 12, 8 July 2024, Pages 6791–6801
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- END PORTLET-->
+
+                                            <div class="portlet light">
+                                                <div class="row" id="logos-home">
+
+                                                        <div class="col-md-4" style="text-align: center;">
+                                                            <a href="https://www.irbbarcelona.org/" target="_blank"><img src="{{ baseURL}}assets/layouts/layout3/img/irb.png" /></a>
+                                                        </div>
+                                                        <div class="col-md-4" style="text-align: center;">
+                                                            <a href="https://mmb.irbbarcelona.org/" target="_blank"><img src="{{ baseURL}}assets/layouts/layout3/img/mmb.png" /></a>
+                                                        </div>
+                                                        <div class="col-md-4" style="text-align: center;">
+                                                            <a href="https://ec.europa.eu/programmes/horizon2020/" target="_blank"><img src="{{ baseURL}}assets/layouts/layout3/img/ue.jpg" /></a>
+                                                        </div>
+                                                </div>
+                                              </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
+

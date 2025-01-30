@@ -1,0 +1,227 @@
+{% extends 'templates/layout.html' %}
+
+{% block content %}
+
+ <body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-mint">Sign Up</h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-mint">Home</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Sign Up</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="portlet light bordered">
+                                                  <div class="portlet-title">
+                                                      <div class="caption font-green">
+                                                          <i class="fa fa-user-plus font-green"></i>
+                                                          <span class="caption-subject bold uppercase"> Enter your personal details</span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="portlet-body form">
+                                                        <form action="{{ baseURL }}auth/signup" method="post" id="form-signup" role="form" autocomplete="off">
+                                                            <div class="form-body">
+																															{% include 'templates/partials/flash.html' %}
+                                                              <div class="row">
+                                                                <div class="col-md-6">
+                                                                  <div class="form-group form-md-line-input form-md-floating-label {{ errors.name ? 'has-error' : '' }}">
+                                                                      <input type="text" class="form-control" id="name" name="name" value="{{ old.name }}" >
+                                                                      <label for="name">Enter your Name</label>
+                                                                      <span class="help-block {{ errors.name ? 'help-block-error' : '' }}">
+																																			{% if errors.name %}
+																																				{{ errors.name | first }}<br>
+																																			{% endif %}
+																																			</span>
+                                                                  </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                  <div class="form-group form-md-line-input form-md-floating-label {{ errors.surname ? 'has-error' : '' }} ">
+                                                                      <input type="text" class="form-control" id="surname" name="surname" value="{{ old.surname }}">
+                                                                      <label for="surname">Enter your Surname</label>
+                                                                      <span class="help-block {{ errors.surname ? 'help-block-error' : '' }}">
+																																			{% if errors.surname %}
+																																				{{ errors.surname | first }}<br>
+																																			{% endif %}
+																																			</span>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                <div class="col-md-6">
+                                                                  <div class="form-group form-md-line-input form-md-floating-label  {{ errors.institution ? 'has-error' : '' }}">
+                                                                      <input type="text" class="form-control" id="institution" name="institution" value="{{ old.institution }}">
+                                                                      <label for="institution">Enter your Institution</label>
+                                                                      <span class="help-block {{ errors.institution ? 'help-block-error' : '' }}">
+																																			{% if errors.institution %}
+																																				{{ errors.institution | first }}<br>
+																																			{% endif %}
+																																			</span>
+                                                                  </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                  <div class="form-group form-md-line-input  form-md-floating-label {{ errors.country ? 'has-error' : '' }}">
+                                                                    <select class="form-control" name="country" id="country" style="color:#999;font-size:16px;">
+                                                                        <option value=""></option>
+																																				{% for v in countries %}	
+																																					{% set sel = '' %}
+																																					{% if old.country == v._id %}
+																																					{% set sel = 'selected' %}
+																																					{% endif %}
+																																					<option value="{{ v._id }}" {{ sel }}>{{ v.country }}</option>
+																																				{% endfor %}
+                                                                      </select>
+                                                                    <label for="country">Enter your Country</label>
+																																		<span class="help-block {{ errors.country ? 'help-block-error' : '' }}">
+																																		{% if errors.country %}
+																																			{{ errors.country | first }}<br>
+																																		{% endif %}
+																																		</span>
+                                                                    </div>
+                                                                </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                <div class="col-md-6">
+                                                                  <div class="form-group form-md-line-input form-md-floating-label {{ errors.email ? 'has-error' : '' }} ">
+                                                                      <input type="text" class="form-control" id="email" name="email" value="{{ old.email }}">
+                                                                      <label for="email">Enter your Email</label>
+                                                                      <span class="help-block {{ errors.email ? 'help-block-error' : '' }}">
+																																			{% if errors.email %}
+																																				{{ errors.email | first }}<br>
+																																			{% endif %}
+																																			</span>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                <div class="col-md-6">
+                                                                  <div class="form-group form-md-line-input form-md-floating-label {{ errors.password1 ? 'has-error' : '' }} ">
+                                                                      <input type="password" class="form-control" id="password1" name="password1">
+                                                                      <label for="password1">Enter your password</label>
+                                                                      <span class="help-block {{ errors.password1 ? 'help-block-error' : '' }}">
+																																			{% if errors.password1 %}
+																																				{{ errors.password1 | first }}<br>
+																																			{% endif %}
+																																			</span>
+                                                                  </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                  <div class="form-group form-md-line-input form-md-floating-label {{ errors.password2 ? 'has-error' : '' }} ">
+                                                                      <input type="password" class="form-control" id="password2" name="password2">
+                                                                      <label for="password2">Enter your password again</label>
+                                                                      <span class="help-block {{ errors.password2 ? 'help-block-error' : '' }}">
+																																			{% if errors.password2 %}
+																																				{{ errors.password2 | first }}<br>
+																																			{% endif %}
+																																			</span>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                              <div class="form-group form-md-radios">
+                                                                <label class="font-yellow-mint" style="font-size:16px;">Type of user</label>
+                                                                <div class="md-radio-inline">
+                                                                    <div class="md-radio">
+																																				{% set chck = '' %}
+																																				{% if old.type == 2 or old.type == false %}
+																																				{% set chck = 'checked' %}
+																																				{% endif %}
+                                                                        <input type="radio" id="radio1" name="type" class="md-radiobtn" value="2" {{ chck }}>
+                                                                        <label for="radio1" class="font-blue-oleo">
+                                                                            <span></span>
+                                                                            <span class="check"></span>
+                                                                            <span class="box"></span> Common user </label>
+                                                                            <span class="tooltip-mt-radio font-yellow-mint"><i class="icon-question tooltips" data-container="body" data-placement="bottom" data-original-title="Common user description: lorem ipsum dolor sit amet consectetuer"></i></span>
+                                                                    </div>
+                                                                    <div class="md-radio">
+																																				{% set chck = '' %}
+																																				{% if old.type == 1 %}
+																																				{% set chck = 'checked' %}
+																																				{% endif %}
+                                                                        <input type="radio" id="radio2" name="type" class="md-radiobtn" value="1" {{ chck }}>
+                                                                        <label for="radio2" class="font-blue-oleo">
+                                                                            <span></span>
+                                                                            <span class="check"></span>
+                                                                            <span class="box"></span> Premium user </label>
+                                                                            <span class="tooltip-mt-radio font-yellow-mint"><i class="icon-question tooltips" data-container="body" data-placement="bottom" data-original-title="Premium user description: lorem ipsum dolor sit amet consectetuer"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-actions noborder">
+                                                                <button type="submit" class="btn yellow-mint">SIGN UP</button>
+                                                            </div>
+                                                          </div>
+																		
+																												{{ csrf.field | raw }}
+	
+                                                        </form>
+                                                    </div>
+                                              </div>
+                                              <!-- END PORTLET-->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}

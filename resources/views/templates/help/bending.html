@@ -1,0 +1,245 @@
+{% set helpname = page.helpname  %}
+{% set analname = page.analname  %}
+
+{% extends 'templates/layout.html' %}
+
+{% block content %} 
+
+<body class="page-container-bg-solid">
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+											
+											{% include 'templates/partials/top.html' %}
+
+											{% include 'templates/partials/nav.html' %}
+
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+            </div>
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+                            <!-- BEGIN PAGE HEAD-->
+                            <div class="page-head">
+                                <div class="container">
+                                    <!-- BEGIN PAGE TITLE -->
+                                    <div class="page-title">
+                                        <h1 class="font-yellow-crusta">MC DNA Help - Analysis Bending </h1>
+                                    </div>
+                                    <!-- END PAGE TITLE -->
+                                </div>
+                            </div>
+                            <!-- END PAGE HEAD-->
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container">
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <ul class="page-breadcrumb breadcrumb">
+                                        <li>
+                                            <a href="{{ baseURL }}" class="font-yellow-crusta">
+																						{% if auth.check %}
+																						User Workspace
+																						{% else %}
+																						Home
+																						{% endif %}
+																						</a>
+                                            <i class="fa fa-circle"></i>
+                                        </li>
+                                        <li>
+                                            <span>Help</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Analysis</span>
+																						<i class="fa fa-circle"></i>
+                                        </li>
+																				<li>
+                                            <span>Bending</span>
+                                        </li>
+                                    </ul>
+                                    <!-- END PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="portlet light bordered">
+                                                  <div class="portlet-title">
+                                                      <div class="caption font-yellow-crusta">
+                                                          <i class="fa fa-circle-o-notch font-yellow-crusta"></i>
+                                                          <span class="caption-subject bold uppercase"> Bending</span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="portlet-body ">
+	                                                   
+																										<h2>Bending</h2>
+
+																										<ul>
+																											<li><a href="#method">Method</a></li>
+																											<li><a href="#table">Table of values for bending of the whole DNA fiber</a></li>
+																											<li><a href="#plot1">Bending distribution of 5/10 bp segments</a></li>
+																											<li><a href="#plot2">Bending distribution of 5/10 bp segments and the whole fiber</a></li>
+																											<li><a href="#plot3">Bending of 5/10 bp segments in xz/yz direction along sequence</a></li>
+																											<li><a href="#plot4">Distribution of contributions of xz- and yz-bending to total bending of whole fiber</a></li>
+																											<li><a href="#plot5">Bending of whole fiber along trajectory</a></li>
+																										</ul>
+
+																										<h3 id="method">Method</h3>
+
+																										<p>The bending of the DNA fiber is calculated based on the values of the rotational base-pair step parameters tilt, roll and twist. The total bending angle of a segment of k base-pairs of DNA of N base-pairs starting at base-pair n is calculated according to</p>	
+					
+																										<p style="font-size:18px;">$$B_n^{tot}(k) = \sqrt{b_n^x(k)^2 + b_n^y(k)^2}$$	</p>
+
+																										<p>`b_n^x(k)` and `b_n^y(k)` are the bending contributions in xz- and yz- plane of a segment of k base-pairs. The directions of the x,y and z-axis here determined by the first base-pair. The definition of the directions of the axes x,y and z is given in “Methods”.  `b_n^x(k)` and `b_n^y(k)`  are calculated according to Equation (7) and (8) of Battistini et al., J Mol Bio (2010):</p>
+																									
+																										<p style="font-size:18px;">\[b_n^x(k) =  \sum_{i=n}^{k + n - 1} \rho_i cos \Phi_i + \sum_{i=n}^{k + n - 1} \tau_i sin \Phi_i \]</p>
+
+																										<p style="font-size:18px;">\[b_n^y(k) =  \sum_{i=n}^{k + n - 1} \rho_i sin \Phi_i + \sum_{i=n}^{k + n - 1} \tau_i cos \Phi_i \]</p>
+
+																										<p>k in the analysis is chosen to be half-turn (5bp), full turn (10bp) and the length of the whole fiber N. `\tau_i` `\rho_i` and `\Phi_i` are the values of tilt, roll and cumulative twist of base-pair step i. </p>
+
+																										<h3 id="table">Table of values for bending of the whole DNA fiber (available for Structure Flexibility Analysis)</h3>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/bending04.png" style="max-width:100%;"></p>
+
+																										<h4>Legend</h4>
+
+																										<p>Total xz bending (in deg): `b_1^x(N)`</p>
+
+																										<p>Total yz bending (in deg): `b_1^y(N)`</p>
+
+																										<p>Total bending (in deg): `B_1^{t ot}(N)`</p>
+
+																										<p>xz contribution to total bending (in %): <span style="font-size:18px;">$b_1^x(N) \over B_1^{t ot}(N)$</span> </p>
+
+																										<p>yz contribution to total bending (in %): <span style="font-size:18px;">$b_1^y(N) \over B_1^{t ot}(N)$</span> </p>
+
+																										<h3 id="plot1">Bending distribution of 5/10 bp segments (available for Structure Flexibility Analysis)</h3>
+
+																										<p>The plot contains the distribution of all possible 5/10bp segments of the DNA fiber of the relaxed structure. The probability distribution is normalized such as that the area of the probability distribution is one. The x-axis shows the bending in degree, the y axis marks the probability.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/bending07.png" style="max-width:100%;"></p>
+
+																										<h4>Explanation of the legend</h4>
+
+																										<p>5bp total: Distribution of all `B_n^{t ot}(5)`</p>
+
+																										<p>10bp total: Distribution of all `B_n^{t ot}(10)`</p>
+
+																										<p>5 bp –xz:  Distribution of all `b_n^x(5)`</p>
+
+																										<p>10 bp –xz:  Distribution of all `b_n^x(10)`</p>
+
+																										<p>5 bp –yz:  Distribution of all `b_n^y(5)`</p>
+
+																										<p>10 bp –yz:  Distribution of all `b_n^y(10)`</p>
+
+																										<h3 id="plot2">Bending distribution of 5/10 bp segments and the whole fiber (available for Trajectory Flexibility Analysis)</h3>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/bending08.png" style="max-width:100%;"></p>
+
+																										<p>The plot contains the probability distribution of all possible 5/10bp segments of the DNA fiber of all snapshots in the trajectory. The probability distribution is normalized such as that the area of the probability distribution is one. The x-axis shows the bending in degree, the y axis marks the probability. </p>
+
+																										<h4>Explanation of the legend</h4>
+
+																										<p>5bp total: Distribution of all `B_n^{t ot}(5)`</p>
+ 
+																										<p>10bp total: Distribution of all `B_n^{t ot}(10)`</p>
+
+																										<p>5 bp –xz:  Distribution of all `b_n^x(5)`</p>
+
+																										<p>10 bp –xz:  Distribution of all `b_n^x(10)`</p>
+
+																										<p>5 bp –yz:  Distribution of all `b_n^y(5)`</p>
+
+																										<p>10 bp –yz:  Distribution of all `b_n^y(10)`</p>
+
+																										<p>xz (whole fiber): Distribution of all `b_1^x(N)`</p>
+
+																										<p>yz (whole fiber): Distribution of all `b_1^y(N)`</p>
+
+																										<p>total (whole fiber): Distribution of all `B_1^{t ot}(N)`</p>
+
+																										<p>while N is the total length of the DNA fiber in base-pairs.</p>
+
+																										<h3 id="plot3">Bending of 5/10 bp segments in xz/yz direction along sequence</h3>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/bending09.png" style="max-width:100%;"></p>
+
+																										<p>Values of bending (in degree) of the fiber. The x-axis represents all possible values of k+n-1 (the last base pair of the evaluated segment; see formulas above), the y-axis shows the bending value in degree. “Structure Flexibility Analysis” shows the values from the relaxed structure. In the case of “Trajectory Flexibility Analysis” the value displayed is the average over all snapshots.</p>
+
+																										<h4>Legend</h4>
+
+																										<p>5 bp –xz: `b^x(5)`</p>
+ 
+																										<p>10 bp –xz: `b^x(10)`</p>
+
+																										<p>5 bp –yz: `b^y(5)`</p>
+ 
+																										<p>10 bp –yz: `b^y(10)`</p>
+
+																										<h3 id="plot4">Distribution of contributions of xz- and yz-bending to total bending of whole fiber (available for Trajectory Flexibility Analysis)</h3>
+
+																										<p>This plot shows the values of <span style="font-size:18px;">$b_1^x(N) \over B_1^{t ot}(N)$</span> and <span style="font-size:18px;">$b_1^y(N) \over B_1^{t ot}(N)$</span>  of each snapshot of the trajectory as a probability distribution. The probability distribution is normalized such as that the area of the probability distribution is one. The x-axis shows the contribution in % and the y-axis shows the probability.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/bending12.png" style="max-width:100%;"></p>
+
+																										<h4>Legend</h4>
+
+																										<p>xz-bending: Distribution of all <span style="font-size:18px;">$b_1^x(N) \over B_1^{t ot}(N)$</span></p>
+																							
+																										<p>yz-bending: Distribution of all <span style="font-size:18px;">$b_1^y(N) \over B_1^{t ot}(N)$</span></p>
+
+																										<h3 id="plot5">Bending of whole fiber along trajectory (available for Trajectory Flexibility Analysis)</h3>
+	
+																										<p>This plot shows contributions of xz- and yz-bending to the total bending of the fiber as well as the absolute values of xz-, yz- and total bending for each snapshot of the trajectory. The x-axis shows the number of snapshots. There are two different y-axes in this interactive plot. The left y-axis marks the values contribution of xz- and yz-bending to the total bending in %. This axis is only valid for the graphs with a ‘%’ sign in the legend. The right y-axis shows the bending in degree and is only valid for the graphs which say ‘(deg)’ in the legend. Both types of graphs can be shown in the same plot window.</p>
+
+																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/bending15.png" style="max-width:100%;"></p>
+
+																										<h4>Legend</h4>
+
+																										<p>xz-bending (%): <span style="font-size:18px;">$b_1^x(N) \over B_1^{t ot}(N)$</span></p>
+
+																										<p>yz-bending (%): <span style="font-size:18px;">$b_1^y(N) \over B_1^{t ot}(N)$</span></p>
+
+																										<p>xz bending (deg): `b_1^x(N)`</p>
+
+																										<p>yz bending (deg): `b_1^y(N)`</p>
+	
+																										<p>total bending (in deg): `B_1^{t ot}(N)`</p>
+
+                                                  </div>
+                                              </div>
+                                              <!-- END PORTLET-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+						<div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                
+									{% include 'templates/partials/footer.html' %}
+
+								</div>
+            </div>
+        </div>
+
+{% endblock %}
