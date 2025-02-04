@@ -42,7 +42,7 @@ $container['view'] = function ($c) {
 		'lastLogin' => $c->auth->lastLogin(),
 		'initials' => $c->auth->initials(),
 	]);*/
-	$view->getEnvironment()->addGlobal('flash', $c->flash);		
+	$view->getEnvironment()->addGlobal('flash', $c->flash);
 
 	return $view;
 };

@@ -11,7 +11,7 @@
   {% endif %}
 	<div class="btn-group btn-group-justified">
 		<a href="{{ baseURL }}output/summary/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if basename == 'summary' %}yellow-crusta not-active{% else %}default{% endif %} menu-output"
+			class="btn btn-lg {% if basename == 'summary' %} yellow-crusta not-active {% else %} default {% endif %} menu-output"
 			{% if basename == 'summary' %}disabled{% endif %}>
 			<span class="fa-stack fa-lg" style="margin-top:30px;">
 				<i class="fa fa-circle-thin fa-stack-2x"></i>
@@ -20,7 +20,7 @@
 		</a>
 		{% if 1 in flextypes %}
 			<a href="{{ baseURL }}output/flex/eq/{{ defaultFlexEQ }}/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if basename == 'flexeq' %}yellow-crusta not-active{% else %}default{% endif %} menu-output"
+			class="btn btn-lg {% if basename == 'flexeq' %} yellow-crusta not-active {% else %} default {% endif %} menu-output"
 			{% if basename == 'flexeq' %}disabled{% endif %}>
 			<span class="fa-stack fa-lg" style="margin-top:30px;">
 				<i class="fa fa-square-o fa-stack-2x"></i>
@@ -30,7 +30,7 @@
 		{% endif %}
 		{% if 2 in flextypes %}
 		<a href="{{ baseURL }}output/flex/traj/{{ defaultFlexTRAJ }}/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if basename == 'flextraj' %}yellow-crusta not-active{% else %}default{% endif %} menu-output"
+			class="btn btn-lg {% if basename == 'flextraj' %} yellow-crusta not-active {% else %} default {% endif %} menu-output"
 			{% if basename == 'flextraj' %}disabled{% endif %}>
 			<span class="fa-stack fa-lg" style="margin-top:30px;">
 				<i class="fa fa-circle-thin fa-stack-2x"></i>

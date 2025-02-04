@@ -7,28 +7,28 @@
 	<div class="btn-group btn-group-justified">
 		{% if 1 in flexsubtypes %}
 		<a href="{{ baseURL }}output/flex/{{ strType }}/curves/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if flexname == 'curves' %}yellow-saffron not-active{% else %}default{% endif %} menu-flex"
+			class="btn btn-lg {% if flexname == 'curves' %} yellow-saffron not-active {% else %} default {% endif %} menu-flex"
 			{% if flexname == 'curves' %}disabled{% endif %}>
 			<i class="fa fa-mail-forward"></i> Curves 
 		</a>
 		{% endif %}
 		{% if 2 in flexsubtypes %}
 		<a href="{{ baseURL }}output/flex/{{ strType }}/stiffness/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if flexname == 'stiffness' %}yellow-saffron not-active{% else %}default{% endif %} menu-flex"
+			class="btn btn-lg {% if flexname == 'stiffness' %} yellow-saffron not-active {% else %} default {% endif %} menu-flex"
 			{% if flexname == 'stiffness' %}disabled{% endif %}>
 			<i class="fa fa-stack-overflow"></i> Stiffness 
 		</a>
 		{% endif %}
 		{% if 3 in flexsubtypes %}
 		<a href="{{ baseURL }}output/flex/{{ strType }}/pcazip/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if flexname == 'pcazip' %}yellow-saffron not-active{% else %}default{% endif %} menu-flex"
+			class="btn btn-lg {% if flexname == 'pcazip' %} yellow-saffron not-active {% else %} default {% endif %} menu-flex"
 			{% if flexname == 'pcazip' %}disabled{% endif %}>
 			<i class="fa fa-signal"></i> PCAZip 
 		</a>
 		{% endif %}
 		{% if 4 in flexsubtypes %}
 		<a href="{{ baseURL }}output/flex/{{ strType }}/contacts/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if flexname == 'contacts' %}yellow-saffron not-active{% else %}default{% endif %} menu-flex"
+			class="btn btn-lg {% if flexname == 'contacts' %} yellow-saffron not-active {% else %} default {% endif %} menu-flex"
 			{% if flexname == 'contacts' %}disabled{% endif %}>
 			<i class="fa fa-compress"></i> Contacts 
 		</a>
@@ -56,14 +56,14 @@
 		{% endif %}
 		{% if 8 in flexsubtypes %}
 		<a href="{{ baseURL }}output/flex/{{ strType }}/end-to-end/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if flexname == 'end-to-end' %}yellow-saffron not-active{% else %}default{% endif %} menu-flex"
+			class="btn btn-lg {% if flexname == 'end-to-end' %} yellow-saffron not-active {% else %} default {% endif %} menu-flex"
 			{% if flexname == 'end-to-end' %}disabled{% endif %}>
 			<i class="fa fa-arrows-h"></i> End-to-end 
 		</a>
 		{% endif %}
 		{% if 9 in flexsubtypes %}
 		<a href="{{ baseURL }}output/flex/{{ strType }}/sasa/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if flexname == 'sasa' %}yellow-saffron not-active{% else %}default{% endif %} menu-flex"
+			class="btn btn-lg {% if flexname == 'sasa' %} yellow-saffron not-active {% else %} default {% endif %} menu-flex"
 			{% if flexname == 'sasa' %}disabled{% endif %}>
 			<i class="fa fa-steam"></i> SASA 
 		</a>
