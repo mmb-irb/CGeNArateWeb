@@ -80,7 +80,7 @@ $container['db'] = function ($c) {
 	
 	$db = $c->get('settings')['db'];
 	
-	$mng = new \MongoDB\Driver\Manager("mongodb://".$db['username'].":".$db['password']."@".$db['host']);
+	$mng = new \MongoDB\Driver\Manager("mongodb://".$db['username'].":".$db['password']."@".$db['host']."/".$db['database']);
 
 	// testing if mongo is working
 	/*try {
