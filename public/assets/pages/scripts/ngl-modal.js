@@ -12,7 +12,8 @@ function previewNGL(id) {
 		stage = new NGL.Stage( "viewport", { backgroundColor:"#c7ced1", tooltip:false } );
 		stage.removeAllComponents();
 
-		stage.loadFile( "rcsb://" + id, { defaultRepresentation: false } )
+		//stage.loadFile( "rcsb://" + id, { defaultRepresentation: false } )
+		stage.loadFile( `https://files.rcsb.org/download/${id}.pdb`, { defaultRepresentation: false } )
 		.then( function( o ){
 			o.setSelection('/0');
 			o.addRepresentation( "cartoon", { color: "sstruc", aspectRatio: 4, scale: 1	} );
