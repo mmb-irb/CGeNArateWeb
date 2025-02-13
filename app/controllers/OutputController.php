@@ -252,6 +252,7 @@ class OutputController extends Controller {
 
 		$status = $this->sge->status($projectData->pid);
 
+
 		$path = $this->global['filesPath']
 						.$projectData->folder
 						.$this->global['flex']['folder'];
@@ -288,8 +289,6 @@ class OutputController extends Controller {
 			'sample' => $sample,
 			'wfSteps' => $wfSteps
 		];  
-
-		
 
 		$this->view->render($response, 'outputsummary.html', $vars);
 

@@ -16,7 +16,9 @@ class ProcessSGE extends Model{
 
 			// to check all the running jobs:
 			//$command = $this->global['sge']['qstat'].'-u www-data | grep "^   *"'
-			$command = $this->global['sge']['qstat'].'-u www-data | grep "^'.$pidForm.'"';
+			//$command = $this->global['sge']['qstat'].'-u www-data | grep "^'.$pidForm.'"';
+
+			$command = sprintf($this->global['sge']['qstat'], $this->global['sge']['host'], $pidForm);
 
       exec($command,$op);
 
@@ -44,9 +46,11 @@ class ProcessSGE extends Model{
 
 		public function start($workdir, $path) {
 
-			$command = $this->global['sge']['qsub']."$path 2>&1";
+			//$command = $this->global['sge']['qsub']."$path 2>&1";
 
-			chdir($workdir);
+			$command = sprintf($this->global['sge']['qsub'], $this->global['sge']['host'], $path);
+
+			//chdir($workdir);
 			
 			exec($command, $op);
 
@@ -54,16 +58,21 @@ class ProcessSGE extends Model{
 			$output = preg_split('/ /', $op[0]);
 			$pid = $output[2];
 
+			//var_dump($command, $op, $output, $pid);
+
 			// logger!!!!
 			// logger("Job $output ($pid). $err");
 			
+			//return 0;
+
 			return (int)$pid;
 
     }
 
 		public function stop($pid) {
 
-			$command = $this->global['sge']['qdel'].' '.$pid;
+			//$command = $this->global['sge']['qdel'].' '.$pid;
+			$command = sprintf($this->global['sge']['qdel'], $this->global['sge']['host'], $pid);
 
       exec($command, $op);
 

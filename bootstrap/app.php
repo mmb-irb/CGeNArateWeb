@@ -22,6 +22,7 @@ $settings['globals']['absoluteURL'] = $settings['settings']['absoluteURL'];
 $settings['globals']['absoluteURLMail'] = $settings['settings']['absoluteURLMail'];
 $settings['globals']['baseURL'] = $settings['settings']['baseURL'];
 $settings['globals']['diskPath'] = $settings['settings']['diskPath'];
+$settings['globals']['wfDataPath'] = $settings['settings']['wfDataPath'];
 $settings['globals']['scriptsGlobals'] = $settings['settings']['scriptsGlobals'];
 $settings['globals']['scriptsPath'] = $settings['settings']['scriptsPath'];
 $settings['globals']['analysisPath'] = $settings['settings']['analysisPath'];

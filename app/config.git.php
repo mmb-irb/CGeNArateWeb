@@ -32,6 +32,7 @@ return [
 		'absoluteURLMail' => 'https://mmb.irbbarcelona.org/CGeNArate/',
 		'baseURL' => '/CGeNArate/',
 		'diskPath' => '/path/to/Web/',
+		'wfDataPath' => '/path/to/data/inside/wf/docker/',
 		'scriptsGlobals' => '/path/to/Scripts/',
 		'scriptsPath' => '/path/to/Scripts/MCDNA/',
 		'analysisPath' => '/path/to/Scripts/Analysis/',
@@ -46,9 +47,10 @@ return [
 		],
 		
 		'sge' => [
-			'qsub' => '/path/to/app/SGE/qsub ',
-			'qstat' => '/path/to/app/SGE/qstat ',
-		 	'qdel' => '/path/to/app/SGE/qdel ' 
+			'host' => 'XXXXXX',
+			'qsub' => 'ssh -o StrictHostKeyChecking=no application@%s "qsub %s"',
+			'qstat' => 'ssh -o StrictHostKeyChecking=no application@%s "qstat"',
+		 	'qdel' => 'ssh -o StrictHostKeyChecking=no application@%s "qdel %s"' 
 		],
 	]
 

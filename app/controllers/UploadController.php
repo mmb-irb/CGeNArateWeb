@@ -8,7 +8,8 @@ class UploadController extends Controller {
 
 	private function getPDBList() {
 
-		$aux = file($this->global['scriptsPath'].'list.MCDNA');
+		//$aux = file($this->global['scriptsPath'].'list.MCDNA');
+		$aux = file('/scripts/MCDNA/list.MCDNA');
 
 		$arrayPDB = array();
 
@@ -383,24 +384,24 @@ class UploadController extends Controller {
 	private function launchJob($folderID, $fileName, $fileName2, $uid, $operations, $tool, $resolution, $numStructures, $analysis, $deltaLN = "-1", $iterStruct = "25000000") {
 
 		$workdir = $this->global['diskPath'].$folderID;
+		$workdirWF = $this->global['wfDataPath'].$folderID;
 		$out = "$workdir/launch.sh";
-		$queuename = $this->global['sh']['queuename'];
 
 		$fout = fopen($out, "w");
 		fwrite($fout, "#!/bin/csh\n");
-		fwrite($fout, "#\$ -q $queuename\n");
+		/*fwrite($fout, "#\$ -q $queuename\n");
 		fwrite($fout, "#\$ -cwd\n");
 		fwrite($fout, "#\$ -N $folderID\n");
-		fwrite($fout, "#\$ -e $workdir/error.log\n");
-		fwrite($fout, "#\$ -o $workdir/output.log\n\n");
+		fwrite($fout, "#\$ -e $workdirWF/error.log\n");
+		fwrite($fout, "#\$ -o $workdirWF/output.log\n\n");*/
 		//fwrite($fout, "#\$ -M genis.bayarri@irbbarcelona.org\n");
 		//fwrite($fout, "#\$ -m bea\n");
-		fwrite($fout, "source ".$this->global['scriptsGlobals']."MCDNA_Scripts_globalVars.sh\n\n");
-		fwrite($fout, "cd $workdir\n\n");
+		//fwrite($fout, "source ".$this->global['scriptsGlobals']."MCDNA_Scripts_globalVars.sh\n\n");*/
+		fwrite($fout, "cd $workdirWF\n\n");
 
-		fwrite($fout, "hostname > hostname.out\n\n");
+		//fwrite($fout, "hostname > hostname.out\n\n");
 
-		fwrite($fout, "echo \"## MCDNA Montecarlo ##\"\n");
+		fwrite($fout, "echo \"## CGeNArate ##\"\n");
 
 		if(in_array("createStructure", $operations) && (sizeof($operations) == 1)) $op = 0;
 		elseif (in_array("createTrajectory", $operations) && (sizeof($operations) == 1)) $op = 1;
@@ -408,10 +409,10 @@ class UploadController extends Controller {
 
 		// RESOLUTION AND DELTA LINKING NUMBER!!!!
 
-		if($tool == 1) fprintf($fout, $this->global['sh']['plbase'], $this->global['scriptsPath'], $workdir, $fileName, $numStructures, $resolution, $op);
-		else if($tool == 2) fprintf($fout, $this->global['sh']['plcirc'], $this->global['scriptsPath'], $workdir, $fileName, $numStructures, $deltaLN, $iterStruct, $resolution, $op);
-		else if($tool == 3) fprintf($fout, $this->global['sh']['plprot'], $this->global['scriptsPath'], $workdir, $fileName, $numStructures, 'proteins.mcdna.in', $resolution, $op);
-		else if($tool == 4) fprintf($fout, $this->global['sh']['plchrdyn'], $this->global['scriptsPath'], $workdir, $fileName, $workdir, $fileName2, $numStructures, $op);
+		if($tool == 1) fprintf($fout, $this->global['sh']['plbase'], $this->global['scriptsPath'], $workdirWF, $fileName, $numStructures, $resolution, $op);
+		else if($tool == 2) fprintf($fout, $this->global['sh']['plcirc'], $this->global['scriptsPath'], $workdirWF, $fileName, $numStructures, $deltaLN, $iterStruct, $resolution, $op);
+		else if($tool == 3) fprintf($fout, $this->global['sh']['plprot'], $this->global['scriptsPath'], $workdirWF, $fileName, $numStructures, 'proteins.mcdna.in', $resolution, $op);
+		else if($tool == 4) fprintf($fout, $this->global['sh']['plchrdyn'], $this->global['scriptsPath'], $workdirWF, $fileName, $workdir, $fileName2, $numStructures, $op);
 
 		// MIRAR AMB ADAM!!!!
 		/*switch($tool) {
@@ -456,7 +457,7 @@ class UploadController extends Controller {
 		}*/
 
 		if($analysis == 1) {
-			fwrite($fout, "echo \"## MCDNA Analysis ##\"\n");
+			fwrite($fout, "echo \"## Analysis ##\"\n");
 			//fprintf($fout, $this->global['sh']['rtraj'], $this->global['scriptsPath']);
 			//fprintf($fout, $this->global['sh']['rstr'], $this->global['scriptsPath']);
 			fprintf($fout, $this->global['sh']['analysis'], $this->global['analysisPath'], $tool, $resolution, $op);
@@ -465,24 +466,63 @@ class UploadController extends Controller {
 		fwrite($fout, "echo \"## Execute end-of-work routines ##\"\n");
 		fprintf($fout, $this->global['sh']['end'], $this->global['absoluteURLMail'], $uid);
 
-		fclose($fout);	
+		fclose($fout);
 
-		if(!file_exists($out)) {
+		$outdck = "$workdir/launchDocker.sh";
+		$queuename = $this->global['sh']['queuename'];
 
-			$this->logger->error("WEB - CSH creation: file not created", [$out, $workdir]);
+		$foutdck = fopen($outdck, "w");
+		fwrite($foutdck, "#!/bin/csh\n");
+		fwrite($foutdck, "#\$ -q $queuename\n");
+		fwrite($foutdck, "#\$ -cwd\n");
+		fwrite($foutdck, "#\$ -N $folderID\n");
+		fwrite($foutdck, "#\$ -e $workdir/error.log\n");
+		fwrite($foutdck, "#\$ -o $workdir/output.log\n\n");
+		fwrite($foutdck, "hostname > hostname.out\n\n");
+		fwrite($foutdck, "docker run --rm -v workflow_data:/mnt -v workflow_scripts:/app/Scripts workflow_image sh $workdirWF/launch.sh\n");
+
+		fclose($foutdck);
+
+		if(!file_exists($out) || !file_exists($outdck)) {
+
+			$this->logger->error("WEB - CSH creation: file(s) not created", [$out, $outdck, $workdir]);
 
 			echo '{ "status":0, "uid":"'.$uid.'" }';
 
 		}else{
 
-			$pid = $this->sge->start($workdir, $out);
+			$pid = $this->sge->start($workdir, $outdck);
 
 			$this->projects->updatePID($uid, $pid);
+
+			//var_dump($pid, $uid);
 
 			echo '{ "status":1, "uid":"'.$uid.'" }';
 
 		}
 
 	}
+
+	/*public function checkSGE($request, $response, $args) {
+
+		$this->createFolder($this->global['diskPath'], 'test');
+
+		$out = $this->global['diskPath']."test/launch.sh";
+
+		$fout = fopen($out, "w");
+		fwrite($fout, "#!/bin/csh\n");
+		fwrite($fout, "#\$ -q local.q\n");
+		fwrite($fout, "#\$ -N test\n");
+		//fwrite($fout, "docker run --rm -v workflow_data:/mnt -e ARG_VALUE=test workflow_image");
+		fwrite($fout, "docker run --rm -v workflow_data:/mnt -v workflow_scripts:/app/Scripts workflow_image sh /app/Scripts/launch_lin.sh");
+		fclose($fout);
+
+
+		exec("ssh -o StrictHostKeyChecking=no application@my_stack_sge \"qsub /data/Web/test/launch.sh\"", $op);
+		var_dump($op);
+
+		//echo '{ "status":1 }';
+
+	}*/
 
 }

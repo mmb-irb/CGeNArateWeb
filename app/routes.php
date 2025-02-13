@@ -9,6 +9,9 @@ use App\Middleware\CheckDBMiddleware;
 
 $app->group('', function() use ($container) {
 
+	// TO REMOVE (TEST)
+	// $this->get('/sge', 'uploadController:checkSGE');
+
 	// HELP ROUTES
 	// 
 	$this->get('/help/method', 'staticPages:method');

@@ -87,7 +87,7 @@ return [
 
 		// queues
 		'sh' => [
-			'queuename' => 'MCDNA_dev.q',
+			'queuename' => 'local.q',
 
 			'plbase' => 'perl %srunMCDNA_all_new.pl %s/%s %s %s %s'."\n\n",
 			'plcirc' => 'perl %srunMCDNA_circular_all.pl %s/%s %s 5 %s %s %s %s'."\n\n",
@@ -104,7 +104,7 @@ return [
 
 		'input' => [
 			//'tools' => [1 => "MC DNA", 2 => "Circular MC DNA", 3 => "MC DNA + Proteins", 4 => "Chromatin Dynamics"],
-			'tools' => [1 => "CGeNArate", 2 => "Circular CGeNArate", 3 => "CGeNArate + Proteins"],
+			'tools' => [1 => "CGeNArate", 2 => "Circular CGeNArate"/*, 3 => "CGeNArate + Proteins"*/],
 			'resolution' => [0 => "Coarse Grain", 1 => "Atomistic"],
 			'types' => ["unimodel" => "UniModel", "multimodel" => "MultiModel"],
 			'operations' => ["createStructure" => "Create Structure", "createTrajectory" => "Create Trajectory"],
