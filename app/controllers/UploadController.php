@@ -493,6 +493,12 @@ class UploadController extends Controller {
 
 			$pid = $this->sge->start($workdir, $outdck);
 
+			if($pid == 0) {
+				$this->logger->error("WEB - SGE: job not submitted", [$outdck, $workdir]);
+				echo '{ "status":0, "msg":"ERROR: job not submitted." }';
+				return false;
+			}
+
 			$this->projects->updatePID($uid, $pid);
 
 			//var_dump($pid, $uid);
