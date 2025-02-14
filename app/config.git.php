@@ -12,7 +12,7 @@ return [
 		],
     'logger' => [
 			'name' => 'CGeNArateWeb',
-			'path' => __DIR__ . '/../logs/app.log',
+			'path' => '/path/to/logs/',
 			'level' => \Monolog\Logger::DEBUG,
 		],
 		'db' => [
