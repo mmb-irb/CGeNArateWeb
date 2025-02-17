@@ -25,7 +25,7 @@ class PostProcessController extends Controller {
  
     $this->mailer->send('mails/mail-end-job.html', ['analysis' => $analysis, 'absoluteURL' => $absoluteURL, 'projectID' => $projectID] , function($message) use ($user, $fromName){
       $message->to($user);
-      $message->subject('MCDNA has finished!');
+      $message->subject('CGeNArate has finished!');
       $message->fromName($fromName);
     });
 
@@ -52,7 +52,7 @@ class PostProcessController extends Controller {
 
     $this->mailer->send('mails/mail-warning-user.html', ['absoluteURL' => $absoluteURL, 'projectID' => $projectID] , function($message) use ($usr, $fromName){
       $message->to($usr);
-      $message->subject('Your MCDNA project is about to expire!');
+      $message->subject('Your CGeNArate project is about to expire!');
       $message->fromName($fromName);
     });
 

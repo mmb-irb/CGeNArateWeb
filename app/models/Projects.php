@@ -55,7 +55,7 @@ class Projects extends Model {
 
 		if($name == "") return false;
 
-		if(!preg_match("/^MCD/", $name)) return false;
+		if(!preg_match("/^CGN/", $name)) return false;
 
 		if(preg_match("/\.|\/|\\\|\-/", $name)) return false;
 
