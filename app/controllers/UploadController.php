@@ -348,7 +348,8 @@ class UploadController extends Controller {
 	private function createFolder($path, $folderID) {
 	
 		$d = mkdir($path.$folderID);
-		chown($path.$folderID, 'www-data:root');
+		chown($path.$folderID, 'www-data');
+		chgrp($path.$folderID, 'root');
 		return $d;
 
 	}
