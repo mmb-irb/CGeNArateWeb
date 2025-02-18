@@ -349,7 +349,7 @@ class UploadController extends Controller {
 	
 		$d = mkdir($path.$folderID);
 		chown($path.$folderID, 'www-data');
-		chgrp($path.$folderID, 'root');
+		chgrp($path.$folderID, 'www-data');
 		return $d;
 
 	}
