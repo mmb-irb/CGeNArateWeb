@@ -92,7 +92,7 @@ var FormValidation = function () {
 					},
 					rules: {
 							seqtxt: {
-								regx: /^[CAGT]{15,}$/,
+								regx: /^[CAGTcagt]{15,}$/,
 									required: true,
 							},
 							email: {
@@ -462,11 +462,11 @@ function loadProteinFields() {
 			if($("#seqtxt").val() != "") {
 
 				// checking if sequence is CAGT and longer or equal than 15
-				if($("#seqtxt").val().toUpperCase().match(/^[CAGT]{15,}$/g)) {
+				if($("#seqtxt").val().toUpperCase().match(/^[CAGTcagt]{15,}$/g)) {
 
 					var nam = $(this).attr("name");
 					var index = parseInt(nam.substring(nam.indexOf("[") + 1, nam.indexOf("]")));
-					var seq = $("#seqtxt").val();
+					var seq = $("#seqtxt").val().toUpperCase();
 					var prot = $("input[name='protein[" + index + "][code]']").val();
 					var len = parseInt($("input[name='protein[" + index + "][length]']").val());
 					var pos = parseInt($("input[name='protein[" + index + "][position]']").val());

@@ -272,6 +272,8 @@ class OutputController extends Controller {
 				'title' => 'Output Summary - '.$this->global['longProjectName'],
 				'description' => $this->global['longProjectName'] . ' output summary',
 				'basename' => 'summary',
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 			],
 			'id' => $args['id'],
 			'projectData' => $projectData,
@@ -1674,6 +1676,8 @@ class OutputController extends Controller {
 				'title' => 'Output Flexibility Analyses Contacts - '.$this->global['longProjectName'],
 				'description' => $this->global['longProjectName'] . ' output flexibility analyses contacts',
 				'basename' => 'flex'.$args['strtype'],
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 				'flexname' => 'contacts'
 			],
 			'id' => $args['id'],
@@ -1750,6 +1754,8 @@ class OutputController extends Controller {
 				'title' => 'Output Flexibility Analyses PCAZip - '.$this->global['longProjectName'],
 				'description' => $this->global['longProjectName'] . ' output flexibility analyses PCAZip',
 				'basename' => 'flex'.$args['strtype'],
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 				'flexname' => 'pcazip'
 			],
 			'id' => $args['id'],
@@ -1798,6 +1804,8 @@ class OutputController extends Controller {
 				'title' => 'Output Flexibility Analyses End-to-end - '.$this->global['longProjectName'],
 				'description' => $this->global['longProjectName'] . ' output flexibility analyses end-to-end',
 				'basename' => 'flex'.$args['strtype'],
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 				'flexname' => 'end-to-end'
 			],
 			'id' => $args['id'],
@@ -1834,6 +1842,8 @@ class OutputController extends Controller {
 				'title' => 'Output Flexibility Analyses Stiffness - '.$this->global['longProjectName'],
 				'description' => $this->global['longProjectName'] . ' output flexibility analyses stiffness',
 				'basename' => 'flex'.$args['strtype'],
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 				'flexname' => 'stiffness'
 			],
 			'id' => $args['id'],
@@ -1869,6 +1879,8 @@ class OutputController extends Controller {
 				'title' => 'Output Flexibility Analyses Curves - '.$this->global['longProjectName'],
 				'description' => $this->global['longProjectName'] . ' output flexibility analyses curves',
 				'basename' => 'flex'.$args['strtype'],
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 				'flexname' => 'curves'
 			],
 			'id' => $args['id'],
@@ -1914,6 +1926,8 @@ class OutputController extends Controller {
 				'title' => 'Output Flexibility Analyses Circular - '.$this->global['longProjectName'],
 				'description' => $this->global['longProjectName'] . ' output flexibility analyses circular',
 				'basename' => 'flex'.$args['strtype'],
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 				'flexname' => 'circular'
 			],
 			'id' => $args['id'],
@@ -1960,6 +1974,8 @@ class OutputController extends Controller {
 				'title' => 'Output Flexibility Analyses Bending - '.$this->global['longProjectName'],
 				'description' => $this->global['longProjectName'] . ' output flexibility analyses bending',
 				'basename' => 'flex'.$args['strtype'],
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 				'flexname' => 'bending'
 			],
 			'id' => $args['id'],
@@ -2010,6 +2026,8 @@ class OutputController extends Controller {
 				'title' => 'Output Flexibility Analyses Energy - '.$this->global['longProjectName'],
 				'description' => $this->global['longProjectName'] . ' output flexibility analyses energy',
 				'basename' => 'flex'.$args['strtype'],
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 				'flexname' => 'energy'
 			],
 			'id' => $args['id'],
@@ -2055,6 +2073,8 @@ class OutputController extends Controller {
 				'title' => 'Output Flexibility Analyses SASA - '.$this->global['longProjectName'],
 				'description' => $this->global['longProjectName'] . ' output flexibility analyses Sasa',
 				'basename' => 'flex'.$args['strtype'],
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 				'flexname' => 'sasa'
 			],
 			'id' => $args['id'],

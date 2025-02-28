@@ -36,7 +36,9 @@ class UploadController extends Controller {
 			'page' => [
 				'title' => 'Input Data - '.$this->global['longProjectName'],
 				'description' => 'Upload all the data to create a new project',
-				'basename' => 'input'
+				'basename' => 'input',
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 			],
 			'tools' => $this->global['input']['tools'],
 			'types' => $this->global['input']['types'],

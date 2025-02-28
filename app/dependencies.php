@@ -55,7 +55,9 @@ $container['notFoundHandler'] = function ($c) {
 				'page' => [
 				'title' => 'MC DNA - Page not found!',
 				'description' => 'The page you\'re requesting doesn\'t exist',
-				'basename' => 'error'
+				'basename' => 'error',
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 				],
 			]; 
 			$c->logger->error("WEB - Page not found", [$request->getUri()->getPath()]);	

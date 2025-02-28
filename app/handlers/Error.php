@@ -34,7 +34,9 @@ final class Error extends \Slim\Handlers\Error
             'page' => [
             'title' => $this->container->global['longProjectName'].' - Database not found!',
             'description' => 'Cannot connect to the database',
-            'basename' => 'errordb'
+            'basename' => 'errordb',
+            'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+			'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
             ],
         ]; 
 

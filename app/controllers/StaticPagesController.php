@@ -13,7 +13,9 @@ class StaticPagesController extends Controller {
 				'description' => $desc,
 				'basename' => $bn,
 				'helpname' => $hn,
-				'analname' => $an
+				'analname' => $an,
+				'cookies' => $_COOKIE['cookie_consent'] === null ? true : false,
+				'ga' => $_COOKIE['cookie_consent'] === 'accepted' ? true : false,
 			],
 		];  
 

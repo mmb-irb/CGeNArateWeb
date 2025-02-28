@@ -10,21 +10,24 @@ function downloadFile(projectID, type) {
 
 var CookieConsent = function () {
 
-    var _init = function () {
-        $('.mt-cookie-consent-bar').cookieBar({ 
-            closeButton : '.mt-cookie-consent-btn' 
-        });
-    };
+    var _acceptCookies = function () {
+        document.cookie = "cookie_consent=accepted; path=/; max-age=31536000";
+        location.reload(); // Reload to apply cookie consent
+    }
+
+    var _declineCookies = function () {
+        document.cookie = "cookie_consent=declined; path=/; max-age=31536000";
+        document.getElementById('cookie-banner').style.display = 'none';
+    }
 
     return {
-        init: function () {
-            _init();
+        acceptCookies: function () {
+            _acceptCookies();
+        },
+        declineCookies: function () {
+            _declineCookies();
         }
     };
 
 }();
-
-$(document).ready(function() {    
-		CookieConsent.init(); 
-});
 

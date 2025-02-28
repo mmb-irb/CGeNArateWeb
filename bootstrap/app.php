@@ -7,6 +7,16 @@
 
 session_start();
 
+// Unset all of the session variables.
+if (isset($_COOKIE['PHPSESSID'])) {
+  setcookie('PHPSESSID', '', time() - 3600, '/');
+}
+
+if (isset($_COOKIE['cookie_consent']) && $_COOKIE['cookie_consent'] === 'declined') {
+  setcookie('_ga', '', time() - 3600, '/');
+  setcookie('_gid', '', time() - 3600, '/');
+}
+
 // Require composer autoloader
 require __DIR__ . '/../vendor/autoload.php';
 
