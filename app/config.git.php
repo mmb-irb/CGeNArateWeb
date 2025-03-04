@@ -48,9 +48,9 @@ return [
 		
 		'sge' => [
 			'host' => 'XXXXXX',
-			'qsub' => 'ssh -o StrictHostKeyChecking=no www-data@%s "qsub %s"',
-			'qstat' => 'ssh -o StrictHostKeyChecking=no www-data@%s "qstat -u www-data | grep \"^%s\""',
-		 	'qdel' => 'ssh -o StrictHostKeyChecking=no www-data@%s "qdel %s"' 
+			'qsub' => 'ssh -p 222 -o StrictHostKeyChecking=no www-data@%s "qsub %s"',
+			'qstat' => 'ssh -p 222 -o StrictHostKeyChecking=no www-data@%s "qstat -u www-data | grep \"^%s\""',
+		 	'qdel' => 'ssh -p 222 -o StrictHostKeyChecking=no www-data@%s "qdel %s"' 
 		],
 	]
 
