@@ -476,6 +476,9 @@ class UploadController extends Controller {
 		$outdck = "$workdir/launchDocker.sh";
 		$queuename = $this->global['sh']['queuename'];
 
+		$cpus = $this->global['sge']['cpus'];
+		$mem = $this->global['sge']['mem'];
+
 		$foutdck = fopen($outdck, "w");
 		fwrite($foutdck, "#!/bin/csh\n");
 		fwrite($foutdck, "#\$ -q $queuename\n");
@@ -484,7 +487,7 @@ class UploadController extends Controller {
 		fwrite($foutdck, "#\$ -e $workdir/error.log\n");
 		fwrite($foutdck, "#\$ -o $workdir/output.log\n\n");
 		fwrite($foutdck, "hostname > hostname.out\n\n");
-		fwrite($foutdck, "docker run --rm -v workflow_data:/mnt -v workflow_scripts:/app/Scripts workflow_image sh $workdirWF/launch.sh\n");
+		fwrite($foutdck, "docker run --rm -v workflow_data:/mnt -v workflow_scripts:/app/Scripts --cpus \"$cpus\" --memory \"$mem\" workflow_image sh $workdirWF/launch.sh\n");
 
 		fclose($foutdck);
 
