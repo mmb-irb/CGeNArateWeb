@@ -35,21 +35,21 @@
 		{% endif %}
 		{% if 5 in flexsubtypes %}
 		<a href="{{ baseURL }}output/flex/{{ strType }}/bending/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if flexname == 'bending' %}yellow-saffron not-active{% else %}default{% endif %} menu-flex"
+			class="btn btn-lg {% if flexname == 'bending' %} yellow-saffron not-active {% else %} default {% endif %} menu-flex"
 			{% if flexname == 'bending' %}disabled{% endif %}>
 			<i class="fa fa-circle-o-notch"></i> Bending 
 		</a>
 		{% endif %}
 		{% if 6 in flexsubtypes %}
 		<a href="{{ baseURL }}output/flex/{{ strType }}/circular/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if flexname == 'circular' %}yellow-saffron not-active{% else %}default{% endif %} menu-flex"
+			class="btn btn-lg {% if flexname == 'circular' %} yellow-saffron not-active {% else %} default {% endif %} menu-flex"
 			{% if flexname == 'circular' %}disabled{% endif %}>
 			<i class="fa fa-circle-thin"></i> Circular 
 		</a>
 		{% endif %}
 		{% if 7 in flexsubtypes %}
 		<a href="{{ baseURL }}output/flex/{{ strType }}/energy/{{id}}{{sampPath}}" 
-			class="btn btn-lg {% if flexname == 'energy' %}yellow-saffron not-active{% else %}default{% endif %} menu-flex"
+			class="btn btn-lg {% if flexname == 'energy' %} yellow-saffron not-active {% else %} default {% endif %} menu-flex"
 			{% if flexname == 'energy' %}disabled{% endif %}>
 			<i class="fa fa-bolt"></i> Elastic Energy 
 		</a>
