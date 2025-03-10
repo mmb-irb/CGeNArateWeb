@@ -129,7 +129,7 @@
                                 <div class="form-group" id="fg-typeahead">
                                   <label class="control-label col-md-3">Write or paste DNA sequence
                                     <i class="icon-question tooltips" data-step="20" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Select DNA sequence as input. Length must be between 15 and 500 nucleotides.</p>"></i>
-                                    <span class="help-inline" style="padding-left:30%;{% if sampleType %}display:none;{% endif %}"> <button type="button" class="btn yellow-crusta btn-xs" id="add-sample-seq">Add sample sequence</button> </span>
+                                    <span class="help-inline" style="padding-left:30%; {% if sampleType %} display:none; {% endif %}"> <button type="button" class="btn yellow-crusta btn-xs" id="add-sample-seq">Add sample sequence</button> </span>
                                   </label>
                                   <div class="col-md-6" data-step="21">
                                   	<textarea class="form-control" name="seqtxt" id="seqtxt" rows="3" placeholder="GATTACATACATACA..." maxlength="500"></textarea>
@@ -165,7 +165,7 @@
                           <div class="form-group display-hide" id="fg-np">
                               <label class="control-label col-md-3">Write or paste nucleosomes positions
                                 <i class="icon-question tooltips" data-step="20" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Put in position where the nucleosomes are positioned in the linker sequence. Between each number has to be a space: for example '5 15' creates a structure where one nucleosome is put after the 5th bp of the linker sequence and another one after the 15th bp of the linker sequence generating a linker of 10bp between the two nucleosomes. Before the first and after the last nucleosome there have to be at least 5 base pairs. Between two nucleosomes there has to be at least 3 base pairs.</p>"></i>
-                                <span class="help-inline" style="padding-left:15%;{% if sampleType %}display:none;{% endif %}"> <button type="button" class="btn yellow-crusta btn-xs" id="add-sample-np">Add sample nucleosomes positions</button> </span>
+                                <span class="help-inline" style="padding-left:15%; {% if sampleType %} display:none; {% endif %}"> <button type="button" class="btn yellow-crusta btn-xs" id="add-sample-np">Add sample nucleosomes positions</button> </span>
                               </label>
                               <div class="col-md-6" data-step="">
                                 <textarea class="form-control" name="nuclpos" id="nuclpos" rows="3" placeholder="10 15 23..." maxlength="500" disabled></textarea>
@@ -311,7 +311,7 @@
 
 
 
-                              <div class="form-group">
+                              <!--<div class="form-group">
                                <label class="control-label col-md-3">Operations
                                 <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Select the operation you want to execute.</p>"></i>
                               </label>
@@ -327,17 +327,21 @@
                                  {% endfor %}
                                </select>
                                {% if sampleType %}
-                               <!--<span class="help-inline">Note: to completely reproduce the Sample Outputs, the </span>-->
+
                                {% endif %}
                              </div>
-                           </div>
+                           </div>-->
 
-                           <div class="form-group display-hide fg_numStruct" id="fg_numStruct2">
+                           <input type="hidden" name="operations[]" value="createStructure" >
+                           <input type="hidden" name="operations[]" value="createTrajectory" >
+
+                           <div class="form-group **display-hide fg_numStruct" id="fg_numStruct2">
                             <label class="control-label col-md-3">Number of structures
                               <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Number of structures for the trajectory.</p>"></i>
                             </label>
                             <div class="col-md-6" data-step="29">
-                              <input type="number" name="numStruct" class="form-control numStruct2" min="1" max="500" value="{{ numStr }}" disabled>
+                              <!--<input type="number" name="numStruct" class="form-control numStruct2" min="1" max="500" value="{{ numStr }}" disabled>-->
+                              <input type="number" name="numStruct" class="form-control numStruct2" min="1" max="500" value="{{ numStr }}">
                             </div>
                           </div>
                           <!--<div class="form-group">

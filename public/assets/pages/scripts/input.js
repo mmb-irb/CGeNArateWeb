@@ -286,12 +286,12 @@ var FormValidation = function () {
 
 			});
 
-			$("#operations2").rules("add", {
+			/*$("#operations2").rules("add", {
 				required:true,
 				messages: {
 					required: "Please select at least one operation to perform.",
 				}
-			});
+			});*/
 
 			$('.protein-id').each(function () {
         $(this).rules("add", {
