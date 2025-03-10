@@ -51,7 +51,7 @@ function loadScatterPlot(subsection, type, titles, names, maintit, shape) {
 				showline: true,
 				showgrid: false,
 				zeroline: false,
-				range:[1, figure.y1.length]
+				//range:[0, figure.y1.length]
 			},
 			yaxis: {
 				title: titles[1],
@@ -127,7 +127,7 @@ function loadScatterProteinsPlot(subsection, type, titles, maintit, shape) {
 				showline: true,
 				showgrid: false,
 				zeroline: false,
-				range:[1, maxlen] 
+				// range:[0, maxlen] 
 			},
 			yaxis: {
 				title: titles[1],
