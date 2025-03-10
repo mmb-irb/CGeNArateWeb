@@ -113,7 +113,7 @@ function load3D(objGlobal) {
 				}	
 
 				//var resPair = [ [ [objGlobal.rp1], [objGlobal.rp2] ] ];
-				var resPair = [[objGlobal.rp1 + ".C5", objGlobal.rp2 + ".C5"]];
+				var resPair = [[objGlobal.rp1 + ".C1'", objGlobal.rp2 + ".C1'"]];
 				o.addRepresentation( "distance", { atomPair: resPair, labelSize:10, labelUnit: 'angstrom', color: "white" } );
 
 				o.autoView();

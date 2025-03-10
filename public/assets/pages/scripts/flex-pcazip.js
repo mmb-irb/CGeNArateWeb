@@ -116,21 +116,21 @@ function load3D(id) {
 
 				o.removeAllRepresentations();
 
-				if(resolution == 1) {
+				if($('#resolution').val() == 0) {
 				
-					o.addRepresentation( "licorice", {
-						sele: "not(water or ion)", scale: 1, aspectRatio: 1.5
+					o.addRepresentation( "ball+stick", {
+						sele: "not(water or ion)", radius: .5
 					} );
 
 				} else {
 
-					o.addRepresentation( "ball+stick", {
-						sele: "not .P1", color: "element", radius: .5
+					o.addRepresentation( "licorice", {
+						sele: "not .P1", color: "element", scale: 1.5, aspectRatio: 1.5
 					} );
 
-					o.addRepresentation( "spacefill", {
+					/*o.addRepresentation( "spacefill", {
 						sele: ".P1", scale: 1, radius:1, color: "element"
-					} );
+					} );*/
 
 				}
 

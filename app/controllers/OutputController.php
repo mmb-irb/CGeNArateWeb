@@ -82,7 +82,7 @@ class OutputController extends Controller {
 
 	}
 
-	private function getFlexSubTypes($folder, $strtype) {
+	private function getFlexSubTypes($folder, $strtype, $tool) {
 
 		// 1: Curves
 		// 2: Stiffness
@@ -110,6 +110,7 @@ class OutputController extends Controller {
 			&& file_exists($p."/".$this->global['analysisPathName']."/NAFlex/".$sp.$this->global['pcazip']['folder']."/NAFlex_pcazipOut.evals")
 			&& file_exists($p."/".$this->global['analysisPathName']."/NAFlex/".$sp.$this->global['pcazip']['folder']."/NAFlex_pcazipOut.collectivity")
 			&& file_exists($p."/".$this->global['analysisPathName']."/NAFlex/".$sp.$this->global['pcazip']['folder']."/NAFlex_pcazipOut.stiffness")
+			&& $tool != 2
 		) $arraySubTypes[] = 3;
 		if(file_exists($p."/".$this->global['analysisPathName']."/NAFlex/".$sp.$this->global['contacts']['folder'.$strtype])) $arraySubTypes[] = 4;
 		if(file_exists($p."/".$this->global['analysisPathName']."/".$this->global['bending']['folder'])) $arraySubTypes[] = 5;
@@ -124,19 +125,19 @@ class OutputController extends Controller {
 
 	}
 
-	private function getFirstFlexType($flextypes, $folder) {
+	private function getFirstFlexType($flextypes, $folder, $tool) {
 
 		$firsttype = array();
 
 		// EQUILIBRATED
 		if (in_array(1, $flextypes)) {
-			$fst = $this->getFlexSubTypes($folder, 'eq');
+			$fst = $this->getFlexSubTypes($folder, 'eq', $tool);
 			$firsttype[0] = $fst[0];
 		}
 
 		// TRAJECTORY
 		if (in_array(2, $flextypes)) {
-			$fst = $this->getFlexSubTypes($folder, 'traj');
+			$fst = $this->getFlexSubTypes($folder, 'traj', $tool);
 			$firsttype[1] = $fst[0];
 		}
 
@@ -259,7 +260,7 @@ class OutputController extends Controller {
 
 		$flextypes = $this->getFlexTypes($projectData->folder);
 
-		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder);
+		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder, $projectData->tool);
 
 		if(isset($args['sample'])) $sample = true;
 
@@ -1655,9 +1656,9 @@ class OutputController extends Controller {
 
 		$flextypes = $this->getFlexTypes($projectData->folder);
 
-		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype']);
+		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype'], $projectData->tool);
 
-		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder);
+		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder, $projectData->tool);
 
 		$strtype = $args['strtype'];
 
@@ -1714,8 +1715,8 @@ class OutputController extends Controller {
 			$array[$i][] = ($i + 1);
 			//$array[$i][] = rtrim($evaluation[$i]);
 			$array[$i][] = substr($evaluation[$i], 0, -5);
-			$array[$i][] = substr($collectivity[$i], 0, -5);
-			$array[$i][] = substr($stiffness[$i], 0, -5);
+			/*$array[$i][] = substr($collectivity[$i], 0, -5);
+			$array[$i][] = substr($stiffness[$i], 0, -5);*/
 		}
 
 		return $array;
@@ -1743,9 +1744,9 @@ class OutputController extends Controller {
 
 		$flextypes = $this->getFlexTypes($projectData->folder);
 
-		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype']);
+		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype'], $projectData->tool);
 
-		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder);
+		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder, $projectData->tool);
 
 		if(isset($args['sample'])) $sample = true;
 
@@ -1793,9 +1794,9 @@ class OutputController extends Controller {
 
 		$flextypes = $this->getFlexTypes($projectData->folder);
 
-		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype']);
+		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype'], $projectData->tool);
 
-		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder);
+		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder, $projectData->tool);
 
 		if(isset($args['sample'])) $sample = true;
 
@@ -1831,9 +1832,9 @@ class OutputController extends Controller {
 
 		$flextypes = $this->getFlexTypes($projectData->folder);
 
-		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype']);
+		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype'], $projectData->tool);
 
-		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder);
+		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder, $projectData->tool);
 
 		if(isset($args['sample'])) $sample = true;
 
@@ -1868,9 +1869,9 @@ class OutputController extends Controller {
 
 		$flextypes = $this->getFlexTypes($projectData->folder);
 
-		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype']);
+		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype'], $projectData->tool);
 
-		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder);
+		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder, $projectData->tool);
 
 		if(isset($args['sample'])) $sample = true;
 
@@ -1905,9 +1906,9 @@ class OutputController extends Controller {
 
 		$flextypes = $this->getFlexTypes($projectData->folder);
 
-		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype']);
+		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype'], $projectData->tool);
 
-		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder);
+		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder, $projectData->tool);
 
 		if(isset($args['sample'])) $sample = true;
 
@@ -1953,9 +1954,9 @@ class OutputController extends Controller {
 
 		$flextypes = $this->getFlexTypes($projectData->folder);
 
-		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype']);
+		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype'], $projectData->tool);
 
-		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder);
+		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder, $projectData->tool);
 
 		if($args['strtype'] == 'eq') {
 			if($projectData->resolution == 0) $res = "CG";
@@ -2002,9 +2003,9 @@ class OutputController extends Controller {
 
 		$flextypes = $this->getFlexTypes($projectData->folder);
 
-		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype']);
+		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype'], $projectData->tool);
 
-		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder);
+		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder, $projectData->tool);
 
 		if($projectData->resolution == 0) $res = "CG";
 		else $res = "AA";
@@ -2057,9 +2058,9 @@ class OutputController extends Controller {
 
 		$flextypes = $this->getFlexTypes($projectData->folder);
 
-		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype']);
+		$flexsubtypes = $this->getFlexSubTypes($projectData->folder, $args['strtype'], $projectData->tool);
 
-		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder);
+		$firsttype = $this->getFirstFlexType($flextypes, $projectData->folder, $projectData->tool);
 
 		/*$pathProt = $this->global['filesPath']
 			.$projectData->folder.'/';

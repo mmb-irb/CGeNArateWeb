@@ -157,10 +157,10 @@ function IntroInputCircular() {
 					element: document.querySelectorAll('[data-step="24"]')[0],
 					intro: "Insert the Delta Linking Number in this numeric field.",
 				},
-				{
+				/*{
 					element: document.querySelectorAll('[data-step="25"]')[0],
 					intro: "Insert the number of iterations per structure in this numeric field. Note that the higher this value is, more calculating time will be taken.",
-				},
+				},*/
 				{
 					element: document.querySelectorAll('[data-step="28"]')[0],
 					intro: "Select the operations you want to execute. Note that <em>Create trajectory</em> implies more calculating time.",

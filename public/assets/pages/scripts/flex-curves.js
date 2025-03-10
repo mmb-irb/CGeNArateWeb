@@ -106,19 +106,19 @@ function loadScatterPlot(subsection, type, titles, names, maintit, flag) {
 
 	var data = [trace1];
 
-	if(figure.v2) {
+	/*if(figure.v2) {
 		var trace2 = {
 			x: figure.labels,
 			y: figure.v2,
 			name: names[1],
 			mode: 'lines+markers',
 			
-			/*error_y: {
-				type: 'data',
-				array: figure.e2,
-				visible: true,
-				color: "#525e64"
-			},*/
+			// error_y: {
+			// 	type: 'data',
+			// 	array: figure.e2,
+			// 	visible: true,
+			// 	color: "#525e64"
+			// },
 			type: 'scatter'
 		};
 
@@ -132,17 +132,17 @@ function loadScatterPlot(subsection, type, titles, names, maintit, flag) {
 			name: names[2],
 			mode: 'lines+markers',
 			
-			/*error_y: {
-				type: 'data',
-				array: figure.e2,
-				visible: true,
-				color: "#525e64"
-			},*/
+			// error_y: {
+			// 	type: 'data',
+			// 	array: figure.e2,
+			// 	visible: true,
+			// 	color: "#525e64"
+			// },
 			type: 'scatter'
 		};
 
 		data.push(trace3);
-	}
+	}*/
 
 	var layout = {
 		legend: {"orientation": "h", y:500},
@@ -198,25 +198,25 @@ $(document).ready(function() {
 	$('html,body').animate({ scrollTop: $("#menu-flex").offset().top}, 10);
 
 	//if(strType == 'eq') loadBarsPlot('backbone_torsions', 'BI_population', 'BI/BII Population', ['BI', 'BII'], 2);
-	loadScatterPlot('axis_bp', 'inclin_avg', ['Sequence Base Pair', 'Inclination (degrees)'], ['Inclination User-MCDNA Average', 'Inclination ABC Average'], 'Base Pair Helical Parameters: Inclination', 1);
-	//if(strType == 'eq') loadScatterPlot('helical_bp', 'shear_avg', ['Sequence Base Pair', 'Shear (Ångströms)'], ['Shear User-MCDNA Average', 'Shear ABC Average'], 'Base Pair Helical Parameters: Shear', 1);
-	loadScatterPlot('helical_bpstep', 'rise_avg', ['Sequence Base Pair Step', 'Rise (Ångströms)'], ['Rise User-MCDNA Average', 'Rise ABC Average', 'Rise X-Ray Average'], 'Base Pair Step Helical Parameters: Rise', 1);
-	loadScatterPlot('grooves', 'majd_avg', ['Sequence Base Pair', 'Major Groove Depth (Ångströms)'], ['Major Groove User-MCDNA Average'], 'Base Pair Helical Parameter: Major Groove', 1);
+	loadScatterPlot('axis_bp', 'inclin_avg', ['Sequence Base Pair', 'Inclination (degrees)'], ['Inclination User-CGeNArate Average', 'Inclination ABC Average'], 'Base Pair Helical Parameters: Inclination', 1);
+	//if(strType == 'eq') loadScatterPlot('helical_bp', 'shear_avg', ['Sequence Base Pair', 'Shear (Ångströms)'], ['Shear User-CGeNArate Average', 'Shear ABC Average'], 'Base Pair Helical Parameters: Shear', 1);
+	loadScatterPlot('helical_bpstep', 'rise_avg', ['Sequence Base Pair Step', 'Rise (Ångströms)'], ['Rise User-CGeNArate Average', 'Rise ABC Average', 'Rise X-Ray Average'], 'Base Pair Step Helical Parameters: Rise', 1);
+	loadScatterPlot('grooves', 'majd_avg', ['Sequence Base Pair', 'Major Groove Depth (Ångströms)'], ['Major Groove User-CGeNArate Average'], 'Base Pair Helical Parameter: Major Groove', 1);
 
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   	var target = $(e.target).attr("href").substr(1) // activated tab
 		switch(target) {
 			case 'axis_bp':
-				loadScatterPlot('axis_bp', 'inclin_avg', ['Sequence Base Pair', 'Inclination (degrees)'], ['Inclination User-MCDNA Average', 'Inclination ABC Average'], 'Base Pair Helical Parameters: Inclination', 1);
+				loadScatterPlot('axis_bp', 'inclin_avg', ['Sequence Base Pair', 'Inclination (degrees)'], ['Inclination User-CGeNArate Average', 'Inclination ABC Average'], 'Base Pair Helical Parameters: Inclination', 1);
 			break;
 			case 'helical_bp':
-				loadScatterPlot('helical_bp', 'shear_avg', ['Sequence Base Pair', 'Shear (Ångströms)'], ['Shear User-MCDNA Average', 'Shear ABC Average'], 'Base Pair Helical Parameters: Shear', 1);
+				loadScatterPlot('helical_bp', 'shear_avg', ['Sequence Base Pair', 'Shear (Ångströms)'], ['Shear User-CGeNArate Average', 'Shear ABC Average'], 'Base Pair Helical Parameters: Shear', 1);
 			break;
 			case 'helical_bpstep':
-				loadScatterPlot('helical_bpstep', 'rise_avg', ['Sequence Base Pair Step', 'Rise (Ångströms)'], ['Rise User-MCDNA Average', 'Rise ABC Average', 'Rise X-Ray Average'], 'Base Pair Step Helical Parameters: Rise', 1);
+				loadScatterPlot('helical_bpstep', 'rise_avg', ['Sequence Base Pair Step', 'Rise (Ångströms)'], ['Rise User-CGeNArate Average', 'Rise ABC Average', 'Rise X-Ray Average'], 'Base Pair Step Helical Parameters: Rise', 1);
 			break;
 			case 'grooves':
-				loadScatterPlot('grooves', 'majd_avg', ['Sequence Base Pair', 'Major Groove Depth (Ångströms)'], ['Major Groove User-MCDNA Average'], 'Base Pair Helical Parameter: Major Groove', 1);
+				loadScatterPlot('grooves', 'majd_avg', ['Sequence Base Pair', 'Major Groove Depth (Ångströms)'], ['Major Groove User-CGeNArate Average'], 'Base Pair Helical Parameter: Major Groove', 1);
 			break;
 		}
 	});

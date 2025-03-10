@@ -89,7 +89,7 @@ $(document).ready(function() {
 
 	$('html,body').animate({ scrollTop: $("#menu-flex").offset().top}, 10);
 
-	loadScatterPlot('helical', 'shift_avg', ['Sequence Base Pair', 'Shift (Kcal/mol*Ångströms²)'], ['Shift User-MCDNA Stiffness Average'], 'Base Pair Step Helical Parameters Stiffness Constants: Shift', 1);
+	loadScatterPlot('helical', 'shift_avg', ['Sequence Base Pair', 'Shift (Kcal/mol*Ångströms²)'], ['Shift User-CGeNArate Stiffness Average'], 'Base Pair Step Helical Parameters Stiffness Constants: Shift', 1);
 
 	//loadStiffness('shift');
 
