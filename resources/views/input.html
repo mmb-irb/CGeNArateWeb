@@ -237,7 +237,7 @@
                                       </div>
                                       <div class="col-md-2 display-hide">
                                         <label class="control-label">Initial position</label>
-                                        <input type="number" min="1" max="500" name="position" class="form-control protein-position" disabled/> 
+                                        <input type="number" min="3" max="500" name="position" class="form-control protein-position" disabled/> 
                                       </div>
                                       <div class="col-md-1 display-hide">
                                         <label class="control-label">&nbsp;</label>
@@ -290,7 +290,7 @@
                                     </div>
                                     <div class="col-md-2">
                                       <label class="control-label">Initial position</label>
-                                      <input type="number" min="1" max="500" name="protein[{{ c }}][position]" value="{{ sp.position }}" class="form-control protein-position-sample" readonly disabled/> 
+                                      <input type="number" min="3" max="500" name="protein[{{ c }}][position]" value="{{ sp.position }}" class="form-control protein-position-sample" readonly disabled/> 
                                     </div>
                                     <div class="col-md-1" data-step="27">
                                       <label class="control-label">&nbsp;</label>
@@ -336,8 +336,8 @@
                            <input type="hidden" name="operations[]" value="createTrajectory" >
 
                            <div class="form-group **display-hide fg_numStruct" id="fg_numStruct2">
-                            <label class="control-label col-md-3">Number of structures
-                              <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Number of structures for the trajectory.</p>"></i>
+                            <label class="control-label col-md-3">Number of frames
+                              <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Number of frames for the trajectory.</p>"></i>
                             </label>
                             <div class="col-md-6" data-step="29">
                               <!--<input type="number" name="numStruct" class="form-control numStruct2" min="1" max="500" value="{{ numStr }}" disabled>-->

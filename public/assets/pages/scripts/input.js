@@ -200,7 +200,7 @@ var FormValidation = function () {
 							}
 						}
 
-						var firstFreePos = 1;
+						var firstFreePos = 3;
 						var submitErr = false;
 						var seqLength = $('#seqtxt').val().length;
 
@@ -214,7 +214,7 @@ var FormValidation = function () {
 								submitErr = true;
 								//console.log("Error, position of protein not correct", v.code);
 								//$('#modalErrProts .modal-body').html('The position of the protein ' + v.code.toUpperCase() + ' is not correct. Remember that the proteins must be located sequentially, the second one must be after the first one and successively.');
-								$('#modalErrProts .modal-body #error-description').html('There\'s an overlapping between two or more proteins. Please take care of the sequence length and the proteins lengths and positions');
+								$('#modalErrProts .modal-body #error-description').html('There\'s an overlapping between two or more proteins. Please take care of the <strong>sequence length</strong> and the <strong>proteins lengths</strong> and <strong>positions</strong>. Remember that, <strong>between proteins</strong>, there must be <strong>at least two nucleotides</strong>.');
 								getProteinsPositions();
 								$('#loading-block').show();
 								$('#blockPlotDiv').show();
@@ -222,10 +222,11 @@ var FormValidation = function () {
 								return false;
 							}
 							// check if lenght is correct
-							if((v.position + v.length - 1) > seqLength) {
+							console.log(v.position, v.length, seqLength);
+							if((v.position + v.length + 2) > seqLength) {
 								submitErr = true;
 								//console.log("Error, protein is too long", v.code);
-								$('#modalErrProts .modal-body #error-description').html('The protein ' + v.code.toUpperCase() + ' is too long. Please choose a sorter one or add nucleotides to the sequence.');
+								$('#modalErrProts .modal-body #error-description').html('The protein <strong>' + v.code.toUpperCase() + ' is too long</strong>. Please choose a shorter one or <strong>add nucleotides</strong> to the sequence. Remember that <strong>the end of the protein</strong> must be <strong>at least two nucleotides</strong> before the end of the sequence.');
 								getProteinsPositions();
 								$('#loading-block').show();
 								$('#blockPlotDiv').show();
@@ -233,7 +234,7 @@ var FormValidation = function () {
 								return false;
 							}
 							// update firstFreePos
-							firstFreePos = v.position + v.length;
+							firstFreePos = v.position + v.length + 2;
 						});
 
 						if(!submitErr) { 
@@ -278,7 +279,7 @@ var FormValidation = function () {
 									console.log("Error", msg);
 								}
 							});
-						
+
 						}
 
 						//App.unblockUI();
@@ -440,7 +441,7 @@ function getProteinsPositions() {
 
 	});
 
-	console.log(proteinsPositions);
+	//console.log(proteinsPositions);
 
 }
 
@@ -470,7 +471,7 @@ function loadProteinFields() {
 					var prot = $("input[name='protein[" + index + "][code]']").val();
 					var len = parseInt($("input[name='protein[" + index + "][length]']").val());
 					var pos = parseInt($("input[name='protein[" + index + "][position]']").val());
-					if (pos == '') pos = 1;
+					if (pos == '') pos = 3;
 
 					// checking if protein is not outside the sequence
 					if(seq.length > (pos + len)) {
@@ -527,7 +528,7 @@ function loadProteinFields() {
 	
 				$(this).parent().parent().find('.col-md-2').find('.protein-code').val(v[0]);
 				$(this).parent().parent().find('.col-md-2').find('.protein-length').val(v[1]);
-				$(this).parent().parent().find('.col-md-2').find('.protein-position').val(1);
+				$(this).parent().parent().find('.col-md-2').find('.protein-position').val(3);
 
 				$(this).parent().parent().find('.col-md-2').find('.view-pdb').attr("href", "javascript:previewNGL('" + v[0]  + "');");
 

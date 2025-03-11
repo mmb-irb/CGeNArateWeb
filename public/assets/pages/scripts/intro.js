@@ -38,7 +38,7 @@ function IntroHome() {
 				},
 				{
 					element: document.querySelectorAll('[data-step="2"]')[0],
-					intro: "Fill the form choosing tool, resolution, operations ans so on."
+					intro: "Fill the form choosing tool, resolution ans so on."
 				},
 				{
 					element: document.querySelectorAll('[data-step="3"]')[0],
@@ -105,18 +105,18 @@ function IntroInputMCDNA() {
 					element: document.querySelectorAll('[data-step="23"]')[0],
 					intro: "Select the resolution in this selectable field.",
 				},
-				{
+				/*{
 					element: document.querySelectorAll('[data-step="28"]')[0],
 					intro: "Select the operations you want to execute. Note that <em>Create trajectory</em> implies more calculating time.",
-				},
+				},*/
 				{
 					element: document.querySelectorAll('[data-step="29"]')[0],
-					intro: "Insert the number of structures (in case you have selected <em>Create trajectory</em>) in this text field.",
+					intro: "Insert the number of frames in this text field.",
 				},
-				{
+				/*{
 					element: document.querySelectorAll('[data-step="30"]')[0],
 					intro: "In case you want to receive an email once the job is done, fill this field.",
-				},
+				},*/
 				{
 					element: document.querySelectorAll('[data-step="31"]')[0],
 					intro: "Select or unselect the anaylisis checkbox. Note that selecting the analysis implies more calculating time.",
@@ -161,18 +161,18 @@ function IntroInputCircular() {
 					element: document.querySelectorAll('[data-step="25"]')[0],
 					intro: "Insert the number of iterations per structure in this numeric field. Note that the higher this value is, more calculating time will be taken.",
 				},*/
-				{
+				/*{
 					element: document.querySelectorAll('[data-step="28"]')[0],
 					intro: "Select the operations you want to execute. Note that <em>Create trajectory</em> implies more calculating time.",
-				},
+				},*/
 				{
 					element: document.querySelectorAll('[data-step="29"]')[0],
-					intro: "Insert the number of structures (in case you have selected <em>Create trajectory</em>) in this text field.",
+					intro: "Insert the number of frames in this text field.",
 				},
-				{
+				/*{
 					element: document.querySelectorAll('[data-step="30"]')[0],
 					intro: "In case you want to receive an email once the job is done, fill this field.",
-				},
+				},*/
 				{
 					element: document.querySelectorAll('[data-step="31"]')[0],
 					intro: "Select or unselect the anaylisis checkbox. Note that selecting the analysis implies more calculating time.",
@@ -217,18 +217,18 @@ function IntroInputProteins() {
 					element: document.querySelectorAll('[data-step="27"]')[0],
 					intro: "In order to put an optimal protein position, please click this button and an affinity plot will be shown.",
 				},
-				{
+				/*{
 					element: document.querySelectorAll('[data-step="28"]')[0],
 					intro: "Select the operations you want to execute. Note that <em>Create trajectory</em> implies more calculating time.",
-				},
+				},*/
 				{
 					element: document.querySelectorAll('[data-step="29"]')[0],
-					intro: "Insert the number of structures (in case you have selected <em>Create trajectory</em>) in this text field.",
+					intro: "Insert the number of frames in this text field.",
 				},
-				{
+				/*{
 					element: document.querySelectorAll('[data-step="30"]')[0],
 					intro: "In case you want to receive an email once the job is done, fill this field.",
-				},
+				},*/
 				{
 					element: document.querySelectorAll('[data-step="31"]')[0],
 					intro: "Select or unselect the anaylisis checkbox. Note that selecting the analysis implies more calculating time.",

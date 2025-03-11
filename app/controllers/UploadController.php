@@ -84,7 +84,10 @@ class UploadController extends Controller {
 		//$inputs = $request->getParsedBody();
 		$inputs = $request->getQueryParams();
 
-		$command = sprintf($this->global['affinity']['script'], $this->global['scriptsGlobals'], $inputs["seq"], $inputs["prot"], $inputs["pos"], $this->global['affinity']['param1'], $this->global['affinity']['param2'], $this->global['affinity']['param3']);
+		//$command = sprintf($this->global['affinity']['script'], $this->global['scriptsGlobals'], $inputs["seq"], $inputs["prot"], $inputs["pos"], $this->global['affinity']['param1'], $this->global['affinity']['param2'], $this->global['affinity']['param3']);
+		$command = sprintf($this->global['affinity']['script'], $inputs["seq"], $inputs["prot"], $inputs["pos"], $this->global['affinity']['param1'], $this->global['affinity']['param2'], $this->global['affinity']['param3']);
+		//var_dump($command);
+
 		exec($command, $output);
 
 		array_shift($output);

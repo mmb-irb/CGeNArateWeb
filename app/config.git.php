@@ -40,10 +40,10 @@ return [
 		'ga4' => 'XXXX',
 
 		'affinity' => [
-			'script' => 'Rscript %sElasticEnergy/MCDNA_comp_protein_affinity_along_seq_WEB.R %s %s %s %s %s %s',
-			'param1' => '/path/to/parmbsc1_naflex_Data/NA_Analysis/scripts/CurvesPDBs/Complexes/Jurgen',
-			'param2' => '/path/to/Scripts/ElasticEnergy/stif_bsc1_meth_hydr_bsc1_dimer.dat',
-			'param3' => '/path/to/Scripts/ElasticEnergy/stif_bsc1_meth_hydr_bsc1_tet.dat',
+			'script' => 'Rscript /scripts/MCDNA/ElasticEnergy/MCDNA_comp_protein_affinity_along_seq_WEB.R %s %s %s %s %s %s',
+			'param1' => '/scripts/MCDNA/ElasticEnergy/Jurgen',
+			'param2' => '/scripts/MCDNA/ElasticEnergy/stif_bsc1_meth_hydr_bsc1_dimer.dat',
+			'param3' => '/scripts/MCDNA/ElasticEnergy/stif_bsc1_meth_hydr_bsc1_tet.dat',
 		],
 		
 		'sge' => [
