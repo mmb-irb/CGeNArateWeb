@@ -21,7 +21,7 @@ $app->group('', function() use ($container) {
 	$this->get('/help/analysis/stiffness', 'staticPages:stiffness');
 	$this->get('/help/analysis/pcazip', 'staticPages:pcazip');
 	$this->get('/help/analysis/contacts', 'staticPages:contacts');
-	$this->get('/help/analysis/bending', 'staticPages:bending');
+	//$this->get('/help/analysis/bending', 'staticPages:bending');
 	$this->get('/help/analysis/circular', 'staticPages:circular');
 	$this->get('/help/analysis/energy', 'staticPages:energy');
 	$this->get('/help/analysis/end-to-end', 'staticPages:endtoend');
