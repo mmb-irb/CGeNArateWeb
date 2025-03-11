@@ -17,7 +17,7 @@ $app->group('', function() use ($container) {
 	$this->get('/help/method', 'staticPages:method');
 	$this->get('/help/inputs', 'staticPages:inputs');
 	$this->get('/help/outputs', 'staticPages:outputs');
-	/*$this->get('/help/analysis/curves', 'staticPages:curves');
+	$this->get('/help/analysis/curves', 'staticPages:curves');
 	$this->get('/help/analysis/stiffness', 'staticPages:stiffness');
 	$this->get('/help/analysis/pcazip', 'staticPages:pcazip');
 	$this->get('/help/analysis/contacts', 'staticPages:contacts');
@@ -25,7 +25,7 @@ $app->group('', function() use ($container) {
 	$this->get('/help/analysis/circular', 'staticPages:circular');
 	$this->get('/help/analysis/energy', 'staticPages:energy');
 	$this->get('/help/analysis/end-to-end', 'staticPages:endtoend');
-	$this->get('/help/analysis/sasa', 'staticPages:sasa');*/
+	$this->get('/help/analysis/sasa', 'staticPages:sasa');
 
 	// INPUT  / UPLOAD
 	//
