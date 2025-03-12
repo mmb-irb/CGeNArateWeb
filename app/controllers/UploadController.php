@@ -411,9 +411,11 @@ class UploadController extends Controller {
 
 		fwrite($fout, "echo \"## CGeNArate ##\"\n");
 
-		if(in_array("createStructure", $operations) && (sizeof($operations) == 1)) $op = 0;
+		/*if(in_array("createStructure", $operations) && (sizeof($operations) == 1)) $op = 0;
 		elseif (in_array("createTrajectory", $operations) && (sizeof($operations) == 1)) $op = 1;
-		elseif (sizeof($operations) == 2) $op = 2;
+		elseif (sizeof($operations) == 2) $op = 2;*/
+
+		$op = 1;
 
 		// RESOLUTION AND DELTA LINKING NUMBER!!!!
 

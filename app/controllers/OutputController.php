@@ -31,10 +31,16 @@ class OutputController extends Controller {
 		$output = '{';
 		$output .= '"path":"'.$this->global['baseURL'].$this->global['filesPathName'].'/'.$project->folder.'/",';
 		if(in_array("createStructure", $project->operations)) {
-			$output .= '"strPath":"EQ_'.$resolution.'/",';
+			/*$output .= '"strPath":"EQ_'.$resolution.'/",';
 			if(file_exists($dpath.'/EQ_'.$resolution.'/'.$this->global['summary']['strPDB'])) $output .= '"strPDB":"'.$this->global['summary']['strPDB'].'",';
 			else {
 				$this->logger->error("WEB - File not found", [$dpath.'/EQ_'.$resolution.'/'.$this->global['summary']['strPDB']]);
+				$output .= '"strPDB":"error",';
+			}*/
+			$output .= '"strPath":"TRAJ_'.$resolution.'/",';
+			if(file_exists($dpath.'/TRAJ_'.$resolution.'/'.$this->global['summary']['trajPDB'])) $output .= '"strPDB":"'.$this->global['summary']['trajPDB'].'",';
+			else  {
+				$this->logger->error("WEB - File not found", [$dpath.'/TRAJ_'.$resolution.'/'.$this->global['summary']['trajPDB']]);
 				$output .= '"strPDB":"error",';
 			}
 		}

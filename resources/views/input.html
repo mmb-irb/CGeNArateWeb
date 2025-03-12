@@ -86,7 +86,7 @@
                           
                             <div class="tab-pane active" id="stext">
                               <!-- BEGIN FORM-->
-                              <p>All the form fields are mandatory except the <em>e-mail address</em> and <em>perform analysis</em>. If you provide your e-mail address, you will be notified once the job is finished.
+                              <p>All the form fields are mandatory except the <em>perform analysis</em>. 
                               Disabling the analysis perform, the tool will calculate just the structure and / or the trajectory.</p>
 
                               {% if sampleType is empty %}
@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="form-group" id="fg-typeahead">
                                   <label class="control-label col-md-3">Write or paste DNA sequence
-                                    <i class="icon-question tooltips" data-step="20" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Select DNA sequence as input. Length must be between 15 and 500 nucleotides.</p>"></i>
+                                    <i class="icon-question tooltips" data-step="20" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Select DNA sequence as input. Length must be between 15 and 500 nucleotides for CGeNArate and CGeNArate + Proteins, while the minimum lenght for Circular CGeNArate is 90.</p>"></i>
                                     <span class="help-inline" style="padding-left:30%; {% if sampleType %} display:none; {% endif %}"> <button type="button" class="btn yellow-crusta btn-xs" id="add-sample-seq">Add sample sequence</button> </span>
                                   </label>
                                   <div class="col-md-6" data-step="21">
@@ -435,7 +435,7 @@
                    </div>
                  </div>
 
-                 <div class="modal fade bs-modal-lg" id="modalAffinity" tabindex="-1" role="basic" aria-hidden="true">
+                 <div class="modal fade bs-modal-lg" id="modalAffinity" tabindex="-1" role="basic" >
                    <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                      <div class="modal-header">

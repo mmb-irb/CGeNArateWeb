@@ -2,7 +2,7 @@ var baseURL = $('#base-url').val();
 var sampleType = $('#sample-type').val();
 var validate_input_text;
 
-
+var seqtxtregex = /^[CAGTcagt]{15,}$/;
 var FormValidation = function () {
 
     $('.operations').change(function() {
@@ -92,7 +92,7 @@ var FormValidation = function () {
 					},
 					rules: {
 							seqtxt: {
-								regx: /^[CAGTcagt]{15,}$/,
+								regx: seqtxtregex,
 									required: true,
 							},
 							email: {
@@ -222,7 +222,7 @@ var FormValidation = function () {
 								return false;
 							}
 							// check if lenght is correct
-							console.log(v.position, v.length, seqLength);
+							//console.log(v.position, v.length, seqLength);
 							if((v.position + v.length + 2) > seqLength) {
 								submitErr = true;
 								//console.log("Error, protein is too long", v.code);
@@ -239,7 +239,7 @@ var FormValidation = function () {
 
 						if(!submitErr) { 
 
-							//console.log("??");
+							//console.log("send form");
 
 							// init uploading
 							App.blockUI({
@@ -869,7 +869,7 @@ window.addEventListener('resize', function(){
 		blockPlotDiv.layout.width = $("#blockPlotDiv").width();
 		Plotly.redraw(blockPlotDiv);
 	}
-	if($("#affinityPlotDiv").length) {
+	if($("#affinityPlotDiv").length > 0 && $('#affinityPlotDiv').is(':visible')) {
 		affinityPlotDiv.layout.width = $("#affinityPlotDiv").width();
 		Plotly.redraw(affinityPlotDiv);
 	}
@@ -910,6 +910,17 @@ jQuery(document).ready(function() {
 				
 			} else if($(this).val() == 3) {
 
+				// Remove the old regx rule
+				$("#seqtxt").rules("remove", "regx");
+
+				// Add a new regx rule (for example, a different regex)
+				$("#seqtxt").rules("add", {
+						regx: /^[CAGTcagt]{15,}$/, // new regex pattern
+						messages: {
+								regx: "Invalid DNA sequence or length is less than 15 characters."
+						}
+				});
+
 				$('#proteins-list').show();
 				$(".mt-repeater").show();
 				$('.protein-id').each(function() { 
@@ -929,6 +940,17 @@ jQuery(document).ready(function() {
 
 			} else if($(this).val() == 2) {
 
+				// Remove the old regx rule
+				$("#seqtxt").rules("remove", "regx");
+
+				// Add a new regx rule (for example, a different regex)
+				$("#seqtxt").rules("add", {
+						regx: /^[CAGTcagt]{90,}$/, // new regex pattern
+						messages: {
+								regx: "Invalid DNA sequence or length is less than 90 characters."
+						}
+				});
+
 				$('#proteins-list').hide();
 				disableProts();
 
@@ -944,6 +966,17 @@ jQuery(document).ready(function() {
 				$('.iterStruct2').prop('disabled', false);
 
 			} else {
+
+				// Remove the old regx rule
+				$("#seqtxt").rules("remove", "regx");
+
+				// Add a new regx rule (for example, a different regex)
+				$("#seqtxt").rules("add", {
+						regx: /^[CAGTcagt]{15,}$/, // new regex pattern
+						messages: {
+								regx: "Invalid DNA sequence or length is less than 15 characters."
+						}
+				});
 
 				$('#proteins-list').hide();
 				disableProts();
@@ -993,8 +1026,6 @@ jQuery(document).ready(function() {
 
 		$('#modalAffinity').on('shown.bs.modal', function (e) {
 
-			
-
 			$.ajax({
 					type: "GET",
 					url: baseURL + "affinity",
@@ -1009,7 +1040,6 @@ jQuery(document).ready(function() {
 
 					}
 			});
-
 					
 		});
 
