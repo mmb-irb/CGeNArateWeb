@@ -120,7 +120,7 @@ return [
 			],
 			'samplenucleosomes' => ["10 15 23 53 82"],
 			'sampleprot' => [
-				[ "code" => "1vfc", "length" => 12, "position" => 2 ],
+				[ "code" => "1vfc", "length" => 12, "position" => 3 ],
 				[ "code" => "1wtr", "length" => 7, "position" => 30 ],
 				[ "code" => "3zhm", "length" => 8, "position" => 60 ],
 				[ "code" => "1bnz", "length" => 7, "position" => 80 ]

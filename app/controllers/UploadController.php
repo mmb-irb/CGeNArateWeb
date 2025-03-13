@@ -86,8 +86,6 @@ class UploadController extends Controller {
 
 		//$command = sprintf($this->global['affinity']['script'], $this->global['scriptsGlobals'], $inputs["seq"], $inputs["prot"], $inputs["pos"], $this->global['affinity']['param1'], $this->global['affinity']['param2'], $this->global['affinity']['param3']);
 		$command = sprintf($this->global['affinity']['script'], $inputs["seq"], $inputs["prot"], $inputs["pos"], $this->global['affinity']['param1'], $this->global['affinity']['param2'], $this->global['affinity']['param3']);
-		//var_dump($command);
-
 		exec($command, $output);
 
 		array_shift($output);
@@ -102,6 +100,14 @@ class UploadController extends Controller {
 			$arrayXDataPlot[] = $a[1];
 			$arrayYDataPlot[] = $a[2];
 		}
+
+		$lastx = end($arrayXDataPlot);
+		$additionalx = range($lastx + 1, strlen($inputs["seq"]));
+		$arrayXDataPlot = array_merge($arrayXDataPlot, $additionalx);
+
+		$county = count($arrayYDataPlot);
+		$additionaly = array_fill($county + 1, strlen($inputs["seq"]) - $county + 1, 'null');
+		$arrayYDataPlot = array_merge($arrayYDataPlot, $additionaly);
 
 		$px = $this->generateJSONVar($arrayXDataPlot, 'number');
 		$py = $this->generateJSONVar($arrayYDataPlot, 'number');

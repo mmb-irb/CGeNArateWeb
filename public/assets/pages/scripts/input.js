@@ -613,8 +613,11 @@ function disableFakeProts() {
 
 function drawPlot(figure) {
 
-	var min = Math.min(...figure.py);
-	var max = Math.max(...figure.py);
+	var numericValues = figure.py.filter(function(val) {
+			return val !== null;
+	});
+	var min = Math.min(...numericValues);
+	var max = Math.max(...numericValues);
 	var len = figure.py.length;
 
 	var arrSeq = $("#seqtxt").val().split("");
