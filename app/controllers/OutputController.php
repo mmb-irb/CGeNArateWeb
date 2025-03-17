@@ -1721,8 +1721,8 @@ class OutputController extends Controller {
 			$array[$i][] = ($i + 1);
 			//$array[$i][] = rtrim($evaluation[$i]);
 			$array[$i][] = substr($evaluation[$i], 0, -5);
-			/*$array[$i][] = substr($collectivity[$i], 0, -5);
-			$array[$i][] = substr($stiffness[$i], 0, -5);*/
+			$array[$i][] = substr($collectivity[$i], 0, -5);
+			$array[$i][] = substr($stiffness[$i], 0, -5);
 		}
 
 		return $array;

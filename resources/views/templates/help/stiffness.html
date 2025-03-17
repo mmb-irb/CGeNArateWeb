@@ -80,62 +80,62 @@
                                                   </div>
                                                   <div class="portlet-body ">
 	                                                   
-																										<h2>Stiffness</h2>
+                                                    <h2>Stiffness</h2>
 
-																										<h3>Method</h3>
+                                                    <h3>Method</h3>
 
-																										<p><strong>Elastic force constants</strong> associated with <strong>helical deformation</strong> at the base <strong>pair step level</strong> were determined by inversion of the covariance matrix in helical space, which yields <strong>stiffness</strong> matrices whose diagonal elements provide the stiffness constants associated with pure <strong>rotational</strong> (<strong><em>twist, roll and tilt</em></strong>) and <strong>translational</strong> (<strong><em>rise, shift and slide</em></strong>) deformations within the given step.</p>
+                                                    <p><strong>Elastic force constants</strong> associated with <strong>helical deformation</strong> at the base <strong>pair step level</strong> were determined by inversion of the covariance matrix in helical space, which yields <strong>stiffness</strong> matrices whose diagonal elements provide the stiffness constants associated with pure <strong>rotational</strong> (<strong><em>twist, roll and tilt</em></strong>) and <strong>translational</strong> (<strong><em>rise, shift and slide</em></strong>) deformations within the given step.</p>
 
-																										<p>$$ \Xi_h = k_BTC_h^{-1} = \left[\begin{matrix} 
-																										k_{twist} & k_{t - r} & k_{t - l} & k_{t - i} & k_{t - s} & k_{t - d} \\ 
-																										k_{t - r} & k_{roll} & k_{r - l} & k_{r - i} & k_{r - s} & k_{r - d} \\
-																										k_{t - l} & k_{r - l} & k_{tilt} & k_{l - i} & k_{l - s} & k_{l - d} \\
-																										k_{t - i} & k_{r - i} & k_{l - i} & k_{rise} & k_{i - s} & k_{i - d} \\
-																										k_{t - s} & k_{r - s} & k_{l - s} & k_{i - s} & k_{shift} & k_{s - d} \\
-																										k_{t - d} & k_{r - d} & k_{l - d} & k_{i - d} & k_{s - d} & k_{slide} \\
-																										\end{matrix}\right] $$</p>
+                                                    <p>$$ \Xi_h = k_BTC_h^{-1} = \left[\begin{matrix} 
+                                                    k_{twist} & k_{t - r} & k_{t - l} & k_{t - i} & k_{t - s} & k_{t - d} \\ 
+                                                    k_{t - r} & k_{roll} & k_{r - l} & k_{r - i} & k_{r - s} & k_{r - d} \\
+                                                    k_{t - l} & k_{r - l} & k_{tilt} & k_{l - i} & k_{l - s} & k_{l - d} \\
+                                                    k_{t - i} & k_{r - i} & k_{l - i} & k_{rise} & k_{i - s} & k_{i - d} \\
+                                                    k_{t - s} & k_{r - s} & k_{l - s} & k_{i - s} & k_{shift} & k_{s - d} \\
+                                                    k_{t - d} & k_{r - d} & k_{l - d} & k_{i - d} & k_{s - d} & k_{slide} \\
+                                                    \end{matrix}\right] $$</p>
 
-																										<h3>Results</h3>
+                                                    <h3>Results</h3>
 
-																										<p> <p><strong>Stiffness</strong> analyses are shown in a set of line plots. The <strong>parameter value</strong> (or average value + standard deviation in case of structure ensemble) is represented with a yellow point-line (y-axis) for each of the base pair steps along the input sequence (x-axis).</p>
+                                                    <p> <p><strong>Stiffness</strong> analyses are shown in a set of line plots. The <strong>parameter value</strong> (average value + standard deviation in the trajectory) is represented with a yellow point-line (y-axis) for each of the base pair steps along the input sequence (x-axis).</p>
 
-																										<h4>Shift</h4>
+                                                    <h4>Shift</h4>
 
-																										<p><strong>Shift stiffness value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Shift stiffness</strong> value in <strong>Kcal/mol * Angstroms<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
+                                                    <p><strong>Shift stiffness average value, together with its associated standard deviation</strong> (for trajectories) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Shift stiffness</strong> value in <strong>Kcal/mol * Angstroms<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
 
-																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-shift2.png" style="max-width:100%;"></p>
+                                                    <p><img src="{{ baseURL }}assets/pages/media/pages/img/res-shift2.png" style="max-width:100%;"></p>
 
-																										<h4>Slide</h4>
+                                                    <h4>Slide</h4>
 
-																										<p><strong>Slide stiffness value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Slide stiffness</strong> value in <strong>Kcal/mol * Angstroms<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
+                                                    <p><strong>Slide stiffness average value, together with its associated standard deviation</strong> (for trajectories) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Slide stiffness</strong> value in <strong>Kcal/mol * Angstroms<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
 
-																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-slide2.png" style="max-width:100%;"></p>
+                                                    <p><img src="{{ baseURL }}assets/pages/media/pages/img/res-slide2.png" style="max-width:100%;"></p>
 
-																										<h4>Rise</h4>
+                                                    <h4>Rise</h4>
 
-																										<p><strong>Rise stiffness value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Rise stiffness</strong> value in <strong>Kcal/mol * Angstroms<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
+                                                    <p><strong>Rise stiffness average value, together with its associated standard deviation</strong> (for trajectories) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Rise stiffness</strong> value in <strong>Kcal/mol * Angstroms<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
 
-																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-rise2.png" style="max-width:100%;"></p>
+                                                    <p><img src="{{ baseURL }}assets/pages/media/pages/img/res-rise2.png" style="max-width:100%;"></p>
 
-																										<h4>Tilt</h4>
+                                                    <h4>Tilt</h4>
 
-																										<p><strong>Tilt stiffness value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Tilt stiffness</strong> value in <strong>Kcal/mol * degrees<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
+                                                    <p><strong>Tilt stiffness average value, together with its associated standard deviation</strong> (for trajectories) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Tilt stiffness</strong> value in <strong>Kcal/mol * degrees<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
 
-																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-tilt2.png" style="max-width:100%;"></p>
+                                                    <p><img src="{{ baseURL }}assets/pages/media/pages/img/res-tilt2.png" style="max-width:100%;"></p>
 
-																										<h4>Roll</h4>
+                                                    <h4>Roll</h4>
 
-																										<p><strong>Roll stiffness value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Roll stiffness</strong> value in <strong>Kcal/mol * degrees<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
+                                                    <p><strong>Roll stiffness average value, together with its associated standard deviation</strong> (for trajectories) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Roll stiffness</strong> value in <strong>Kcal/mol * degrees<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
 
-																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-roll2.png" style="max-width:100%;"></p>
+                                                    <p><img src="{{ baseURL }}assets/pages/media/pages/img/res-roll2.png" style="max-width:100%;"></p>
 
-																										<h4>Twist</h4>
+                                                    <h4>Twist</h4>
 
-																										<p><strong>Twist stiffness value</strong> (for structure) or <strong>average value together with its associated standard deviation</strong> (for ensembles) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Twist stiffness</strong> value in <strong>Kcal/mol * degrees<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
+                                                    <p><strong>Twist stiffness average value, together with its associated standard deviation</strong> (for trajectories) is shown for each of the base pair steps in the sequence in a yellow point-line. Y-axis: <strong>Twist stiffness</strong> value in <strong>Kcal/mol * degrees<sup>2</sup></strong>, X-axis: Sequence base pair steps.</p> 
 
-																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/res-twist2.png" style="max-width:100%;"></p>
+                                                    <p><img src="{{ baseURL }}assets/pages/media/pages/img/res-twist2.png" style="max-width:100%;"></p>
 
-																										
+                                                    
 
                                                   </div>
                                               </div>

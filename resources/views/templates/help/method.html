@@ -77,7 +77,7 @@
 	                                                   
                                                     <h2>Method Help</h2>
 
-                                                    <p>In the CGeNArate model, DNA is represented in Cartesian 3D space, using one bead per nucleotide located at the C1' atom of the sugar. The Energy of the interactions between the particles are deivided between remote non-bonded terms (LJ and Debye-Hückel), and sequence-dependent interactions represented by truncated polynomial expansions
+                                                    <p>In the CGeNArate model, DNA is represented in Cartesian 3D space, using one bead per nucleotide located at the C1' atom of the sugar. The Energy of the interactions between the particles are divided between remote non-bonded terms (LJ and Debye-Hückel), and sequence-dependent interactions represented by truncated polynomial expansions
 
                                                     $$E = \sum_{a=2}^4 K_a(l-l_0)^a, \sum_{a=2}^4 K_a(\alpha-\alpha _0)^a,$$
                                                     
@@ -107,7 +107,7 @@
 
                                                     <p>The algorithm of 'CGeNArate + Proteins' works the same way as the unconstrained CGeNArate with Langevin Dynamics, where the Energy is given by sequence-dependent polynomial interactions. However, the DNA which is bound to the protein is constrained. The base-pairs bound to the protein are kept rigid with the reference values (distances and angles), extracted from the X-ray crystal structure of the protein-DNA complex in the PDB. In the 'Input' section you can choose the protein of interest from an extensive list of protein-DNA complexes. For example the protein-DNA complex 1a0a is bound to 16 base pairs of DNA. If you choose in the 'Input' initial position 3, the base pairs 3 to 18 are kept rigid according to reference values of the DNA in the 1a0a complex. The sequence the user inputs for the bound DNA does not matter in this case.</p>
 
-                                                    <p><strong>Note:</strong> The protein itself does not directly contribute to the simulation (apart from the conformation imposed on the protein-bound DNA), however in the 3D output of the structure/trajectory the protein structure of the protein-DNA complex is superimposed onto the DNA for visualization and analysis purposes. </p>
+                                                    <p><strong>Note:</strong> The protein itself does not directly contribute to the simulation (apart from the conformation imposed on the protein-bound DNA, and a nonbonded interaction to avoid overlaps), and the 3D output of the trajectory the protein structure of the protein-DNA complex is superimposed onto the DNA for visualization and analysis purposes. </p>
                                                     
                                                   </div>
                                               </div>

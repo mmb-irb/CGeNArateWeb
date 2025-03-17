@@ -79,40 +79,38 @@
                                                       </div>
                                                   </div>
                                                   <div class="portlet-body ">
-	                                                   
-																										<h2>Elastic Energy</h2>
+    
+                                                    <h2>Elastic Energy</h2>
 
-																										<p>The elastic energy $F_{short}(X)$ of the DNA fiber in the current implementation is calculated as follows:</p>
+                                                    <p>The elastic energy $E_{bonded}$ of the DNA fiber in the current implementation is calculated following the CGeNArate model:</p>
 
-																										<p>$$F_{short}(X) = K_i \Delta X_i^2$$</p>
+                                                    <p>$$E_{bonded} = \sum_{a=2}^4 K_a(l-l_0)^a, \sum_{a=2}^4 K_a(\alpha-\alpha _0)^a,$$</p>
 
-																										<p>$K_i$ is a 6x6 stiffness matrix obtained by inverting the covariance matrix centered at the global minimum i for all unique base-pair steps in all unique tetrameric environments as derived from ABC microsecond-long MD simulations with the parmbsc1 force-field, $\Delta X_i^2$ is the displacement of the given conformation of base pair step parameters ($X_i$).</p>
+                                                    <p>$K_a$ are the interaction strengt constants for all unique tetrameric environments as derived from ABC microsecond-long MD simulations with the parmbsc1 force-field, $l_0, \alpha_0$ are the derived equilibrium distances and angles of the interactions, and $l, \alpha$ are these distances and angles measured throughout the trajectory.</p>
 
-																										<p>Elastic energy of DNA: The table shows mean and standard deviation for the elastic energy of the DNA fiber as well as the average elastic energy per base pair</p>
-	
-																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna.png" style="max-width:100%;"></p>
+                                                    <p>Elastic energy of DNA: The table shows mean and standard deviation for the elastic energy of the DNA fiber as well as the average elastic energy per base pair</p>
 
-																										<p>Note that for “Structure Flexibility Analysis” the standard deviation is 0 and the mean represents the elastic energy of the structure.</p>
+                                                    <p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna.png" style="max-width:100%;"></p>
 
-																										<h3>Elastic energy of DNA along trajectory (available for Trajectory Flexibility Analysis)</h3>
+                                                    <h3>Elastic energy of DNA along trajectory (available for Trajectory Flexibility Analysis)</h3>
 
-																										<p>The elastic energy and the average elastic energy per base pair (y-axis, in kcal/mol) is shown for each snapshot (x-axis) of the trajectory:</p>
+                                                    <p>The elastic energy and the average elastic energy per base pair (y-axis, in kcal/mol) is shown for each snapshot (x-axis) of the trajectory:</p>
 
-																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna_plot.png" style="max-width:100%;"></p>
+                                                    <p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna_plot.png" style="max-width:100%;"></p>
 
-																										<!--<h3>Elastic energy of DNA not bound to a protein (available when tool “{{ longName }} + Proteins” is chosen):</h3>
-	
-																										<p>Table with elastic energy and average elastic energy per base pair of the DNA not bound to a protein.</p>
+                                                    <!--<h3>Elastic energy of DNA not bound to a protein (available when tool “{{ longName }} + Proteins” is chosen):</h3>
 
-																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna_unbound.png" style="max-width:100%;"></p>
+                                                    <p>Table with elastic energy and average elastic energy per base pair of the DNA not bound to a protein.</p>
 
-																										<p>Note that for “Structure Flexibility Analysis” the standard deviation is 0 and the mean represents the elastic energy of the structure.
+                                                    <p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna_unbound.png" style="max-width:100%;"></p>
 
-																										<h3>Elastic Energy of Protein-Bound DNA (available when tool “{{ longName }} + Proteins” is chosen)</h3>
+                                                    <p>Note that for “Structure Flexibility Analysis” the standard deviation is 0 and the mean represents the elastic energy of the structure.
 
-																										<p>A table with the elastic energy of the protein-bound DNA is shown ordered according to the appearance along the DNA fiber. In the plot underneath the values of the elastic energy in kcal/mol (y-axis) along the bound DNA (x-axis) are shown.</p>
+                                                    <h3>Elastic Energy of Protein-Bound DNA (available when tool “{{ longName }} + Proteins” is chosen)</h3>
 
-																										<p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna_bound.png" style="max-width:100%;"></p>-->
+                                                    <p>A table with the elastic energy of the protein-bound DNA is shown ordered according to the appearance along the DNA fiber. In the plot underneath the values of the elastic energy in kcal/mol (y-axis) along the bound DNA (x-axis) are shown.</p>
+
+                                                    <p><img src="{{ baseURL }}assets/pages/media/pages/img/elen_dna_bound.png" style="max-width:100%;"></p>-->
 
                                                   </div>
                                               </div>
