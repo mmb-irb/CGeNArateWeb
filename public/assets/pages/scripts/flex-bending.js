@@ -323,7 +323,7 @@ $(document).ready(function() {
 	
 		loadScatterPlot('bending', 'distribution', 
 				['Bending (in deg)', 'Density'], 
-				["5 bp total", "10 bp total", "5 bp -xz", "10 bp -xz", "5 bp -yz", "10 bp -yz", "xz (whole fiber)", "yz (whole fiber)", "total (whole fiber)"], 
+				["5 bp total", "10 bp total", "5 bp xz", "10 bp xz", "5 bp yz", "10 bp yz", "xz (whole fiber)", "yz (whole fiber)", "total (whole fiber)"], 
 				'Bending distribution of 5/10 bp segments and the whole fiber',"spline", 9);
 
 		loadScatterPlot('bending', 'individual', 
@@ -345,12 +345,12 @@ $(document).ready(function() {
 
 		loadScatterPlot('bending', 'distribution', 
 				['Bending (in deg)', 'Density'], 
-				["5 bp total", "10 bp total", "5 bp -xz", "10 bp -xz", "5 bp -yz", "10 bp -yz"], 
+				["5 bp total", "10 bp total", "5 bp xz", "10 bp xz", "5 bp yz", "10 bp yz"], 
 				'Bending distribution of 5/10 bp segments',"spline", 6);
 
 		loadScatterPlot('bending', 'individual', 
 				['# bp', 'Bending (in deg)'], 
-				["5 bp -xz", "5 bp -yz", "10 bp -xz", "10 bp -yz"], 
+				["5 bp xz", "5 bp yz", "10 bp xz", "10 bp yz"], 
 				'Bending of 5/10 bp segments in xz/yz-direction along sequence',"linear", 4);
 
 	}
