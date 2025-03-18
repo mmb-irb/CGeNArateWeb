@@ -28,12 +28,12 @@ return [
 
 		// sample outputs
 		'sample' => [
-			'1' => ['5a3cd6a32b9e45.88876421', 'CGeNArate - Coarse Grain'],
-			'2' => ['5a9d4e7bb01b31.44017553', 'CGeNArate - Atomistic'],
-			'3' => ['5a3d7be6e49fb7.88498829', 'Circular CGeNArate - Coarse Grain'],
-			'4' => ['5a3cee1ac4a6c4.69000433', 'Circular CGeNArate - Atomistic'],
-			'5' => ['5a3cd2d4106f78.82278285', 'CGeNArate + Proteins  - Coarse Grain'],
-			'6' => ['5a3c3972c7be71.61030885', 'CGeNArate + Proteins - Atomistic']
+			'1' => ['67d86f37021ff2.50529559', 'CGeNArate - Coarse Grain'],
+			'2' => ['67d94200b03b99.28165192', 'CGeNArate - Atomistic'],
+			'3' => ['67d94208e19073.61173417', 'Circular CGeNArate - Coarse Grain'],
+			'4' => ['67d87509b8d2b2.67967905', 'Circular CGeNArate - Atomistic'],
+			'5' => ['67d87049a7f7a2.49210743', 'CGeNArate + Proteins  - Coarse Grain'],
+			'6' => ['67d86f56eca641.18630477', 'CGeNArate + Proteins - Atomistic']
 		],
 
 		'flex' => [
