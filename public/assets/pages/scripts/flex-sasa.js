@@ -82,7 +82,7 @@ function load3D() {
 			
 					if($("#tool").val() == 3) {
 						o.addRepresentation( "cartoon", {
-							sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 1.5, color: "sstruc"
+							sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 10.5, color: "sstruc"
 						} );
 						o.addRepresentation( "licorice", {
 							sele: ":A or :B", scale: 1.5, aspectRatio: 1.5
@@ -97,7 +97,7 @@ function load3D() {
 
 					if($("#tool").val() == 3) {
 						o.addRepresentation( "cartoon", {
-							sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 1.5, color: "sstruc"
+							sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 10.5, color: "sstruc"
 						} );
 						o.addRepresentation( "ball+stick", {
 							sele: ":A or :B", radius: .5
