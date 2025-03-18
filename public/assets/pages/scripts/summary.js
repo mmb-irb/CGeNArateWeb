@@ -166,7 +166,7 @@ function drawStructure(path, strPath, strPDB) {
 
 			if($("#tool").val() == 3) {
 				o.addRepresentation( "cartoon", {
-					sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 1.5, color: "sstruc"
+					sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 10.5, color: "sstruc"
 				} );
 				o.addRepresentation( "licorice", {
 					sele: ":A or :B", scale: 1.5, aspectRatio: 1.5
@@ -181,10 +181,10 @@ function drawStructure(path, strPath, strPDB) {
 
 			if($("#tool").val() == 3) {
 				o.addRepresentation( "cartoon", {
-					sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 1.5, color: "sstruc"
+					sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 10.5, color: "sstruc"
 				} );
 				o.addRepresentation( "ball+stick", {
-					sele: ":A or :B"
+					sele: ":A or :B", radius: .5
 				} );
 				o.addRepresentation( "spacefill", {
 					sele: ":A.P1 or :B.P1", scale: 1, radius:1, color: "element"
@@ -297,7 +297,7 @@ function drawTrajectory(path, trajPath, trajPDB, trajDCD) {
 
 			if($("#tool").val() == 3) {
 				o.addRepresentation( "cartoon", {
-					sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 1.5, color: "sstruc"
+					sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 10.5, color: "sstruc"
 				} );
 				o.addRepresentation( "licorice", {
 					sele: ":A or :B", scale: 1.5, aspectRatio: 1.5
@@ -312,10 +312,10 @@ function drawTrajectory(path, trajPath, trajPDB, trajDCD) {
 
 			if($("#tool").val() == 3) {
 				o.addRepresentation( "cartoon", {
-					sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 1.5, color: "sstruc"
+					sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 10.5, color: "sstruc"
 				} );
 				o.addRepresentation( "ball+stick", {
-					sele: ":A or :B"
+					sele: ":A or :B", radius: .5
 				} );
 				o.addRepresentation( "spacefill", {
 					sele: ":A.P1 or :B.P1", scale: 1, radius:1, color: "element"
