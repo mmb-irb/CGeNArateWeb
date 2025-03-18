@@ -328,8 +328,8 @@ $(document).ready(function() {
 
 		loadScatterPlot('bending', 'individual', 
 				['# bp', 'Bending (in deg)'], 
-				["5 bp -xz", "5 bp -yz", "10 bp -xz", "10 bp -yz"], 
-				'Bending of 5/10 bp pieces in xz/yz-direction along sequence',"linear", 4);
+				["5 bp xz", "5 bp yz", "5 bp total", "10 bp xz", "10 bp yz", "10 bp total"], 
+				'Bending of 5/10 bp pieces in xz/yz-direction along sequence',"linear", 6);
 
 		loadScatterPlot('bending', 'fiber', 
 				['Contribution (in %)', 'Density'], 
