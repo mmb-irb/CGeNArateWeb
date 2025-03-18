@@ -14,7 +14,7 @@
 
 																				{% set active='' %}
                                         {% if basename == 'home' %}
-                                        {% set active = 'active' %}
+                                        {% set active = ' active' %}
                                         {% endif %}
                                         <li class="menu-dropdown classic-menu-dropdown {{ active }}">
                                             <a href="{{ baseURL }}"> Home
@@ -26,7 +26,7 @@
 
 																				{% set active='' %}
                                         {% if basename == 'workspace' or basename starts with 'summary' %}
-                                        {% set active = 'active' %}
+                                        {% set active = ' active' %}
                                         {% endif %}
 																				<li class="menu-dropdown classic-menu-dropdown {{ active }}">
                                             <a href="{{ baseURL }}workspace"> Workspace
@@ -38,7 +38,7 @@
 
 																				{% set active='' %}
                                         {% if basename == 'input' and not sampleinput %}
-                                        {% set active = 'active' %}
+                                        {% set active = ' active' %}
                                         {% endif %}
                                         <li class="menu-dropdown classic-menu-dropdown {{ active }}">
                                             <a href="{{ baseURL }}input"> Input data
@@ -48,7 +48,7 @@
 																		
 																				{% set active='' %}
 																				{% if sampleinput == true %}
-                                        {% set active = 'active' %}
+                                        {% set active = ' active' %}
                                         {% endif %}
 																				<li class="menu-dropdown classic-menu-dropdown {{ active }}">
                                             <a href="javascript:;"> Sample Inputs
@@ -59,7 +59,7 @@
 																								{% for s in sampleOutputs %}
 																								{% set active='' %}
 																								{% if c == sampleType %}
-                                        				{% set active = 'active' %}
+                                        				{% set active = ' active' %}
                                         				{% endif %}
                                                 <li class="{{ active }}">
 																									<a href="{{ baseURL }}input/sample/{{ c }}" class="nav-link "> {{ s[1] }} </a>
@@ -71,7 +71,7 @@
 
 																				{% set active='' %}
                                         {% if sample == true %}
-                                        {% set active = 'active' %}
+                                        {% set active = ' active' %}
                                         {% endif %}
 																				<li class="menu-dropdown classic-menu-dropdown {{ active }}">
                                             <a href="javascript:;"> Sample Outputs
@@ -81,7 +81,7 @@
 																								{% for s in sampleOutputs %}
 																								{% set active='' %}
                                         				{% if sample and s[0] ==  id  %}
-                                        				{% set active = 'active' %}
+                                        				{% set active = ' active' %}
                                         				{% endif %}
                                                 <li class="{{ active }}">
                                                   <a href="{{ baseURL }}output/summary/{{ s[0] }}/sample" class="nav-link "> {{ s[1] }} </a>
@@ -92,7 +92,7 @@
 
 																				{% set active='' %}
                                         {% if basename == 'help' %}
-                                        {% set active = 'active' %}
+                                        {% set active = ' active' %}
                                         {% endif %}
                                         <li class="menu-dropdown classic-menu-dropdown {{ active }}">
                                             <a href="javascript:;"> Help
@@ -101,28 +101,28 @@
                                             <ul class="dropdown-menu pull-left">
 																								{% set active='' %}
                                         				{% if basename == 'help' and helpname == 'method' %}
-                                        				{% set active = 'active' %}
+                                        				{% set active = ' active' %}
                                         				{% endif %}
                                                 <li class="{{ active }}">
                                                     <a href="{{ baseURL }}help/method" class="nav-link "> Method </a>
 																								</li>
 																								{% set active='' %}
                                         				{% if basename == 'help' and helpname == 'inputs' %}
-                                        				{% set active = 'active' %}
+                                        				{% set active = ' active' %}
                                         				{% endif %}
                                                 <li class="{{ active }}">
                                                     <a href="{{ baseURL }}help/inputs" class="nav-link "> Inputs </a>
                                                 </li>
 																								{% set active='' %}
                                         				{% if basename == 'help' and helpname == 'outputs' %}
-                                        				{% set active = 'active' %}
+                                        				{% set active = ' active' %}
                                         				{% endif %}
                                                 <li class="{{ active }}">
                                                     <a href="{{ baseURL }}help/outputs" class="nav-link "> Outputs </a>
                                                 </li>
 																								{% set active='' %}
                                         				{% if basename == 'help' and helpname == 'analysis' %}
-                                        				{% set active = 'active' %}
+                                        				{% set active = ' active' %}
                                         				{% endif %}
                                                 <li class="{{ active }} dropdown-submenu ">
                                                     <a href="javascript:;" class="nav-link nav-toggle"> 
@@ -131,63 +131,63 @@
 																										<ul class="dropdown-menu">
 																												{% set active='' %}
 																												{% if basename == 'help' and helpname == 'analysis' and analname == 'curves' %}
-																												{% set active = 'active' %}
+																												{% set active = ' active' %}
 																												{% endif %}
                                                         <li aria-haspopup="true" class="{{ active }} ">
                                                             <a href="{{ baseURL }}help/analysis/curves" class="nav-link "> Curves </a>
                                                         </li>
 																												{% set active='' %}
 																												{% if basename == 'help' and helpname == 'analysis' and analname == 'stiffness' %}
-																												{% set active = 'active' %}
+																												{% set active = ' active' %}
 																												{% endif %}
                                                         <li aria-haspopup="true" class="{{ active }} ">
                                                             <a href="{{ baseURL }}help/analysis/stiffness" class="nav-link "> Stiffness </a>
                                                         </li>
 																												{% set active='' %}
 																												{% if basename == 'help' and helpname == 'analysis' and analname == 'pcazip' %}
-																												{% set active = 'active' %}
+																												{% set active = ' active' %}
 																												{% endif %}
                                                         <li aria-haspopup="true" class="{{ active }} ">
                                                             <a href="{{ baseURL }}help/analysis/pcazip" class="nav-link "> PCAZip </a>
                                                         </li>
 																												{% set active='' %}
 																												{% if basename == 'help' and helpname == 'analysis' and analname == 'contacts' %}
-																												{% set active = 'active' %}
+																												{% set active = ' active' %}
 																												{% endif %}
 																												<li aria-haspopup="true" class="{{ active }} ">
                                                             <a href="{{ baseURL }}help/analysis/contacts" class="nav-link "> Contacts </a>
                                                         </li>
 																												{% set active='' %}
 																												{% if basename == 'help' and helpname == 'analysis' and analname == 'bending' %}
-																												{% set active = 'active' %}
+																												{% set active = ' active' %}
 																												{% endif %}
 																												<!--<li aria-haspopup="true" class="{{ active }} ">
                                                             <a href="{{ baseURL }}help/analysis/bending" class="nav-link "> Bending </a>
                                                         </li>-->
 																												{% set active='' %}
 																												{% if basename == 'help' and helpname == 'analysis' and analname == 'circular' %}
-																												{% set active = 'active' %}
+																												{% set active = ' active' %}
 																												{% endif %}
 																												<li aria-haspopup="true" class="{{ active }} ">
                                                             <a href="{{ baseURL }}help/analysis/circular" class="nav-link "> Circular </a>
                                                         </li>
 																												{% set active='' %}
 																												{% if basename == 'help' and helpname == 'analysis' and analname == 'energy' %}
-																												{% set active = 'active' %}
+																												{% set active = ' active' %}
 																												{% endif %}
 																												<li aria-haspopup="true" class="{{ active }} ">
                                                             <a href="{{ baseURL }}help/analysis/energy" class="nav-link "> Energy </a>
 																												</li>
 																												{% set active='' %}
 																												{% if basename == 'help' and helpname == 'analysis' and analname == 'endtoend' %}
-																												{% set active = 'active' %}
+																												{% set active = ' active' %}
 																												{% endif %}
 																												<li aria-haspopup="true" class="{{ active }} ">
                                                             <a href="{{ baseURL }}help/analysis/end-to-end" class="nav-link "> End-to-end </a>
 																												</li>
 																												{% set active='' %}
 																												{% if basename == 'help' and helpname == 'analysis' and analname == 'sasa' %}
-																												{% set active = 'active' %}
+																												{% set active = ' active' %}
 																												{% endif %}
 																												<li aria-haspopup="true" class="{{ active }} ">
                                                             <a href="{{ baseURL }}help/analysis/sasa" class="nav-link "> Sasa </a>
