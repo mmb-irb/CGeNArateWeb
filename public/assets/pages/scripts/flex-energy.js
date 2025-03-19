@@ -24,10 +24,10 @@ function loadScatterPlot(subsection, type, titles, names, maintit, shape) {
 
 		var data = [trace1];
 
-		/*if(type != "elen") {
+		//if(type != "elen") {
 			var trace2 = {
 				//x: figure.x1,
-				y: figure.y1,
+				y: figure.y4,
 				name: names[0],
 				mode: 'lines',
 				line: {shape: shape},
@@ -38,7 +38,7 @@ function loadScatterPlot(subsection, type, titles, names, maintit, shape) {
 
 			data.push(trace2);
 
-		}*/
+		//}
 
 		//var data = [trace1, trace2];
 
@@ -172,8 +172,8 @@ $(document).ready(function() {
 	if($("#elenPlotDiv").length) {
 		loadScatterPlot('energy', 'elen', 
 				['Index of snapshot', 'Energy (kcal/mol)'], 
-				["Elastic energy", "Elastic energy per bp"], 
-				'Elastic energy of DNA along trajectory',"spline");
+				["Deformation Energy", "Elastic energy"], 
+				'Elastic and Deformation energies of DNA along trajectory',"spline");
 	}
 
 	if(tool == '3') {

@@ -119,7 +119,7 @@ class OutputController extends Controller {
 			&& $tool != 2
 		) $arraySubTypes[] = 3;
 		if(file_exists($p."/".$this->global['analysisPathName']."/NAFlex/".$sp.$this->global['contacts']['folder'.$strtype])) $arraySubTypes[] = 4;
-		if(file_exists($p."/".$this->global['analysisPathName']."/".$this->global['bending']['folder'])) $arraySubTypes[] = 5;
+		if(count(scandir($p."/".$this->global['analysisPathName']."/".$this->global['bending']['folder'])) > 2) $arraySubTypes[] = 5;
 		if(file_exists($p."/".$this->global['analysisPathName']."/".$this->global['circular']['folder'])) $arraySubTypes[] = 6;
 		if(file_exists($p."/".$this->global['analysisPathName']."/".$this->global['energy']['folder'])) $arraySubTypes[] = 7;
 		if(file_exists($p."/".$this->global['analysisPathName']."/NAFlex/".$sp.$this->global['end-to-end']['folder'])) $arraySubTypes[] = 8;
@@ -740,7 +740,7 @@ class OutputController extends Controller {
 				case 'energy': 
 					switch($type){
 						case 'elen':
-							$output = $this->getBendingScatterPlotJSON($path, ["total_elastic_energy"]);
+							$output = $this->getBendingScatterPlotJSON($path, ["total_elastic_energy", "total_deformation_energy"]);
 								break;
 						case 'unbound':
 							$output = $this->getBendingScatterPlotJSON($path, ["total_elastic_energy_unbound"]);
@@ -1124,7 +1124,66 @@ class OutputController extends Controller {
 
 	}
 
-	private function getEndToEndJSON($path) {
+	private function getContactsDistJSON($path, $chains) {
+
+		$fileName = $chains.".dat";
+
+		if(file_exists($path.$fileName)) {
+
+			chdir($path);
+			
+			$arrayRows = file($fileName);
+			$fl = array_shift($arrayRows);
+			$arrayXDataPlot = array();
+			$arrayYDataPlot = array();
+			foreach($arrayRows as $a) {
+				$a = ltrim($a);
+				$a = rtrim($a);
+				$a = preg_split('/\s+/', $a);
+				$arrayXDataPlot[] = $a[0];
+				$arrayYDataPlot[] = $a[1];
+			}
+
+			$arrRound = array();
+			foreach($arrayYDataPlot as $a) {
+				$arrRound[] = round($a, 2);
+			}
+
+			$arrayYDataPlot = $arrRound;
+
+			$px = $this->generateJSONVar($arrayXDataPlot, 'number');
+			$py = $this->generateJSONVar($arrayYDataPlot, 'number');
+
+			$fl = ltrim($fl);
+			$fl = rtrim($fl);
+			$fl = preg_split('/\s+/', $fl);
+			$fl = explode("-", $fl[1]);
+			$rp1 = $fl[0];
+			$rp2 = $fl[1];
+
+			sort($arrayYDataPlot);
+			$adistsort = $this->generateJSONVar($arrayYDataPlot, 'number');
+
+			$json = '{';
+			$json .= '"px":'.$px.',';
+			$json .= '"py":'.$py.',';
+			$json .= '"rp1":"'.$rp1.'",';
+			$json .= '"rp2":"'.$rp2.'",';
+			$json .= '"adistsort":'.$adistsort;
+			$json .= '}';
+
+			return($json);
+
+		}else{
+
+			$this->logger->error("WEB - File not found", [$path.$fileName]);
+			return '{"error": true}';
+
+		}
+
+	}
+
+	private function getEndToEndJSON($path, $path_pl) {
 
 		$fileName = "distances.dat";
 
@@ -1164,12 +1223,19 @@ class OutputController extends Controller {
 			sort($arrayYDataPlot);
 			$adistsort = $this->generateJSONVar($arrayYDataPlot, 'number');
 			
+			$pl = null;
+			if(file_exists($path_pl)) {
+				chdir($path_pl);
+				$pl = trim(shell_exec("grep Persistence PL.out"));
+			}
+
 			$json = '{';
 			$json .= '"px":'.$px.',';
 			$json .= '"py":'.$py.',';
 			$json .= '"rp1":'.$rp1.',';
 			$json .= '"rp2":'.$rp2.',';
-			$json .= '"adistsort":'.$adistsort;
+			$json .= '"adistsort":'.$adistsort.',';
+			$json .= '"pl":"'.$pl.'"';
 			$json .= '}';
 
 			return($json);
@@ -1542,92 +1608,107 @@ class OutputController extends Controller {
 
 		switch($section) {
 
+			case 'contacts-dist':
+				$path = $this->global['filesPath']
+				.$projectData->folder
+				.sprintf($this->global['flex']['folder'.$strtype], $res)
+				.$this->global['NAFlex']['naflex'.$strtype]
+				.$this->global['contacts']['folder'.$strtype]
+				.'PROTpi-PROTpi/';
+				echo $this->getContactsDistJSON($path, $type);
+			break;
+
 			case 'contacts':
-			$path = $this->global['filesPath']
-			.$projectData->folder
-			.sprintf($this->global['flex']['folder'.$strtype], $res)
-			.$this->global['NAFlex']['naflex'.$strtype]
-			.$this->global['contacts']['folder'.$strtype];
-			echo $this->getContactsJSON($path, $subsection, $type);
+				$path = $this->global['filesPath']
+				.$projectData->folder
+				.sprintf($this->global['flex']['folder'.$strtype], $res)
+				.$this->global['NAFlex']['naflex'.$strtype]
+				.$this->global['contacts']['folder'.$strtype];
+				echo $this->getContactsJSON($path, $subsection, $type);
 			break;
 
 			case 'curves':
-			$path = $this->global['filesPath']
-			.$projectData->folder
-			.sprintf($this->global['flex']['folder'.$strtype], $res)
-			.$this->global['NAFlex']['naflex'.$strtype]
-			.$this->global['curves']['folder'];
-			echo $this->getCurvesJSON($path, $subsection, $type);
+				$path = $this->global['filesPath']
+				.$projectData->folder
+				.sprintf($this->global['flex']['folder'.$strtype], $res)
+				.$this->global['NAFlex']['naflex'.$strtype]
+				.$this->global['curves']['folder'];
+				echo $this->getCurvesJSON($path, $subsection, $type);
 			break;
 
 			case 'pcazip':
-			$path = $this->global['filesPath']
-			.$projectData->folder
-			.sprintf($this->global['flex']['folder'.$strtype], $res)
-			.$this->global['NAFlex']['naflex'.$strtype]
-			.$this->global['pcazip']['folder'];
-			echo $this->getPCAZipJSON($path, $section, $subsection);
+				$path = $this->global['filesPath']
+				.$projectData->folder
+				.sprintf($this->global['flex']['folder'.$strtype], $res)
+				.$this->global['NAFlex']['naflex'.$strtype]
+				.$this->global['pcazip']['folder'];
+				echo $this->getPCAZipJSON($path, $section, $subsection);
 			break;
 
 			case 'stiffness':
-			$path = $this->global['filesPath']
-			.$projectData->folder
-			.sprintf($this->global['flex']['folder'.$strtype], $res)
-			.$this->global['NAFlex']['naflex'.$strtype]
-			.$this->global['stiffness']['folder'];
-			echo $this->getStiffnessJSON($path, $subsection, $type);
+				$path = $this->global['filesPath']
+				.$projectData->folder
+				.sprintf($this->global['flex']['folder'.$strtype], $res)
+				.$this->global['NAFlex']['naflex'.$strtype]
+				.$this->global['stiffness']['folder'];
+				echo $this->getStiffnessJSON($path, $subsection, $type);
 			break;
 
 			case 'circular':
-			$path = $this->global['filesPath']
-			.$projectData->folder
-			.sprintf($this->global['flex']['folder'.$strtype], $res)
-			.$this->global['circular']['folder'];
-			echo $this->getCircularJSON($path, $subsection, $type, $strtype);
+				$path = $this->global['filesPath']
+				.$projectData->folder
+				.sprintf($this->global['flex']['folder'.$strtype], $res)
+				.$this->global['circular']['folder'];
+				echo $this->getCircularJSON($path, $subsection, $type, $strtype);
 			break;
 
 			case 'bending':
-			$path = $this->global['filesPath']
-			.$projectData->folder
-			.sprintf($this->global['flex']['folder'.$strtype], $res)
-			.$this->global['bending']['folder'];
-			echo $this->getBendingJSON($path, $subsection, $type, $strtype);
+				$path = $this->global['filesPath']
+				.$projectData->folder
+				.sprintf($this->global['flex']['folder'.$strtype], $res)
+				.$this->global['bending']['folder'];
+				echo $this->getBendingJSON($path, $subsection, $type, $strtype);
 			break;
 
 			case 'end-to-end':
-			$path = $this->global['filesPath']
-			.$projectData->folder
-			.sprintf($this->global['flex']['folder'.$strtype], $res)
-			.$this->global['NAFlex']['naflex'.$strtype]
-			.$this->global['end-to-end']['folder'];
-			echo $this->getEndToEndJSON($path);
+				$path = $this->global['filesPath']
+				.$projectData->folder
+				.sprintf($this->global['flex']['folder'.$strtype], $res)
+				.$this->global['NAFlex']['naflex'.$strtype]
+				.$this->global['end-to-end']['folder'];
+
+				$path_pl =  $this->global['filesPath']
+				.$projectData->folder
+				.sprintf($this->global['flex']['folder'.$strtype], $res)
+				.$this->global['end-to-end']['pl'];
+				echo $this->getEndToEndJSON($path, $path_pl);
 			break;
 
 			case 'energy':
-			$path = $this->global['filesPath']
-			.$projectData->folder
-			.sprintf($this->global['flex']['folder'.$strtype], $res)
-			.$this->global['energy']['folder'];
+				$path = $this->global['filesPath']
+				.$projectData->folder
+				.sprintf($this->global['flex']['folder'.$strtype], $res)
+				.$this->global['energy']['folder'];
 
-			if(isset($projectData->proteins)) $proteins = $projectData->proteins;
+				if(isset($projectData->proteins)) $proteins = $projectData->proteins;
 
-			echo $this->getEnergyJSON($path, $subsection, $type, $strtype, $proteins);
+				echo $this->getEnergyJSON($path, $subsection, $type, $strtype, $proteins);
 			break;
 
 			case 'sasa':
-			$path = $this->global['filesPath']
-			.$projectData->folder
-			.sprintf($this->global['flex']['folder'.$strtype], $res)
-			.$this->global['sasa']['folder'];
+				$path = $this->global['filesPath']
+				.$projectData->folder
+				.sprintf($this->global['flex']['folder'.$strtype], $res)
+				.$this->global['sasa']['folder'];
 
-			if(isset($projectData->proteins)) $proteins = $projectData->proteins;
+				if(isset($projectData->proteins)) $proteins = $projectData->proteins;
 
-			$pathProt = $this->global['filesPath']
-			.$projectData->folder.'/';
+				$pathProt = $this->global['filesPath']
+				.$projectData->folder.'/';
 
-			$proteinsList = $this->getListOfProteins($pathProt);
+				$proteinsList = $this->getListOfProteins($pathProt);
 
-			echo $this->getSasaJSON($path, $subsection, $type, $strtype, $proteins, $proteinsList);
+				echo $this->getSasaJSON($path, $subsection, $type, $strtype, $proteins, $proteinsList);
 			break;
 
 			default:

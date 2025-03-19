@@ -39,25 +39,35 @@ function loadTypeOfContact(typeOfContact) {
 
 	if(typeOfContact == 'NUC-NUC') {
 		$("#3d-view").hide();
+		$("#dist-prots").hide(); 
 		$("#heatmap").show();
 		axisLabels = ['Sequence', 'Sequence'];
 		loadHeatMap('mean', 'Distances (Ångströms)', axisLabels, 'NUC-NUC');
 		$("#heatmap-type").html("Nucleotide - Nucleotide");
 	} else if(typeOfContact == 'PROT-NUC') {
 		$("#heatmap").hide(); 
+		$("#dist-prots").hide(); 
 		$("#3d-view").show();
 		$('#submit-prot-nuc').prop('disabled', true);
 		$('input[type=radio][name=proteinIDradio]').prop('checked', false);
 		$("#heatmap-type").html("Protein - Nucleotide");
 	} else if(typeOfContact == 'PROT-PROT') {
 		$("#heatmap").hide(); 
+		$("#dist-prots").hide(); 
 		$("#3d-view").show();
 		$('#submit-prot-prot').prop('disabled', true);
 		$('input[type=checkbox][name=proteinIDcheckbox]').prop('checked', false);
 		$("#heatmap-type").html("Protein - Protein");
+	}else if(typeOfContact == 'PROT-PROT2') {
+		$("#heatmap").hide(); 
+		$("#dist-prots").hide(); 
+		$("#3d-view").show();
+		$('#submit-prot-prot2').prop('disabled', true);
+		$('input[type=checkbox][name=proteinIDcheckbox2]').prop('checked', false);
+		//$("#heatmap-type").html("Protein - Protein");
 	}
 
-	if((typeOfContact == 'PROT-NUC') || (typeOfContact == 'PROT-PROT')) {
+	if((typeOfContact == 'PROT-NUC') || (typeOfContact == 'PROT-PROT') || (typeOfContact == 'PROT-PROT2')) {
 
 		$.ajax({
 				
@@ -66,8 +76,6 @@ function loadTypeOfContact(typeOfContact) {
 				success: function(response) {
 
 					var obj = JSON.parse(response);
-
-					
 
 					$('#viewport').html('');
 					stage = new NGL.Stage( "viewport", { backgroundColor:"#c7ced1", tooltip:true } );
@@ -242,6 +250,93 @@ window.addEventListener('resize', function(){
 		}
 }, true);
 
+function goToFrame(f) {
+	traj.setFrame(f);
+}
+
+var traj;
+var arrayDistancesFrames;
+function load3D(prots/*objGlobal*/) {
+
+	//arrayDistancesFrames = objGlobal.py;
+
+	$("#loading-viewport2").show();
+
+	$('#viewport2').html('');
+
+	$.ajax({
+			
+		type: "POST",
+		url: baseURL + "path/for/" + projectID,
+		success: function(response) {
+
+			var obj = JSON.parse(response);
+
+			stage2 = new NGL.Stage( "viewport2", { backgroundColor:"#c7ced1", tooltip:true } );
+			stage2.removeAllComponents();
+
+			stage2.loadFile(obj.path + obj.trajPath + obj.trajPDB, { defaultRepresentation: false } )
+			.then( function( o ){
+
+				o.setSelection('/2');
+
+				var framesPromise = NGL.autoLoad( obj.path + obj.trajPath + obj.trajDCD, { ext: "dcd" })
+				.then( function( frames ){
+					traj = o.addTrajectory( frames ).trajectory;
+					
+					trajlength = traj.frames.length;
+
+					$("#loading-viewport2").hide();
+					o.setSelection('/0');
+					o.autoView();
+
+					var frame = arrayDistancesFrames.indexOf(arrayDistancesSort[0]);
+					$("#distance-label").html("Distance: <strong>" + arrayDistancesSort[0] + " Å</strong>");
+					goToFrame(frame);
+
+					$("#loading-range").hide();
+					$("#range").show();
+
+				} );
+
+				if(resolution == 1) {
+
+					o.addRepresentation( "cartoon", {
+						sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 10.5, color: "sstruc"
+					} );
+					o.addRepresentation( "licorice", {
+						sele: ":A or :B", scale: 1.5, aspectRatio: 1.5
+					} );
+
+				}else{
+
+					o.addRepresentation( "cartoon", {
+						sele: "not(water or ion or :A or :B)", scale: 1.5, aspectRatio: 10.5, color: "sstruc"
+					} );
+					o.addRepresentation( "ball+stick", {
+						sele: ":A or :B", radius: .5
+					} );
+					o.addRepresentation( "spacefill", {
+						sele: ":A.P1 or :B.P1", scale: 1, radius:1, color: "element"
+					} );
+
+				}
+
+				var resPair = [[":" + prots[0], ":" + prots[1]]];
+				o.addRepresentation( "distance", { atomPair: resPair, labelSize:0, labelUnit: 'angstrom', color: "white" } );
+
+				o.autoView();
+			} );
+
+			function handleResize(){ if(typeof stage2 != 'undefined') stage2.handleResize(); }
+			window.addEventListener( "resize", handleResize, false );
+
+		}
+
+	});
+
+}
+
 $(document).ready(function() {
 
 	$('html,body').animate({ scrollTop: $("#menu-flex").offset().top}, 10);
@@ -329,6 +424,11 @@ $(document).ready(function() {
 				
 			});
 
+			var checked = $('input[type=checkbox][name=proteinIDcheckbox]:checked').length;
+			if(checked == 0 || checked == 1) {
+				$('#submit-prot-prot').prop('disabled', true);
+			}
+
 		}
 
   });
@@ -367,6 +467,223 @@ $(document).ready(function() {
    	
   })
 
+	// PROT-PROT2 Proteins selection
+	$('input[type=checkbox][name=proteinIDcheckbox2]').change(function() {
+
+		var protChain = ":" + $(this).val().substring(5,6);
+
+		if(this.checked) {
+
+			var protein = protChain;
+
+			var checked = $('input[type=checkbox][name=proteinIDcheckbox2]:checked').length;
+
+			if((checked >= 1) && (checked < 2)) {
+				var csf = stage.compList[0].addRepresentation( "surface", {
+					sele: protein, opacity:1, background: 'true', color: '#fff'
+				} );
+				currSurfaceArr.push(csf);
+				$('#submit-prot-prot2').prop('disabled', true);
+			} else if((checked == 2)) {
+				var csf = stage.compList[0].addRepresentation( "surface", {
+					sele: protein, opacity:1, background: 'true', color: '#fff'
+				} );
+				currSurfaceArr.push(csf);
+				$('#submit-prot-prot2').prop('disabled', false);
+			} else if(checked > 2) {
+				$(this).prop('checked', false);
+			}
+
+		} else {
+
+			$.each(currSurfaceArr, function(i, v) {
+
+				if(v.repr.__sele == protChain) {
+					stage.compList[0].removeRepresentation(v);
+				}
+				
+			});
+
+			var checked = $('input[type=checkbox][name=proteinIDcheckbox2]:checked').length;
+			if(checked == 0 || checked == 1) {
+				$('#submit-prot-prot2').prop('disabled', true);
+			}
+
+		}
+
+  });
+
+	$('#reset-view-prot-prot2').click(function(){
+		$.each(currSurfaceArr, function(i, v) {
+			stage.compList[0].removeRepresentation(v);
+		});
+		$('#submit-prot-prot2').prop('disabled', true);
+    $('input[type=checkbox][name=proteinIDcheckbox2]').prop('checked', false);
+    stage.animationControls.zoom();
+		stage.autoView(1000);
+  });
+
+	$('#submit-prot-prot2').click(function(){
+
+		var prot = [];
+		var protName = [];
+	
+		$('input[type=checkbox][name=proteinIDcheckbox2]').each(function () {
+    	var sThisVal = (this.checked ? $(this).val() : "");
+			if(sThisVal != "") { 
+				prot.push(sThisVal.substring(5,6));
+				protName.push(sThisVal.substring(0,4));
+			}
+		});	
+
+		$("#label-dis-prot").html(protName[0] + " - " + protName[1] + " distances");
+		$("#dist-prots").show(); 
+
+		//load3D(prot);
+
+		loadEndToEndPlot(prot, 'distances', 'Distance between ', ['Snapshot index', 'Distance (Ångströms)']);
+
+		var aTag = $("div[id='dist-prots']");
+		setTimeout(function(){ $('html,body').animate({scrollTop: aTag.offset().top},'slow'); }, 200);
+
+		/*$('.nav-tabs a[href=\'#mean\']').click();
+		$("#heatmap").show();
+		axisLabels = [protName[1] + ' protein residues (C<sub>α</sub>)', protName[0] + ' protein residues (C<sub>α</sub>)'];
+		loadHeatMap('mean', 'Distances (Ångströms)', axisLabels, prot[0] + '-' + prot[1]);
+		var aTag = $("div[id='heatmap']");
+		setTimeout(function(){ $('html,body').animate({scrollTop: aTag.offset().top},'slow'); }, 200);*/
+   	
+  })
+
+	var viewFullScreen = document.getElementById("view-fullscreen");
+	if (viewFullScreen) {
+    viewFullScreen.addEventListener("click", function () {
+			var docElm = document.getElementById("viewport2");
+			if (docElm.requestFullscreen) {
+					docElm.requestFullscreen();
+			}
+			else if (docElm.msRequestFullscreen) {
+					docElm.msRequestFullscreen();
+			}
+			else if (docElm.mozRequestFullScreen) {
+					docElm.mozRequestFullScreen();
+			}
+			else if (docElm.webkitRequestFullScreen) {
+					docElm.webkitRequestFullScreen();
+			}
+
+			stage.toggleFullscreen(document.body.viewport);
+    });
+	}
+
 });
+
+function loadDataFromPlot(prot, x, y, figure) {
+
+	var frame = arrayDistancesFrames.indexOf(y);
+	var maxv = Math.max(...arrayDistancesFrames);
+	var minv = Math.min(...arrayDistancesFrames);
+
+	drawGraph(prot, figure, 'distances', 'Distance between ', ['Snapshot index', 'Distance (Ångströms)'], 0, (frame + 1), minv, (frame + 1), maxv);
+
+	$("#distance-label").html("Distance: <strong>" + y + " Å</strong>");
+
+	goToFrame(arrayDistancesFrames.indexOf(y));
+
+}
+
+function drawGraph(prot, figure, name, maintit, titles, type, x0, y0, x1, y1) {
+
+	var trace = {
+		x: figure.px,
+		y: figure.py,
+		name: name,
+		marker: {
+			color: "#cc6600"
+		},
+		type: 'lines'
+	};
+
+	var data = [trace];
+
+	var layout = {
+		showlegend: false,
+		title: maintit + figure.rp1 + '-' + figure.rp2 + ' proteins',
+		autosize: true,
+		xaxis: {
+			title: titles[0],
+			showline: true,
+			showgrid: false,
+			zeroline: false
+		},
+		yaxis: {
+			title: titles[1],
+			showline: true,
+			showgrid: false,
+			zeroline: false
+		},
+		shapes: [
+			{
+				xref: 'x',
+        yref: 'paper',
+				type: 'line',
+				x0: x0,
+				y0: 0,
+				x1: x1,
+				y1: 1,
+				line: {
+					color: '#525e64',
+					width: 1,
+					dash: "dash"
+				}
+			}
+		]
+	};
+
+	if(type == 1) {
+
+		Plotly.newPlot('endToEndPlotDiv', data, layout).then(function(){
+			$("#loading-plot").hide();
+		
+			load3D(prot);
+
+		});
+
+	}else{
+
+		Plotly.newPlot('endToEndPlotDiv', data, layout);
+
+	}
+
+		endToEndPlotDiv.on('plotly_click', function(data){
+		loadDataFromPlot(prot, data.points[0].x, data.points[0].y, figure);
+		
+	});
+
+}
+
+function loadEndToEndPlot(prot, name, maintit, titles) {
+
+	$("#loading-plot").show();
+
+	Plotly.d3.json(baseURL + 'backoutput/flex/' + projectID + '/' + strType+ '/contacts-dist/contacts-dist/' + prot[0] + '-' + prot[1], function(figure) {
+	if(!figure.error) {
+
+		arrayDistancesFrames = figure.py;
+		arrayDistancesSort = figure.adistsort;
+		var frameinit = (arrayDistancesFrames.indexOf(arrayDistancesSort[0]) + 1);
+
+		var maxv = Math.max(...arrayDistancesFrames);
+		var minv = Math.min(...arrayDistancesFrames);
+
+		drawGraph(prot, figure, name, maintit, titles, 1, frameinit, minv, frameinit, maxv);
+		
+	}else{
+		$("#loading-plot").html("Error loading plot data. Please, try later.");
+	}
+
+	});
+
+}
 
 

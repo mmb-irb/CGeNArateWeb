@@ -232,6 +232,11 @@ function loadEndToEndPlot(name, maintit, titles) {
 
 		drawGraph(figure, name, maintit, titles, 1, frameinit, minv, frameinit, maxv);
 
+		var persistenceLength = figure.pl;
+		if ($("#pl").length) {
+			$("#pl").text(persistenceLength);
+		}
+
 	}else{
 		$("#loading-plot").html("Error loading plot data. Please, try later.");
 	}

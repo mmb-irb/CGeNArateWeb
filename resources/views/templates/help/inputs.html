@@ -166,7 +166,7 @@
 
 															<p><img src="{{ baseURL }}assets/pages/media/pages/img/inputs07.png" style="max-width:100%;"></p>
 
-															<p>Choose a number of the change of the linking number ΔLk. Only integer numbers are valid. ΔLk = 0 means there will be no additional tension induced. Putting another number than 0 will induce over/undertwisting of the planar circular starting structure.</p>
+															<p>Choose a number of the change of the linking number ΔLk. Only integer numbers are valid. ΔLk = 0 means there will be no additional tension induced. Putting a number other than 0 will induce over/undertwisting of the planar circular starting structure. High undertwisting relative to the length of the sequence (i.e. ΔLk = -5 for a 90bp sequence) can lead to kinks in the simulation. For canonical bdna simulations, limit negative ΔLk at around $-bp/75$ .</p>
 															
 															<!--<h4 id="iterations">Iterations per structure</h4>
 
@@ -174,7 +174,7 @@
 
 															<p>Choose the number of Monte Carlo iterations per structure. The higher the number the longer the simulation takes. In the following you can see a table formulas which should serve as a guideline for choosing the number of Monte Carlo iterations per structure for different ΔLk. The number of Monte Carlo iterations y depend on the size of the circle x (in bp). The formulas were fit to observations after how many Monte Carlo iterations the expected transition for a certain ΔLk is visible (for example the transition of a planar circle to a 8-shape for ΔLk=-1).</p>-->
 															
-															<div class="row">
+															<!-- <div class="row">
 																<div class="col-md-6">
 																	<table class="table table-bordered table-striped">
 																		<thead>
@@ -199,9 +199,10 @@
 																		</tbody>
 																	</table>
 																</div>
-															</div>
+															</div> -->
 
-<p>Circles of 94bp (Lankas et al., Structure 2006), 260bp (Noy et al., BJ 2017) and 336bp (Sutthibutpong et al, JCTC 2015) were used to fit these formulas. The value for required Monte Carlo iterations for ΔLk = -2 becomes negative for x ~ 100bp. This is because this formula was fitted to large minicircles with x > 260bp. Also take into account that the transitions may not occur because of the stiffness of the underlying sequence.</p>
+															<!-- <p>Circles of 94bp (Lankas et al., Structure 2006), 260bp (Noy et al., BJ 2017) and 336bp (Sutthibutpong et al, JCTC 2015) were used to fit these formulas. The value for required Monte Carlo iterations for ΔLk = -2 becomes negative for x ~ 100bp. This is because this formula was fitted to large minicircles with x > 260bp. Also take into account that the transitions may not occur because of the stiffness of the underlying sequence.</p> -->
+
 															<h3 id="proteins">Additional field only for CGeNArate + Proteins</h3>
 
 															<h4 id="prot-list">Proteins</h4>

@@ -113,15 +113,18 @@
 
 																									{% if strType == 'traj' %}
 
-																									<!--<p>Images courtesy of <a href="http://pubs.rsc.org/en/content/articlelanding/2012/sm/c2sm26036k/unauth#!divAbstract" target="_blank">
+																									{% if projectData.resolution == 1 %}
+																									<p>Images courtesy of <a href="http://pubs.rsc.org/en/content/articlelanding/2012/sm/c2sm26036k/unauth#!divAbstract" target="_blank">
 																										<em>Danielle J. Mai, Christopher Brockman  and Charles M. Schroeder</em></a> (Radius of Gyration)  
 																									and <a href="https://www.researchgate.net/publication/40757110_DNA_supercoiling_and_its_role_in_DNA_decatenation_and_unknotting" target="_blank"><em>Guillaume Witz and Andrzej Stasiak</em></a> (Helical and Writhe). 
-																									</p>-->
+																									</p>
+																									{% endif %}
 
 																									<div class="mt-element-card mt-element-overlay" data-step="2">
 																										<div class="row">
 
-																											<!--<div class="col-md-4 col-sm-6 col-xs-12">
+																											{% if projectData.resolution == 1 %}
+																											<div class="col-md-4 col-sm-6 col-xs-12">
 																												<div class="mt-card-item">
 																													<div class="mt-card-avatar mt-overlay-1">
 																														<img src="{{ baseURL }}assets/layouts/layout3/img/rg.png" />
@@ -161,7 +164,8 @@
 																														<h3 class="mt-card-name">Writhe</h3>
 																													</div>
 																												</div>
-																											</div>-->
+																											</div>
+																											{% endif %}
 
 																										</div>	
 

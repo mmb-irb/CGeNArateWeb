@@ -76,7 +76,8 @@ return [
 		],
 
 		'end-to-end' => [
-			'folder' => 'END-TO-END/'
+			'folder' => 'END-TO-END/',
+			'pl' => 'PersistenceLength'
 		],
 
 		'sasa' => [
