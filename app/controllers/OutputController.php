@@ -119,7 +119,7 @@ class OutputController extends Controller {
 			&& $tool != 2
 		) $arraySubTypes[] = 3;
 		if(file_exists($p."/".$this->global['analysisPathName']."/NAFlex/".$sp.$this->global['contacts']['folder'.$strtype])) $arraySubTypes[] = 4;
-		if(count(scandir($p."/".$this->global['analysisPathName']."/".$this->global['bending']['folder'])) > 2) $arraySubTypes[] = 5;
+		if(file_exists($p."/".$this->global['analysisPathName']."/".$this->global['bending']['folder']) && count(scandir($p."/".$this->global['analysisPathName']."/".$this->global['bending']['folder'])) > 2) $arraySubTypes[] = 5;
 		if(file_exists($p."/".$this->global['analysisPathName']."/".$this->global['circular']['folder'])) $arraySubTypes[] = 6;
 		if(file_exists($p."/".$this->global['analysisPathName']."/".$this->global['energy']['folder'])) $arraySubTypes[] = 7;
 		if(file_exists($p."/".$this->global['analysisPathName']."/NAFlex/".$sp.$this->global['end-to-end']['folder'])) $arraySubTypes[] = 8;
