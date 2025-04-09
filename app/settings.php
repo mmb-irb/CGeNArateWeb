@@ -121,10 +121,10 @@ return [
 			],
 			'samplenucleosomes' => ["10 15 23 53 82"],
 			'sampleprot' => [
-				[ "code" => "1vfc", "length" => 12, "position" => 4 ],
-				[ "code" => "1wtr", "length" => 7, "position" => 30 ],
-				[ "code" => "3zhm", "length" => 8, "position" => 60 ],
-				[ "code" => "1bnz", "length" => 7, "position" => 80 ]
+				[ "code" => "1vfc", "name" => "Solution Structure Of The DNA Complex Of Human Trf2", "length" => 12, "position" => 4 ],
+				[ "code" => "1wtr", "name" => "Hyperthermophile chromosomal protein SAC7D single mutant M29A in complex with DNA GCGATCGC", "length" => 7, "position" => 30 ],
+				[ "code" => "3zhm", "name" => "N-terminal domain of the CI repressor from bacteriophage TP901-1 in complex with the OL2 operator half-site ", "length" => 8, "position" => 60 ],
+				[ "code" => "1bnz", "name" => "SSO7D HYPERTHERMOPHILE PROTEIN/DNA COMPLEX", "length" => 7, "position" => 80 ]
 			]	
 		],
 
