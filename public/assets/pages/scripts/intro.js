@@ -70,11 +70,11 @@ function IntroHome() {
 				},
 				{
 					element: document.querySelectorAll('[data-step="3"]')[0],
-					intro: "If the user has selected <em>Create Structure</em> as operation, the 3D structure is shown in this box."
+					intro: "The static 3D structure is shown in this box."
 				},
 				{
 					element: document.querySelectorAll('[data-step="4"]')[0],
-					intro: "If the user has selected <em>Create Trajectory</em> as operation, the 3D trajectory is shown in this box."
+					intro: "The 3D trajectory is shown in this box."
 				}
 			]
 		}).start();
