@@ -216,7 +216,8 @@
                                               <select class="form-control form-field-enabled valid protein-id" name="id" aria-invalid="false" disabled>
                                                <option value="">Select a protein</option>
                                                {% for k,v in PDBList %}
-                                               <option value="{{ v }}" >ID: {{ v|slice(0,4) }} - length: {{ v|slice(5,7) }}</option>
+                                               <!--<option value="{{ v }}" >ID: {{ v|slice(0,4) }} - length: {{ v|slice(5,7) }}</option>-->
+                                               <option value="{{ v.code }}{{ " " }}{{ v.length }}" >{{ v.code }}&nbsp;{{ v.name }} (length:&nbsp;{{ v.length }})</option>
                                                {% endfor %}
                                              </select>
                                            </div>

@@ -14,8 +14,20 @@ class UploadController extends Controller {
 		$arrayPDB = array();
 
 		foreach($aux as $a) $arrayPDB[] = trim(preg_replace('/\s\s+/', ' ', $a));
+
+		$arrayObj = [];
+		foreach ($arrayPDB as $item) {
+			list($code, $length, $name) = explode(" ", $item, 3);
+			$arrayObj[] = [
+					"code"   => $code,
+					"length" => $length,
+					"name"  => $name,
+			];
+		}
+
+		//var_dump($arrayObj);
 		
-		return $arrayPDB;
+		return $arrayObj;
 
 	}
 
