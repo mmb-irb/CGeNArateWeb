@@ -948,9 +948,9 @@ jQuery(document).ready(function() {
 
 				// Add a new regx rule (for example, a different regex)
 				$("#seqtxt").rules("add", {
-						regx: /^[CAGTcagt]{90,}$/, // new regex pattern
+						regx: /^[CAGTcagt]{80,}$/, // new regex pattern
 						messages: {
-								regx: "Invalid DNA sequence or length is less than 90 characters."
+								regx: "Invalid DNA sequence or length is less than 80 characters."
 						}
 				});
 
