@@ -82,7 +82,8 @@ $container['db'] = function ($c) {
 	
 	$db = $c->get('settings')['db'];
 	
-	$mng = new \MongoDB\Driver\Manager("mongodb://".$db['username'].":".$db['password']."@".$db['host']."/".$db['database']);
+	//$mng = new \MongoDB\Driver\Manager("mongodb://".$db['username'].":".$db['password']."@".$db['host']."/".$db['database']);
+	$mng = new \MongoDB\Driver\Manager("mongodb://".$db['username'].":".$db['password']."@".$db['host'].":".$db['port']."/?authSource=".$db['database']."&retryWrites=false");
 
 	// testing if mongo is working
 	/*try {

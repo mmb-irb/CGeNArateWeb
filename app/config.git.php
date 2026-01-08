@@ -19,7 +19,8 @@ return [
 			'host'     => 'XXXX',
 			'database' => 'XXXX',
 			'username' => 'XXXX',
-			'password' => 'XXXX'
+			'password' => 'XXXX',
+			'port' => 'XXXX'
 		],
 		'mail' => [
 			'login' => 'XXXX',
@@ -28,9 +29,10 @@ return [
 			'port' => 465
 		],
 
-		'absoluteURL' => 'https://mmb.irbbarcelona.org/CGeNArate/', 
-		'absoluteURLMail' => 'https://mmb.irbbarcelona.org/CGeNArate/',
-		'baseURL' => '/CGeNArate/',
+		'absoluteURL' => 'https://mmb.irbbarcelona.org/CGNAW/', 
+		'absoluteURLMail' => 'https://mmb.irbbarcelona.org/CGNAW/',
+		'containerURL' => 'http://cgnaw_stack_cgnaw_website:3001/mcdnalitewebsite/',
+		'baseURL' => '/CGNAW/',
 		'diskPath' => '/path/to/Web/',
 		'wfDataPath' => '/path/to/data/inside/wf/docker/',
 		'scriptsGlobals' => '/path/to/Scripts/',
