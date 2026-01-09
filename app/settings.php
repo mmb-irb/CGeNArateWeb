@@ -88,19 +88,19 @@ return [
 
 		// queues
 		'sh' => [
-			'queuename' => 'local.q',
+			'queuename' => 'CGNAW.q',
 
-			'plbase' => 'perl %srunMCDNA_all_new.pl %s/%s %s %s %s'."\n\n",
-			'plcirc' => 'perl %srunMCDNA_circular_all.pl %s/%s %s 5 %s %s %s %s'."\n\n",
-			'plprot' => 'perl %srunMCDNA_Prots_all.pl %s/%s %s 3 %s %s %s'."\n\n",
-			'plchrdyn' => 'perl %srunChromatinDynamics.pl %s/%s %s/%s %s %s'."\n\n",
+			'plbase' => 'perl %srunMCDNA_all_new.pl %s/%s %s %s %s > %s/job.log 2>&1'."\n\n",
+			'plcirc' => 'perl %srunMCDNA_circular_all.pl %s/%s %s 5 %s %s %s %s > %s/job.log 2>&1'."\n\n",
+			'plprot' => 'perl %srunMCDNA_Prots_all.pl %s/%s %s 3 %s %s %s > %s/job.log 2>&1'."\n\n",
+			//'plchrdyn' => 'perl %srunChromatinDynamics.pl %s/%s %s/%s %s %s > %s/job.log 2>&1'."\n\n",
 
 			'rtraj' => 'Rscript %sMuG_DNA_bending_ensemble.R 10 .'."\n",
 			'rstr' => 'Rscript %sMuG_DNA_bending_single_structure.R .'."\n",
 
-			'analysis' => 'perl %srunMCDNA_Analysis.pl %s %s %s'."\n\n",
+			'analysis' => 'perl %srunMCDNA_Analysis.pl %s %s %s >> %s/job.log 2>&1'."\n\n",
 
-			'end' => 'wget -q -O- "%send/jobs/%s"'."\n"
+			'end' => 'wget -q -O- "%send/jobs/%s" >> %s/job.log 2>&1'."\n"
 		],
 
 		'input' => [

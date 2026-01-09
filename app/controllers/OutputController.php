@@ -307,7 +307,7 @@ class OutputController extends Controller {
 
 		$projectData = $this->getData($args['id']);
 
-		$currentLog = trim(shell_exec("egrep '\# STEP|GENERATING|BUILDING|\# TRAJECTORY|\# STRUCTURE' ".$this->global['diskPath'].$projectData->folder."/output.log"));
+		$currentLog = trim(shell_exec("egrep '\# STEP|GENERATING|BUILDING|\# TRAJECTORY|\# STRUCTURE' ".$this->global['diskPath'].$projectData->folder."/job.log"));
 		if($currentLog != "") $numCL = substr_count($currentLog, "\n") + 1;
 		else $numCL = 0;
 

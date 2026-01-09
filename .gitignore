@@ -7,3 +7,4 @@ info.php
 *.bk
 .DS_Store
 help.txt
+/scripts/old

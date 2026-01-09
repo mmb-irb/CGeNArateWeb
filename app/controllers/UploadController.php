@@ -414,7 +414,8 @@ class UploadController extends Controller {
 		$out = "$workdir/launch.sh";
 
 		$fout = fopen($out, "w");
-		fwrite($fout, "#!/bin/csh\n");
+		fwrite($fout, "#!/bin/sh\n\n");
+		//fwrite($fout, "#!/bin/csh\n");
 		/*fwrite($fout, "#\$ -q $queuename\n");
 		fwrite($fout, "#\$ -cwd\n");
 		fwrite($fout, "#\$ -N $folderID\n");
@@ -437,10 +438,10 @@ class UploadController extends Controller {
 
 		// RESOLUTION AND DELTA LINKING NUMBER!!!!
 
-		if($tool == 1) fprintf($fout, $this->global['sh']['plbase'], $this->global['scriptsPath'], $workdirWF, $fileName, $numStructures, $resolution, $op);
-		else if($tool == 2) fprintf($fout, $this->global['sh']['plcirc'], $this->global['scriptsPath'], $workdirWF, $fileName, $numStructures, $deltaLN, $iterStruct, $resolution, $op);
-		else if($tool == 3) fprintf($fout, $this->global['sh']['plprot'], $this->global['scriptsPath'], $workdirWF, $fileName, $numStructures, 'proteins.mcdna.in', $resolution, $op);
-		else if($tool == 4) fprintf($fout, $this->global['sh']['plchrdyn'], $this->global['scriptsPath'], $workdirWF, $fileName, $workdir, $fileName2, $numStructures, $op);
+		if($tool == 1) fprintf($fout, $this->global['sh']['plbase'], $this->global['scriptsPath'], $workdirWF, $fileName, $numStructures, $resolution, $op, $workdirWF);
+		else if($tool == 2) fprintf($fout, $this->global['sh']['plcirc'], $this->global['scriptsPath'], $workdirWF, $fileName, $numStructures, $deltaLN, $iterStruct, $resolution, $op, $workdirWF);
+		else if($tool == 3) fprintf($fout, $this->global['sh']['plprot'], $this->global['scriptsPath'], $workdirWF, $fileName, $numStructures, 'proteins.mcdna.in', $resolution, $op, $workdirWF);
+		//else if($tool == 4) fprintf($fout, $this->global['sh']['plchrdyn'], $this->global['scriptsPath'], $workdirWF, $fileName, $workdir, $fileName2, $numStructures, $op);
 
 		// MIRAR AMB ADAM!!!!
 		/*switch($tool) {
@@ -488,15 +489,17 @@ class UploadController extends Controller {
 			fwrite($fout, "echo \"## Analysis ##\"\n");
 			//fprintf($fout, $this->global['sh']['rtraj'], $this->global['scriptsPath']);
 			//fprintf($fout, $this->global['sh']['rstr'], $this->global['scriptsPath']);
-			fprintf($fout, $this->global['sh']['analysis'], $this->global['analysisPath'], $tool, $resolution, $op);
+			fprintf($fout, $this->global['sh']['analysis'], $this->global['analysisPath'], $tool, $resolution, $op, $workdirWF);
 		}
 
 		fwrite($fout, "echo \"## Execute end-of-work routines ##\"\n");
-		fprintf($fout, $this->global['sh']['end'], $this->global['absoluteURLMail'], $uid);
+		fprintf($fout, $this->global['sh']['end'], $this->global['containerURL'], $uid, $workdirWF);
 
 		fclose($fout);
 
-		$outdck = "$workdir/launchDocker.sh";
+		chmod($out, 0755);
+
+		/*$outdck = "$workdir/launchDocker.sh";
 		$queuename = $this->global['sh']['queuename'];
 
 		$cpus = $this->global['sge']['cpus'];
@@ -512,23 +515,25 @@ class UploadController extends Controller {
 		fwrite($foutdck, "hostname > hostname.out\n\n");
 		fwrite($foutdck, "docker run --rm -v workflow_data:/mnt -v workflow_scripts:/app/Scripts --cpus \"$cpus\" --memory \"$mem\" workflow_image sh $workdirWF/launch.sh\n");
 
-		fclose($foutdck);
+		fclose($foutdck);*/
 
-		if(!file_exists($out) || !file_exists($outdck)) {
+		//if(!file_exists($out) || !file_exists($outdck)) {
+		if(!file_exists($out)) {
 
-			$this->logger->error("WEB - CSH creation: file(s) not created", [$out, $outdck, $workdir]);
+			$this->logger->error("WEB - CSH creation: file(s) not created", [$out, $workdir]);
 
 			echo '{ "status":0, "uid":"'.$uid.'" }';
 
 		}else{
 
-			$pid = $this->sge->start($workdir, $outdck);
+			//$pid = $this->sge->start($workdir, $outdck);
+			$pid = $this->sge->start($workdir, "$workdirWF/launch.sh");
 
-			if($pid == 0) {
+			/*if($pid == 0) {
 				$this->logger->error("WEB - SGE: job not submitted", [$outdck, $workdir]);
 				echo '{ "status":0, "msg":"ERROR: job not submitted." }';
 				return false;
-			}
+			}*/
 
 			$this->projects->updatePID($uid, $pid);
 

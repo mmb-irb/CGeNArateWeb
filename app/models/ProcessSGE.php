@@ -10,7 +10,8 @@ namespace App\Models;
 
 class ProcessSGE extends Model{
 
-   public function status($pid) {
+		// OLD SGE LOGIC
+   	/*public function status($pid) {
 
 			$pidForm = sprintf("%7s",$pid);
 
@@ -42,9 +43,41 @@ class ProcessSGE extends Model{
 				}
 			}
 		
+		}*/
+
+		// NEW DOCKER LOGIC
+		public function status($pid) {
+
+			// Format: %sget-job-status.py %s
+			$command = sprintf(
+				$this->global['docker']['status'],
+				$this->global['scriptsLocal'], // Path to the script
+				$pid
+			);
+
+			exec($command, $op);
+
+			$output = json_decode($op[0], true);
+			$status = $output['status'];
+
+			if($status == 'done' || $status == '') {
+				return 5;
+			} else { 
+				switch($status) {
+					case 'queued':
+					case 'running': return 4;
+										break;
+					case 'stopped':
+					case 'failed': return 3;
+										break;
+					default: return 4;
+				}
+			}
+
 		}
 
-		public function start($workdir, $path) {
+		// OLD SGE LOGIC
+		/*public function start($workdir, $path) {
 
 			//$command = $this->global['sge']['qsub']."$path 2>&1";
 
@@ -67,9 +100,31 @@ class ProcessSGE extends Model{
 
 			return (int)$pid;
 
-    }
+    }*/
 
-		public function stop($pid) {
+		// NEW DOCKER LOGIC
+		public function start($workdir, $path) {
+
+			// Format: %slaunch-worker.py --command "%s" --volumes '%s'
+			$command = sprintf(
+				$this->global['docker']['launch'],
+				$this->global['scriptsLocal'], // Path to the script
+				$path,
+				json_encode($this->global['docker']['volumes'])
+			);
+
+			chdir($workdir);
+
+			exec($command, $op);
+
+			$output = json_decode($op[0], true);
+			$pid = $output['job_id'];
+
+			return $pid;
+		}
+
+		// OLD SGE LOGIC
+		/*public function stop($pid) {
 
 			//$command = $this->global['sge']['qdel'].' '.$pid;
 			$command = sprintf($this->global['sge']['qdel'], $this->global['sge']['host'], $pid);
@@ -77,6 +132,23 @@ class ProcessSGE extends Model{
       exec($command, $op);
 
 			return $this->status($pid);
+
+		}*/
+
+		public function stop($pid) {
+
+			$command = sprintf(
+				$this->global['docker']['stop'],
+				$this->global['scriptsLocal'], // Path to the script
+				$pid
+			);
+
+			exec($command, $op);
+
+			$output = json_decode($op[0], true);
+			$success = $output['success'];
+
+			return $success;
 
 		}
 
