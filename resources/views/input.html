@@ -86,8 +86,9 @@
                           
                             <div class="tab-pane active" id="stext">
                               <!-- BEGIN FORM-->
-                              <p>All the form fields are mandatory except the <em>perform analysis</em>. 
+                              <p>All the form fields are mandatory except the <em>e-mail address</em> and <em>perform analysis</em>. If you provide your e-mail address, you will be notified once the job is finished.
                               Disabling the analysis perform, the tool will calculate just the structure and / or the trajectory.</p>
+
 
                               {% if sampleType is empty %}
                               <p>If you prefer, you can load the form with different sample inputs through the top menu or clicking the buttons below:</p>
@@ -346,14 +347,14 @@
                               <input type="number" name="numStruct" class="form-control numStruct2" min="1" max="500" value="{{ numStr }}">
                             </div>
                           </div>
-                          <!--<div class="form-group">
+                          <div class="form-group">
                             <label class="control-label col-md-3">E-mail address
                               <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Please provide your email adress if you want to receive the results.</p>"></i>
                             </label>
                             <div class="col-md-6" data-step="30">
                               <input type="email" name="email" class="form-control" placeholder="your@email.com" >
                             </div>
-                          </div>-->
+                          </div>
                           <div class="form-group">
                             <label class="control-label col-md-3">Perform analysis
                               <i class="icon-question tooltips" data-container="body" data-html="true" data-placement="top" data-original-title="<p align='left' style='margin:0'>Enable or disable Flexibility Analyses. Disabling this button, the tool will only calculate the equilibrated and / or the trajectory and it will took less time.</p>"></i>

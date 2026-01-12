@@ -37,6 +37,7 @@ return [
 		'wfDataPath' => 'XXX',
 		'scriptsGlobals' => 'XXX',
 		'scriptsLocal' => 'XXX',
+		'mailTemplates' => 'XXX',
 		'scriptsPath' => 'XXX',
 		'analysisPath' => 'XXX',
 		'ga4' => 'XXXX',

@@ -20,14 +20,47 @@ class PostProcessController extends Controller {
 		$projectID = $projectData->_id;
     $absoluteURL = $this->global['absoluteURL'];
     $fromName = $this->global['fromName'];
+		$longProjectName = $this->global['longProjectName'];
     //$hashId = password_hash($user->_id, PASSWORD_DEFAULT);
     //$name = $user->name.' '.$user->surname;
  
-    $this->mailer->send('mails/mail-end-job.html', ['analysis' => $analysis, 'absoluteURL' => $absoluteURL, 'projectID' => $projectID] , function($message) use ($user, $fromName){
+    /*$this->mailer->send('mails/mail-end-job.html', ['analysis' => $analysis, 'absoluteURL' => $absoluteURL, 'projectID' => $projectID] , function($message) use ($user, $fromName){
       $message->to($user);
       $message->subject('CGeNArate has finished!');
       $message->fromName($fromName);
-    });
+    });*/
+
+		// Prepare your variables
+		$variables = [
+				'absoluteURL' => $absoluteURL,
+				'projectID' => $projectID,
+				'analysis' => $analysis,
+				'longProjectName' => $longProjectName,
+				'now' => date('Y')
+		];
+
+		// Path to your Twig template
+		$htmlFile = $this->global['mailTemplates'] . 'mail-end-job.html';
+
+		// Build the command
+		$command = sprintf(
+				'python3 %s --to %s --subject %s --html-file %s --vars %s 2>&1',
+				escapeshellarg($this->global['scriptsLocal'] . 'send-mail.py'),
+				escapeshellarg($user),
+				escapeshellarg($this->global['longProjectName'] . ' has finished!'),
+				escapeshellarg($htmlFile),
+				escapeshellarg(json_encode($variables))
+		);
+
+		exec($command, $output, $returnCode);
+
+		if ($returnCode === 0) {
+				// Success
+				//$this->logger->log("Email sent to $user", []);
+		} else {
+				// Failed
+				$this->logger->error("WEB - Email failed", [implode("\\", $output)]);
+		}
 
 	}
 
@@ -45,16 +78,48 @@ class PostProcessController extends Controller {
 
 	private function sendWarningEmail($projectData) {
 
-		$usr = $projectData->email;
+		$user = $projectData->email;
 		$projectID = $projectData->_id;
     $absoluteURL = $this->global['absoluteURL'];
     $fromName = $this->global['fromName'];
+		$longProjectName = $this->global['longProjectName'];
 
-    $this->mailer->send('mails/mail-warning-user.html', ['absoluteURL' => $absoluteURL, 'projectID' => $projectID] , function($message) use ($usr, $fromName){
+    /*$this->mailer->send('mails/mail-warning-user.html', ['absoluteURL' => $absoluteURL, 'projectID' => $projectID] , function($message) use ($usr, $fromName){
       $message->to($usr);
       $message->subject('Your CGeNArate project is about to expire!');
       $message->fromName($fromName);
-    });
+    });*/
+
+		// Prepare your variables
+		$variables = [
+				'absoluteURL' => $absoluteURL,
+				'projectID' => $projectID,
+				'longProjectName' => $longProjectName,
+				'now' => date('Y')
+		];
+
+		// Path to your Twig template
+		$htmlFile = $this->global['mailTemplates'] . 'mail-warning-user.html';
+
+		// Build the command
+		$command = sprintf(
+				'python3 %s --to %s --subject %s --html-file %s --vars %s 2>&1',
+				escapeshellarg($this->global['scriptsLocal'] . 'send-mail.py'),
+				escapeshellarg($user),
+				escapeshellarg('Your '. $this->global['longProjectName'] . ' project is about to expire!'),
+				escapeshellarg($htmlFile),
+				escapeshellarg(json_encode($variables))
+		);
+
+		exec($command, $output, $returnCode);
+
+		if ($returnCode === 0) {
+				// Success
+				//$this->logger->log("Email sent to $user", []);
+		} else {
+				// Failed
+				$this->logger->error("WEB - Email failed", [implode("\\", $output)]);
+		}
 
 	}
 

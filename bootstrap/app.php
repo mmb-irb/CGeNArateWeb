@@ -36,6 +36,7 @@ $settings['globals']['diskPath'] = $settings['settings']['diskPath'];
 $settings['globals']['wfDataPath'] = $settings['settings']['wfDataPath'];
 $settings['globals']['scriptsGlobals'] = $settings['settings']['scriptsGlobals'];
 $settings['globals']['scriptsLocal'] = $settings['settings']['scriptsLocal'];
+$settings['globals']['mailTemplates'] = $settings['settings']['mailTemplates'];
 $settings['globals']['scriptsPath'] = $settings['settings']['scriptsPath'];
 $settings['globals']['analysisPath'] = $settings['settings']['analysisPath'];
 $settings['globals']['affinity'] = $settings['settings']['affinity'];
