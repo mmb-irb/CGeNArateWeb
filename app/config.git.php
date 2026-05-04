@@ -31,7 +31,7 @@ return [
 
 		'absoluteURL' => 'https://mmb.irbbarcelona.org/CGNAW/', 
 		'absoluteURLMail' => 'https://mmb.irbbarcelona.org/CGNAW/',
-		'containerURL' => 'http://cgnaw_stack_cgnaw_website:3001/CGNAW/',
+		'containerURL' => 'http://cgnaw_stack_cgnaw_website:8090/CGNAW/',
 		'baseURL' => '/CGNAW/',
 		'diskPath' => 'XXX',
 		'wfDataPath' => 'XXX',
