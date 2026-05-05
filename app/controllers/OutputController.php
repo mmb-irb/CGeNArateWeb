@@ -72,8 +72,7 @@ class OutputController extends Controller {
 	
 	private function getFlexTypes($folder) {
 
-		//$path = $this->global['filesPathName'].'/'.$folder;
-		$path = $this->global['filesPath'].'Web/'.$folder;
+		$path = $this->global['filesPathName'].'/'.$folder;
 		
 		chdir($path);
 
