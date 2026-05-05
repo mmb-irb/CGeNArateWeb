@@ -56,4 +56,4 @@ $logArray = [
 
 if(!empty($list1)) $logArray["removed"] = $list1;
 
-$container->logger->info("CRON - Cronjob cleaning", $logArray);
+// $container->logger->info("CRON - Cronjob cleaning", $logArray);
